@@ -1,0 +1,1 @@
+var PhotoAppSpace = PhotoAppSpace  || {};
