@@ -3,7 +3,8 @@ html, body {
     padding: 0;
 }
 body {
-     background: url("../images/background.jpg");
+    background: url("../images/background.jpg");
+    font-family: 'Open Sans', sans-serif;
  }
 
 body div#container header {
@@ -11,33 +12,90 @@ body div#container header {
     color: white;
 }
 
-body div#container header section#links{
+body div#container header div#logo a img {
+    height: 120px;
+    width: 120px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+body div#container header section#links {
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
-body div#container header section#links a{
+body div#container header section#links a {
+    text-decoration: none;
     padding: 15px;
     color: white;
 }
 
-body div#container header section#links a:hover {
+body div#container header section#links a:hover, body div#container header div#mainMenu ul li:hover {
     text-decoration: none;
-    background: #21455F;
+    background: #245673;
+    cursor: pointer;
 }
 
 body div#container header div#mainMenu ul {
     list-style-type: none;
 }
 
+body div#container header div#mainMenu ul li {
+    width: 5%;
+    padding: 5px;
+    margin: 0 auto;
+}
+
+body div#container header div#loginBox form {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+body div#container header div#loginBox form input, body div#container header div#searchBox input {
+    padding: 5px;
+    color: black;
+}
+
+body div#container header div#searchBox img {
+    width: 30px;
+    margin: 5px;
+}
+
+body div#container main {
+    text-align: center;
+}
+
 body div#container main div#galleryContainer {
-     width: 61.5%;
-     margin: 0 auto;
-     padding: 2px;
+    padding: 2px;
+    margin-top: 10px;
+    margin-bottom: 10px;
  }
+
+body div#container main div#loginBox form input {
+    display: block;
+    margin: 10px auto;
+}
+
+body div#container main div#loginBox form a {
+    text-decoration: none;
+    color: white;
+    padding: 5px;
+}
+
+body div#container main div#loginBox form a:hover {
+    text-decoration: none;
+    background: #2d6b91;
+    cursor: pointer;
+}
 
  #first-row, #second-row, #third-row, #fourth-row {
      margin: 0;
      margin-top: 2px;
      padding: 0;
+ }
+ 
+ body div#container footer {
+     background: url("../images/footer.jpg");
+     height: 100px;
+     margin-top: 15px;
  }
