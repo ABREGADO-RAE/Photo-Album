@@ -6,11 +6,16 @@
     <!--Bootstrap CDN-->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="styles/mainStyles.css"/>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
 </head>
 <body>
     <div id="container">
         <header>
-            <h1>Logo/Webpage header<!--TODO--></h1>
+            <div id="logo">
+                <a href="index.html">
+                    <img src="./images/logo.png" alt="logo" title="logoto e kradeno, shte go smenqm, ama posle..."/>
+                </a>
+            </div>
             <section id="links">
                 <a href="">Latest</a>
                 <a href="">Random</a>
@@ -23,13 +28,11 @@
                     <li>Gallery</li>
                 </ul>
             </div>
-            <div id="loginBox">
-                <form>
-                    <input type="text" id="userName" placeholder="Username..." />
-                    <input type="password" id="password" placeholder="Password..."/>
-                    <a href="#" id="btnLogin">Login</a>
-                    <a href="#" id="btnRegister">Register</a>
-                </form>
+            <div id="searchBox">
+                <input type="search" id="search" placeholder="Search..."/>
+                <a href="#" id="btnSearch">
+                    <img src="./images/search.png" alt="search" title="Search"/>
+                </a>
             </div>
         </header>
         <main>
@@ -105,6 +108,22 @@
                         <img src="./images/sample4.jpg" alt=""/>
                     </a>
                 </div>
+            </div>
+            <div id="loginBox">
+                <form>
+                    <input type="text" id="userName" placeholder="Username..." />
+                    <input type="password" id="password" placeholder="Password..."/>
+                    <a href="#" id="btnLogin">Login</a>
+                </form>
+            </div>
+            <div id="registerBox">
+                <form>
+                    <input type="text" id="regUserName" placeholder="Username..." />
+                    <input type="email" id="email" placeholder="Email..."/>
+                    <input type="password" id="regPassword" placeholder="Password..."/>
+                    <input type="password" id="repeatPassword" placeholder="Repeat password..."/>
+                    <a href="#" id="btnRegister">Register</a>
+                </form>
             </div>
         </main>
         <footer>
