@@ -2,3 +2,42 @@ html, body {
     margin: 0;
     padding: 0;
 }
+body {
+     background: url("../images/background.jpg");
+ }
+
+body div#container header {
+    text-align: center;
+    color: white;
+}
+
+body div#container header section#links{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+body div#container header section#links a{
+    padding: 15px;
+    color: white;
+}
+
+body div#container header section#links a:hover {
+    text-decoration: none;
+    background: #21455F;
+}
+
+body div#container header div#mainMenu ul {
+    list-style-type: none;
+}
+
+body div#container main div#galleryContainer {
+     width: 61.5%;
+     margin: 0 auto;
+     padding: 2px;
+ }
+
+ #first-row, #second-row, #third-row, #fourth-row {
+     margin: 0;
+     margin-top: 2px;
+     padding: 0;
+ }
