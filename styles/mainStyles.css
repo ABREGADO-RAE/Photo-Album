@@ -59,6 +59,7 @@ body div#container header div#loginBox form input, body div#container header div
 body div#container header div#searchBox img {
     width: 30px;
     margin: 5px;
+    vertical-align: middle;
 }
 
 body div#container main {
