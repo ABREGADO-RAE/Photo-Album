@@ -4,6 +4,7 @@ html, body {
 }
 body {
     background: url("../images/background.jpg");
+    background-size: cover;
     font-family: 'Open Sans', sans-serif;
  }
 
@@ -32,18 +33,29 @@ body div#container header section#links a {
 
 body div#container header section#links a:hover, body div#container header div#mainMenu ul li:hover {
     text-decoration: none;
-    background: #245673;
+    background: #276a87;
     cursor: pointer;
+    border-radius: 20px;
+}
+
+body div#container header section#links a:active, body div#container header div#mainMenu ul li:active {
+    background: #20465f;
 }
 
 body div#container header div#mainMenu ul {
     list-style-type: none;
+    padding: 0;
 }
 
 body div#container header div#mainMenu ul li {
     width: 5%;
     padding: 5px;
     margin: 0 auto;
+}
+
+body div#container header div#mainMenu ul li a {
+    text-decoration: none;
+    color: white;
 }
 
 body div#container header div#loginBox form {
@@ -62,8 +74,72 @@ body div#container header div#searchBox img {
     vertical-align: middle;
 }
 
+body div#container header div#searchBox button#search-button {
+    background: url("../images/search.png");
+    background-size: cover;
+    width: 35px;
+    height: 35px;
+    border: none;
+    outline: none;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+body div#container header div#searchBox button#search-button:active {
+    background: url("../images/search-clicked.png");
+    background-size: cover;
+    width: 35px;
+    height: 35px;
+    border: none;
+    outline: none;
+    vertical-align: middle;
+}
+
 body div#container main {
     text-align: center;
+    color: white;
+}
+
+body div#container main input, body div#container main button {
+    color: black;
+    padding: 5px;
+}
+
+body div#container main div#login-box, body div#container main div#register-box {
+    display: inline-block;
+    width: 400px;
+    vertical-align: top;
+    padding: 15px;
+}
+
+body div#container main div#login-box:hover, body div#container main div#register-box:hover {
+    background: rgba(0, 0, 0, 0.16);
+}
+
+body div#container main div#login-box button, body div#container main div#register-box button{
+    padding: 11px;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: white;
+    background-color: #DC741F;
+    font-weight: bold;
+}
+
+body div#container main div#login-box button:hover, body div#container main div#register-box button:hover {
+    background-color: #f0871f
+}
+
+body div#container main div#login-box button:active, body div#container main div#register-box button:active {
+    background-color: #b95f20;
+}
+
+body div#container main div#login-box p, body div#container main div#register-box p,
+body div#container main div#login-box button, body div#container main div#register-box button{
+    float: right;
+    clear: both;
+    margin-right: 50px;
 }
 
 body div#container main div#galleryContainer {
@@ -71,23 +147,6 @@ body div#container main div#galleryContainer {
     margin-top: 10px;
     margin-bottom: 10px;
  }
-
-body div#container main div#loginBox form input {
-    display: block;
-    margin: 10px auto;
-}
-
-body div#container main div#loginBox form a {
-    text-decoration: none;
-    color: white;
-    padding: 5px;
-}
-
-body div#container main div#loginBox form a:hover {
-    text-decoration: none;
-    background: #2d6b91;
-    cursor: pointer;
-}
 
  #first-row, #second-row, #third-row, #fourth-row {
      margin: 0;
@@ -97,6 +156,7 @@ body div#container main div#loginBox form a:hover {
  
  body div#container footer {
      background: url("../images/footer.jpg");
-     height: 100px;
+     height: 50px;
      margin-top: 15px;
+     background-size: contain;
  }

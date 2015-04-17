@@ -3,8 +3,6 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>Abregado-Rae's Photo Album</title>
-    <!--Bootstrap CDN-->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="styles/mainStyles.css"/>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
 </head>
@@ -17,22 +15,20 @@
                 </a>
             </div>
             <section id="links">
-                <a href="">Latest</a>
-                <a href="">Random</a>
-                <a href="">Upload</a>
-                <a href="">Comments</a>
+                <a href="#">Latest</a>
+                <a href="#">Random</a>
+                <a href="#">Upload</a>
+                <a href="#">Comments</a>
             </section>
             <div id="mainMenu">
                 <ul>
-                    <li>Home</li>
-                    <li>Gallery</li>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Gallery</a></li>
                 </ul>
             </div>
             <div id="searchBox">
                 <input type="search" id="search" placeholder="Search..."/>
-                <a href="#" id="btnSearch">
-                    <img src="./images/search.png" alt="search" title="Search"/>
-                </a>
+                <button id="search-button"></button>
             </div>
         </header>
         <main>
@@ -109,21 +105,39 @@
                     </a>
                 </div>
             </div>
-            <div id="loginBox">
-                <form>
-                    <input type="text" id="userName" placeholder="Username..." />
-                    <input type="password" id="password" placeholder="Password..."/>
-                    <a href="#" id="btnLogin">Login</a>
-                </form>
+            <div id="register-box">
+                <h3>Register</h3>
+                <p>
+                    <label for="reg-username">Username:</label>
+                    <input type="text" id="reg-username"/>
+                </p>
+                <p>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email"/>
+                </p>
+                <p>
+                    <label for="reg-password">Password:</label>
+                    <input type="password" id="reg-password"/>
+                </p>
+                <p>
+                    <label for="repeat-password">Repeat password:</label>
+                    <input type="password" id="repeat-password"/>
+                </p>
+                <button id="reg-button">Register</button>
             </div>
-            <div id="registerBox">
-                <form>
-                    <input type="text" id="regUserName" placeholder="Username..." />
-                    <input type="email" id="email" placeholder="Email..."/>
-                    <input type="password" id="regPassword" placeholder="Password..."/>
-                    <input type="password" id="repeatPassword" placeholder="Repeat password..."/>
-                    <a href="#" id="btnRegister">Register</a>
-                </form>
+
+            <div id="login-box">
+                <h3>Already a member?</h3>
+                <h4>Log in</h4>
+                <p>
+                    <label for="login-username">Username:</label>
+                    <input type="text" id="login-username"/>
+                </p>
+                <p>
+                    <label for="login-password">Password:</label>
+                    <input type="password" id="login-password"/>
+                </p>
+                <button id="login-button">Login</button>
             </div>
         </main>
         <footer>
