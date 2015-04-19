@@ -1,6 +1,7 @@
 var photoAppSpace = photoAppSpace  || {};
 
 photoAppSpace.controller = (function(){
+    'use strict';
     function Controller(model){
         this._model = model;
     }

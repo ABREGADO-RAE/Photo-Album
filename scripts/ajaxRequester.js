@@ -1,45 +1,60 @@
-var PhotoAppSpace = PhotoAppSpace  || {};
+var photoAppSpace = photoAppSpace  || {};
 
-PhotoAppSpace.ajaxRequester = (function () {
+photoAppSpace.ajaxRequester = (function () {
     'use strict';
-    
-    var headers = {
-        "X-Parse-Application-Id": "HdOp9MTDbFyibXNxEV9eTLCDmLpHAKarj7CJ8EkF",
-        "X-Parse-REST-API-Key": "8fugchnAdU25Qs8vLVigbO8kjxaS2JgAOExIXmRy"
-    };
+    function AjaxRequester() {
+        this.get = getRequest();
+        this.post = postRequest();
+        this.put = putRequest();
+        this.delete = deleteRequest();
+    }
 
-    function makeRequest(method, url, data, success, error) {
-        return $.ajax({
+    function makeRequest(method, url, headers, data) {
+        var defer = Q.defer();
+
+        $.ajax({
             method: method,
-            headers: headers,
             url: url,
+            headers: headers,
             data: JSON.stringify(data),
             contentType: 'application/json',
-            success: success,
-            error: error
+            success: function ajaxSuccess(success) {
+                defer.resolve(success);
+            },
+            error: function ajaxError(error) {
+                defer.reject(error);
+            }
         });
+
+        return defer.promise;
     }
 
-    function getRequest(url, success, error) {
-        makeRequest('GET', url, null, success, error);
+    function getRequest(url, headers) {
+        return makeRequest('GET', url, headers, null);
     }
 
-    function postRequest(url, data, success, error) {
-        makeRequest('POST', url, data, success, error);
+    function postRequest(url, headers, data) {
+        return makeRequest('POST', url, headers, data);
     }
 
-    function putRequest(url, data, success, error) {
-        makeRequest('PUT', url, data, success, error);
+    function putRequest(url, headers, data) {
+        return makeRequest('PUT', url, headers, data);
     }
 
-    function deleteRequest(url, success, error) {
-        makeRequest('DELETE', url,null, success, error);
+    function deleteRequest(url, headers) {
+        return makeRequest('DELETE', url, headers, null);
     }
+
+//    return {
+//        getRequest: getRequest,
+//        postRequest: postRequest,
+//        putRequest: putRequest,
+//        deleteRequest: deleteRequest
+//    }
 
     return {
-        getRequest: getRequest,
-        postRequest: postRequest,
-        putRequest: putRequest,
-        deleteRequest: deleteRequest
+        initAjax: function(){
+            return new AjaxRequester();
+        }
     }
 }());

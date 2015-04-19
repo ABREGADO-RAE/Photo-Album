@@ -1,6 +1,7 @@
 var photoAppSpace = photoAppSpace  || {};
 
 photoAppSpace.model = (function(){
+    'use strict';
     function Model(baseUrl){
         this._baseUrl = baseUrl;
         this.users = new User(baseUrl);
@@ -13,6 +14,7 @@ photoAppSpace.model = (function(){
     var User = (function(){
         function User(baseUrl){
             this._serviceUrl = baseUrl;
+            this._ajaxRequester = photoAppSpace.ajaxRequester.initAjax();
         }
 
         User.prototype.login = function(username, password) {
@@ -29,6 +31,7 @@ photoAppSpace.model = (function(){
     var Album = (function(){
         function Album(baseUrl){
             this._serviceUrl = baseUrl + '/classes/Album';
+            this._ajaxRequester = photoAppSpace.ajaxRequester.initAjax();
         }
 
         Album.prototype.addAlbum = function(data) {
@@ -53,6 +56,7 @@ photoAppSpace.model = (function(){
     var Picture = (function(){
         function Picture(baseUrl){
             this._serviceUrl = baseUrl + '/classes/Picture';
+            this._ajaxRequester = photoAppSpace.ajaxRequester.initAjax();
         }
 
         Picture.prototype.addPicture = function(data) {
@@ -77,6 +81,7 @@ photoAppSpace.model = (function(){
     var Category = (function(){
         function Category(baseUrl){
             this._serviceUrl = baseUrl + '/classes/Category';
+            this._ajaxRequester = photoAppSpace.ajaxRequester.initAjax();
         }
 
         Category.prototype.addCategory = function(data) {
@@ -101,6 +106,7 @@ photoAppSpace.model = (function(){
     var Comment = (function(){
         function Comment(baseUrl){
             this._serviceUrl = baseUrl + '/classes/Comment';
+            this._ajaxRequester = photoAppSpace.ajaxRequester.initAjax();
         }
 
         Comment.prototype.addComment = function(data) {
