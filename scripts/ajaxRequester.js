@@ -2,6 +2,7 @@ var PhotoAppSpace = PhotoAppSpace  || {};
 
 PhotoAppSpace.ajaxRequester = (function () {
     'use strict';
+    
     var headers = {
         "X-Parse-Application-Id": "HdOp9MTDbFyibXNxEV9eTLCDmLpHAKarj7CJ8EkF",
         "X-Parse-REST-API-Key": "8fugchnAdU25Qs8vLVigbO8kjxaS2JgAOExIXmRy"
