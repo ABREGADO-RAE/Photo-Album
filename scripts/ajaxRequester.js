@@ -18,8 +18,8 @@ photoAppSpace.ajaxRequester = (function () {
             headers: headers,
             data: JSON.stringify(data),
             contentType: 'application/json',
-            success: function ajaxSuccess(success) {
-                defer.resolve(success);
+            success: function ajaxSuccess(data) {
+                defer.resolve(data);
             },
             error: function ajaxError(error) {
                 defer.reject(error);
@@ -45,16 +45,10 @@ photoAppSpace.ajaxRequester = (function () {
         return makeRequest('DELETE', url, headers, null);
     }
 
-//    return {
-//        getRequest: getRequest,
-//        postRequest: postRequest,
-//        putRequest: putRequest,
-//        deleteRequest: deleteRequest
-//    }
-
     return {
-        initAjax: function(){
-            return new AjaxRequester();
-        }
-    }
+        getRequest: getRequest,
+        postRequest: postRequest,
+        putRequest: putRequest,
+        deleteRequest: deleteRequest
+    };
 }());

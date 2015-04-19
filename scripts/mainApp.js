@@ -2,8 +2,9 @@ var photoAppSpace = photoAppSpace  || {};
 
 (function () {
     'use strict';
-    $(document).ready(function () {
-
-//        TODO Add Sammy routing
-    });
+    var rootUrl = 'https://api.parse.com/1/';
+    var selector = '#container';
+    var model = photoAppSpace.model.loadModel(rootUrl);
+    var controller = photoAppSpace.controller.loadController(model);
+    controller.attachEventHandlers(selector);
 }());
