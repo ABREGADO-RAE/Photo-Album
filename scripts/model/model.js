@@ -48,6 +48,7 @@ photoAppSpace.model = (function(){
             var url = this._serviceUrl + 'login?username=' + username + '&password=' + password;
             return photoAppSpace.ajaxRequester.getRequest(url, this._headers)
                 .then(function(data){
+                    Credentials.setSessionToken(data.sessionToken);
                     console.log(data);
                     return data;
                 }, function(error){
@@ -62,6 +63,7 @@ photoAppSpace.model = (function(){
                 var url = this._serviceUrl + 'users';
                 return photoAppSpace.ajaxRequester.postRequest(url, this._headers, userCredentials)
                     .then(function(data){
+                        Credentials.setSessionToken(data.sessionToken);
                         console.log(data);
                         return data;
                     }, function(error){

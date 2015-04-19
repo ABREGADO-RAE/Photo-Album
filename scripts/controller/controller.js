@@ -16,6 +16,7 @@ photoAppSpace.controller = (function(){
 
     Controller.prototype.attachEventHandlers = function(selector) {
         attachEventHandlerRegisterNewUser.call(this, selector);
+        attachEventHandlerLoginUser.call(this, selector);
     };
 
     var attachEventHandlerRegisterNewUser = function attachEventHandlerRegisterNewUser(selector) {
@@ -35,6 +36,22 @@ photoAppSpace.controller = (function(){
             password.val('');
             repeatPassword.val('');
             email.val('');
+        });
+    };
+
+    var attachEventHandlerLoginUser = function attachEventHandlerLoginUser(selector) {
+        var _this = this;
+        $(selector).on('click', '#login-button', function(ev){
+            var username = $('#login-username');
+            var password = $('#login-password');
+            _this._model.users.login(username.val(), password.val())
+                .then(function(data) {
+                    console.log('Login successful');
+                }, function(error){
+                    console.log('Login failed');
+                });
+            username.val('');
+            password.val('');
         });
     };
 
