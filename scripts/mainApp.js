@@ -1,10 +1,19 @@
-var photoAppSpace = photoAppSpace  || {};
+var app = app || {};
 
 (function () {
     'use strict';
     var rootUrl = 'https://api.parse.com/1/';
     var selector = '#container';
-    var model = photoAppSpace.model.loadModel(rootUrl);
-    var controller = photoAppSpace.controller.loadController(model);
+    var model = app.model.loadModel(rootUrl);
+    var controller = app.controller.loadController(model);
     controller.attachEventHandlers(selector);
+
+    app.router = Sammy(function () {
+        this.get('#/', function () {
+            controller.getRegisterPage();
+            controller.getLoginPage();
+        })
+    });
+
+    app.router.run('#/');
 }());

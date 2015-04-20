@@ -1,6 +1,6 @@
-var photoAppSpace = photoAppSpace  || {};
+var app = app  || {};
 
-photoAppSpace.ajaxRequester = (function () {
+app.ajaxRequester = (function () {
     'use strict';
     function AjaxRequester() {
         this.get = getRequest();

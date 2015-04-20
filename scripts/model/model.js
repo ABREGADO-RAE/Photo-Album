@@ -1,6 +1,6 @@
-var photoAppSpace = photoAppSpace  || {};
+var app = app  || {};
 
-photoAppSpace.model = (function(){
+app.model = (function(){
     'use strict';
     function Model(baseUrl){
         this._baseUrl = baseUrl;
@@ -46,7 +46,7 @@ photoAppSpace.model = (function(){
 
         User.prototype.login = function(username, password) {
             var url = this._serviceUrl + 'login?username=' + username + '&password=' + password;
-            return photoAppSpace.ajaxRequester.getRequest(url, this._headers)
+            return app.ajaxRequester.getRequest(url, this._headers)
                 .then(function(data){
                     Credentials.setSessionToken(data.sessionToken);
                     console.log(data);
@@ -61,7 +61,7 @@ photoAppSpace.model = (function(){
             if (assurePasswordEquality(password, repeatedPwrd)) {
                 var userCredentials = {'username': username, 'password': password, 'email': email};
                 var url = this._serviceUrl + 'users';
-                return photoAppSpace.ajaxRequester.postRequest(url, this._headers, userCredentials)
+                return app.ajaxRequester.postRequest(url, this._headers, userCredentials)
                     .then(function(data){
                         Credentials.setSessionToken(data.sessionToken);
                         console.log(data);
@@ -85,7 +85,7 @@ photoAppSpace.model = (function(){
     var Album = (function(){
         function Album(baseUrl){
             this._serviceUrl = baseUrl + 'classes/Album';
-            //this._ajaxRequester = photoAppSpace.ajaxRequester.initAjax();
+            //this._ajaxRequester = app.ajaxRequester.initAjax();
             this._headers = Credentials.getHeaders();
         }
 
@@ -111,7 +111,7 @@ photoAppSpace.model = (function(){
     var Picture = (function(){
         function Picture(baseUrl){
             this._serviceUrl = baseUrl + 'classes/Picture';
-            //this._ajaxRequester = photoAppSpace.ajaxRequester.initAjax();
+            //this._ajaxRequester = app.ajaxRequester.initAjax();
             this._headers = Credentials.getHeaders();
         }
 
@@ -137,7 +137,7 @@ photoAppSpace.model = (function(){
     var Category = (function(){
         function Category(baseUrl){
             this._serviceUrl = baseUrl + 'classes/Category';
-            //this._ajaxRequester = photoAppSpace.ajaxRequester.initAjax();
+            //this._ajaxRequester = app.ajaxRequester.initAjax();
             this._headers = Credentials.getHeaders();
         }
 
@@ -163,7 +163,7 @@ photoAppSpace.model = (function(){
     var Comment = (function(){
         function Comment(baseUrl){
             this._serviceUrl = baseUrl + 'classes/Comment';
-            //this._ajaxRequester = photoAppSpace.ajaxRequester.initAjax();
+            //this._ajaxRequester = app.ajaxRequester.initAjax();
             this._headers = Credentials.getHeaders();
         }
 

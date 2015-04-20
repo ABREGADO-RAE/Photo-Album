@@ -1,5 +1,5 @@
-var photoAppSpace = photoAppSpace  || {};
+var app = app  || {};
 
-photoAppSpace.eventHandlers = (function () {
+app.eventHandlers = (function () {
 
 }());

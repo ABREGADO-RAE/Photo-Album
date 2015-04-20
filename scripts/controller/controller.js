@@ -1,17 +1,17 @@
-var photoAppSpace = photoAppSpace  || {};
+var app = app  || {};
 
-photoAppSpace.controller = (function(){
+app.controller = (function(){
     'use strict';
     function Controller(model){
         this._model = model;
     }
 
     Controller.prototype.getLoginPage = function() {
-
+        app.loginView.load();
     };
 
     Controller.prototype.getRegisterPage = function() {
-
+        app.registerView.load();
     };
 
     Controller.prototype.attachEventHandlers = function(selector) {

@@ -114,6 +114,7 @@ body div#container main {
 body div#container main input, body div#container main button {
     color: black;
     padding: 5px;
+    margin: 16px;
 }
 
 body div#container main div#login-box, body div#container main div#register-box {
@@ -146,7 +147,7 @@ body div#container main div#login-box button:active, body div#container main div
     background-color: #b95f20;
 }
 
-body div#container main div#login-box p, body div#container main div#register-box p,
+body div#container main div#login-box div, body div#container main div#register-box div,
 body div#container main div#login-box button, body div#container main div#register-box button{
     float: right;
     clear: both;
