@@ -85,7 +85,6 @@ app.model = (function(){
     var Album = (function(){
         function Album(baseUrl){
             this._serviceUrl = baseUrl + 'classes/Album';
-            //this._ajaxRequester = app.ajaxRequester.initAjax();
             this._headers = Credentials.getHeaders();
         }
 
@@ -111,7 +110,6 @@ app.model = (function(){
     var Picture = (function(){
         function Picture(baseUrl){
             this._serviceUrl = baseUrl + 'classes/Picture';
-            //this._ajaxRequester = app.ajaxRequester.initAjax();
             this._headers = Credentials.getHeaders();
         }
 
@@ -137,7 +135,6 @@ app.model = (function(){
     var Category = (function(){
         function Category(baseUrl){
             this._serviceUrl = baseUrl + 'classes/Category';
-            //this._ajaxRequester = app.ajaxRequester.initAjax();
             this._headers = Credentials.getHeaders();
         }
 
@@ -163,7 +160,6 @@ app.model = (function(){
     var Comment = (function(){
         function Comment(baseUrl){
             this._serviceUrl = baseUrl + 'classes/Comment';
-            //this._ajaxRequester = app.ajaxRequester.initAjax();
             this._headers = Credentials.getHeaders();
         }
 

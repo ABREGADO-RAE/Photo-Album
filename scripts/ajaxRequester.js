@@ -2,13 +2,6 @@ var app = app  || {};
 
 app.ajaxRequester = (function () {
     'use strict';
-    function AjaxRequester() {
-        this.get = getRequest();
-        this.post = postRequest();
-        this.put = putRequest();
-        this.delete = deleteRequest();
-    }
-
     function makeRequest(method, url, headers, data) {
         var defer = Q.defer();
 
