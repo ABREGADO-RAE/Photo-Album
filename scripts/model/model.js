@@ -27,7 +27,7 @@ app.model = (function(){
         }
 
         function setSessionToken(sessionToken) {
-            return localStorage.getItem('sessionToken', sessionToken);
+            return localStorage.setItem('sessionToken', sessionToken);
         }
 
         return {
@@ -70,7 +70,7 @@ app.model = (function(){
                         console.log(error);
                         return error;
                     });
-            }else{
+            } else {
                 alert('Passwords does not match!');     // Add noty popup later
             }
         };
@@ -82,26 +82,72 @@ app.model = (function(){
         return User;
     }());
 
+    var Unit = (function(){
+        function Unit() {
+
+        }
+
+        Unit.prototype.addUnit = function(url, headers, data){
+            return app.ajaxRequester.postRequest(url, headers, data)
+                .then(function(data){
+                    console.log(data);
+                }, function(error){
+                    console.log(error.responseText);
+                });
+        };
+
+        Unit.prototype.getUnit = function(url, headers, id){
+            var requestUrl = url + id;
+            return app.ajaxRequester.getRequest(requestUrl, headers)
+                .then(function(data){
+                    console.log(data);
+                }, function(error){
+                    console.log(error.responseText);
+                });
+        };
+
+        Unit.prototype.updateUnit = function(url, headers, data, id) {
+            var requestUrl = url + id;
+            return app.ajaxRequester.putRequest(requestUrl, headers, data)
+                .then(function(data){
+                    console.log(data);
+                }, function(error){
+                    console.log(error.responseText);
+                });
+        };
+
+        Unit.prototype.deleteUnit = function(url, headers, id) {
+            var requestUrl = url + id;
+            return app.ajaxRequester.deleteRequest(requestUrl, headers)
+                .then(function(data){
+                    console.log(data);
+                }, function(error){
+                    console.log(error.responseText);
+                });
+        };
+        return Unit;
+    }());
+
     var Album = (function(){
         function Album(baseUrl){
-            this._serviceUrl = baseUrl + 'classes/Album';
+            this._serviceUrl = baseUrl + 'classes/Album/';
             this._headers = Credentials.getHeaders();
         }
 
         Album.prototype.addAlbum = function(data) {
-
+            return Unit.addUnit(this.serviceUrl, this._headers, data);
         };
 
-        Album.prototype.getAlbums = function() {
-
+        Album.prototype.getAlbums = function(id) {
+            return Unit.getUnit(this._serviceUrl, this._headers, id)
         };
 
         Album.prototype.editAlbum = function(data, id) {
-
+            return Unit.updateUnit(this._serviceUrl, this._headers, data, id);
         };
 
         Album.prototype.deleteAlbum = function(id) {
-
+            return Unit.deleteUnit(this._serviceUrl, this._headers, id);
         };
 
         return Album;
@@ -109,24 +155,24 @@ app.model = (function(){
 
     var Picture = (function(){
         function Picture(baseUrl){
-            this._serviceUrl = baseUrl + 'classes/Picture';
+            this._serviceUrl = baseUrl + 'classes/Picture/';
             this._headers = Credentials.getHeaders();
         }
 
         Picture.prototype.addPicture = function(data) {
-
+            return Unit.addUnit(this._serviceUrl, this._headers, data);
         };
 
-        Picture.prototype.getPicture = function() {
-
+        Picture.prototype.getPicture = function(id) {
+            return Unit.getUnit(this._serviceUrl, this._headers, id);
         };
 
         Picture.prototype.editPicture = function(data, id) {
-
+            return Unit.updateUnit(this._serviceUrl, this._headers, data, id);
         };
 
         Picture.prototype.deletePicture = function(id) {
-
+            return Unit.deleteUnit(this._serviceUrl, this._headers, id);
         };
 
         return Picture;
@@ -134,24 +180,24 @@ app.model = (function(){
 
     var Category = (function(){
         function Category(baseUrl){
-            this._serviceUrl = baseUrl + 'classes/Category';
+            this._serviceUrl = baseUrl + 'classes/Category/';
             this._headers = Credentials.getHeaders();
         }
 
         Category.prototype.addCategory = function(data) {
-
+            return Unit.addUnit(this._serviceUrl, this._headers, data);
         };
 
-        Category.prototype.getCategory = function() {
-
+        Category.prototype.getCategory = function(id) {
+            return Unit.getUnit(this._serviceUrl, this._headers, id);
         };
 
         Category.prototype.editCategory = function(data, id) {
-
+            return Unit.updateUnit(this._serviceUrl, this._headers, data, id);
         };
 
         Category.prototype.deleteCategory = function(id) {
-
+            return Unit.deleteUnit(this._serviceUrl, this._headers, id);
         };
 
         return Category;
@@ -159,24 +205,24 @@ app.model = (function(){
 
     var Comment = (function(){
         function Comment(baseUrl){
-            this._serviceUrl = baseUrl + 'classes/Comment';
+            this._serviceUrl = baseUrl + 'classes/Comment/';
             this._headers = Credentials.getHeaders();
         }
 
         Comment.prototype.addComment = function(data) {
-
+            return Unit.addUnit(this._serviceUrl, this._headers, data);
         };
 
-        Comment.prototype.getComment = function() {
-
+        Comment.prototype.getComment = function(id) {
+            return Unit.getUnit(this._serviceUrl, this._headers, id);
         };
 
         Comment.prototype.editComment = function(data, id) {
-
+            return Unit.updateUnit(this._serviceUrl, this._headers, data, id);
         };
 
         Comment.prototype.deleteComment = function(id) {
-
+            return Unit.deleteUnit(this._serviceUrl, this._headers, id);
         };
 
         return Comment;
