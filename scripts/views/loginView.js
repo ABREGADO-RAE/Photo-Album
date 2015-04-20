@@ -5,9 +5,14 @@ app.loginView = (function () {
         $.get('templates/login.html', function (template) {
             var output = Mustache.render(template);
             var $main = $('main');
-            var selector = $('<div>');
-            selector.attr('id', 'login-box');
-            selector.appendTo($main);
+           
+            if ($main.find('#login-box').length) {
+                selector = $('#login-box');
+            } else {
+                selector = $('<div>');
+                selector.attr('id', 'login-box');
+                selector.appendTo($main)
+            }
 
             $(selector).html(output);
         })
