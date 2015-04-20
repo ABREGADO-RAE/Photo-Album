@@ -209,3 +209,7 @@ body div#container footer {
     margin-top: 15px;
     background-size: contain;
 }
+
+body div#signBox > a {
+    color: white;
+}

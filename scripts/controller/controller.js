@@ -6,12 +6,16 @@ app.controller = (function(){
         this._model = model;
     }
 
-    Controller.prototype.getLoginPage = function() {
-        app.loginView.load();
+    Controller.prototype.getLoginPage = function(selector) {
+        app.loginView.load(selector);
     };
 
-    Controller.prototype.getRegisterPage = function() {
-        app.registerView.load();
+    Controller.prototype.getRegisterPage = function(selector) {
+        app.registerView.load(selector);
+    };
+
+    Controller.prototype.getHomePage = function(selector) {
+        app.homeView.load(selector);
     };
 
     Controller.prototype.getAlbumPage = function () {
