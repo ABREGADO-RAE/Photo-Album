@@ -136,22 +136,23 @@ app.model = (function(){
         function Album(baseUrl){
             this._serviceUrl = baseUrl + 'classes/Album/';
             this._headers = Credentials.getHeaders();
+            this._unit = new Unit();
         }
 
         Album.prototype.addAlbum = function(data) {
-            return Unit.addUnit(this.serviceUrl, this._headers, data);
+            return this._unit.addUnit(this.serviceUrl, this._headers, data);
         };
 
         Album.prototype.getAlbums = function(id) {
-            return Unit.getUnit(this._serviceUrl, this._headers, id)
+            return this._unit.getUnit(this._serviceUrl, this._headers, id)
         };
 
         Album.prototype.editAlbum = function(data, id) {
-            return Unit.updateUnit(this._serviceUrl, this._headers, data, id);
+            return this._unit.updateUnit(this._serviceUrl, this._headers, data, id);
         };
 
         Album.prototype.deleteAlbum = function(id) {
-            return Unit.deleteUnit(this._serviceUrl, this._headers, id);
+            return this._unit.deleteUnit(this._serviceUrl, this._headers, id);
         };
 
         return Album;
@@ -161,22 +162,23 @@ app.model = (function(){
         function Picture(baseUrl){
             this._serviceUrl = baseUrl + 'classes/Picture/';
             this._headers = Credentials.getHeaders();
+            this._unit = new Unit();
         }
 
         Picture.prototype.addPicture = function(data) {
-            return Unit.addUnit(this._serviceUrl, this._headers, data);
+            return this._unit.addUnit(this._serviceUrl, this._headers, data);
         };
 
         Picture.prototype.getPicture = function(id) {
-            return Unit.getUnit(this._serviceUrl, this._headers, id);
+            return this._unit.getUnit(this._serviceUrl, this._headers, id);
         };
 
         Picture.prototype.editPicture = function(data, id) {
-            return Unit.updateUnit(this._serviceUrl, this._headers, data, id);
+            return this._unit.updateUnit(this._serviceUrl, this._headers, data, id);
         };
 
         Picture.prototype.deletePicture = function(id) {
-            return Unit.deleteUnit(this._serviceUrl, this._headers, id);
+            return this._unit.deleteUnit(this._serviceUrl, this._headers, id);
         };
 
         return Picture;
@@ -189,19 +191,19 @@ app.model = (function(){
         }
 
         Category.prototype.addCategory = function(data) {
-            return Unit.addUnit(this._serviceUrl, this._headers, data);
+            return this._unit.addUnit(this._serviceUrl, this._headers, data);
         };
 
         Category.prototype.getCategory = function(id) {
-            return Unit.getUnit(this._serviceUrl, this._headers, id);
+            return this._unit.getUnit(this._serviceUrl, this._headers, id);
         };
 
         Category.prototype.editCategory = function(data, id) {
-            return Unit.updateUnit(this._serviceUrl, this._headers, data, id);
+            return this._unit.updateUnit(this._serviceUrl, this._headers, data, id);
         };
 
         Category.prototype.deleteCategory = function(id) {
-            return Unit.deleteUnit(this._serviceUrl, this._headers, id);
+            return this._unit.deleteUnit(this._serviceUrl, this._headers, id);
         };
 
         return Category;
@@ -214,19 +216,19 @@ app.model = (function(){
         }
 
         Comment.prototype.addComment = function(data) {
-            return Unit.addUnit(this._serviceUrl, this._headers, data);
+            return this._unit.addUnit(this._serviceUrl, this._headers, data);
         };
 
         Comment.prototype.getComment = function(id) {
-            return Unit.getUnit(this._serviceUrl, this._headers, id);
+            return this._unit.getUnit(this._serviceUrl, this._headers, id);
         };
 
         Comment.prototype.editComment = function(data, id) {
-            return Unit.updateUnit(this._serviceUrl, this._headers, data, id);
+            return this._unit.updateUnit(this._serviceUrl, this._headers, data, id);
         };
 
         Comment.prototype.deleteComment = function(id) {
-            return Unit.deleteUnit(this._serviceUrl, this._headers, id);
+            return this._unit.deleteUnit(this._serviceUrl, this._headers, id);
         };
 
         return Comment;

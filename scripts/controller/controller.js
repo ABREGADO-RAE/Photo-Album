@@ -15,7 +15,7 @@ app.controller = (function(){
     };
 
     Controller.prototype.getAlbumPage = function () {
-        app.model.albums.getAlbums()
+        this._model.albums.getAlbums()
             .then(function(data){
                 app.albumsView.load(data)
             }, function(error) {
