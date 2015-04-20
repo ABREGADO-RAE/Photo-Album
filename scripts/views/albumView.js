@@ -5,6 +5,9 @@ app.albumsView = (function () {
         $.get('templates/albums.html', function (template) {
             var output = Mustache.render(template, json);
             var $main = $('main');
+            var selector;
+            $('#login-box').remove();
+            $('#register-box').remove();
 
             if ($main.find('#albums-box').length) {
                 selector = $('#albums-box');
