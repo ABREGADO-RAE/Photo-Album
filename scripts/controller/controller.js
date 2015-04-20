@@ -14,6 +14,15 @@ app.controller = (function(){
         app.registerView.load();
     };
 
+    Controller.prototype.getAlbumPage = function () {
+        app.model.albums.getAlbums()
+            .then(function(data){
+                app.albumsView.load(data)
+            }, function(error) {
+            console.log(error);
+        })
+    };
+
     Controller.prototype.attachEventHandlers = function(selector) {
         attachEventHandlerRegisterNewUser.call(this, selector);
         attachEventHandlerLoginUser.call(this, selector);

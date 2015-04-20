@@ -12,6 +12,7 @@ var app = app || {};
         this.get('#/', function () {
             controller.getRegisterPage();
             controller.getLoginPage();
+            controller.getAlbumPage();
         })
     });
 

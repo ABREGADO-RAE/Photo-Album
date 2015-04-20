@@ -97,7 +97,11 @@ app.model = (function(){
         };
 
         Unit.prototype.getUnit = function(url, headers, id){
-            var requestUrl = url + id;
+            var requestUrl = url;
+            if(id){
+                requestUrl = url + id;
+            }
+
             return app.ajaxRequester.getRequest(requestUrl, headers)
                 .then(function(data){
                     console.log(data);
