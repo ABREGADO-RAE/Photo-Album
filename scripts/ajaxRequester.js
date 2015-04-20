@@ -11,10 +11,10 @@ app.ajaxRequester = (function () {
             headers: headers,
             data: JSON.stringify(data),
             contentType: 'application/json',
-            success: function ajaxSuccess(data) {
+            success: function (data) {
                 defer.resolve(data);
             },
-            error: function ajaxError(error) {
+            error: function (error) {
                 defer.reject(error);
             }
         });

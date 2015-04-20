@@ -1,9 +1,9 @@
 var app = app || {};
 
 app.albumsView = (function () {
-    function AlbumsView(json) {
+    function AlbumsView(data) {
         $.get('templates/albums.html', function (template) {
-            var output = Mustache.render(template, json);
+            var output = Mustache.render(template, data);
             $('main').html(output);
             var $main = $('main');
             var selector;
@@ -25,8 +25,8 @@ app.albumsView = (function () {
     $('#addAlbum').click(app.addNewAlbumView);
 
     return {
-        load: function (json) {
-            return AlbumsView(json);
+        load: function (data) {
+            return AlbumsView(data);
         }
     }
 })();
