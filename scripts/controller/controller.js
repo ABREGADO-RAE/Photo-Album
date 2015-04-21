@@ -30,6 +30,8 @@ app.controller = (function(){
     Controller.prototype.attachEventHandlers = function(selector) {
         attachEventHandlerRegisterNewUser.call(this, selector);
         attachEventHandlerLoginUser.call(this, selector);
+        attachEventHandlerShowAddAlbumView.call(this, selector);
+        attachEventHandlerAddNewAlbum.call(this, selector);
     };
 
     var attachEventHandlerRegisterNewUser = function attachEventHandlerRegisterNewUser(selector) {
@@ -65,6 +67,38 @@ app.controller = (function(){
                 });
             username.val('');
             password.val('');
+        });
+    };
+
+    var attachEventHandlerShowAddAlbumView = function attachEventHandlerShowAddAlbumView(selector) {
+        var _this = this;
+        $(selector).on('click', '#btn-show-add-album', function(ev){
+            _this._model.categories.getCategory()
+                .then(function(data){
+                    console.log(data);
+                    app.showAddAlbumView.loadShowView(selector, data);
+                }, function(error) {
+                    console.log(error);
+                });
+        });
+    };
+
+    var attachEventHandlerAddNewAlbum = function attachEventHandlerAddNewAlbum(selector) {
+        var _this = this;
+        $(selector).on('click', '#create-album', function(ev) {
+            var albumTitle = $('#album-title');
+            var selectedCategoryId = $('select .categories:selected').data('id');
+            var albumData = {"title": albumTitle.val(), "category":{"__type":"Pointer","className":"Category","objectId":selectedCategoryId}};
+            _this._model.albums.addAlbum(albumData)
+                .then(function(data){
+                    console.log(data);
+                    console.log('Successfully added new album');
+                    window.location.replace('#/Albums');
+                    window.location.reload(true);
+                    return data;
+                }, function(error) {
+                    console.log(error);
+                });
         });
     };
 

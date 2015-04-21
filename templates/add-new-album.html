@@ -4,7 +4,7 @@
 <label for="album-category">Category: </label>
 <select id="album-category">
     {{#results}}
-    <option value="{{name}}">{{name}}</option>
+    <option data-id="{{objectId}}" value="{{name}}" class="categories">{{name}}</option>
     {{/results}}
 </select>
 <button id="create-album">Add</button>

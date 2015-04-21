@@ -91,8 +91,10 @@ app.model = (function(){
             return app.ajaxRequester.postRequest(url, headers, data)
                 .then(function(data){
                     console.log(data);
+                    return data;
                 }, function(error){
                     console.log(error.responseText);
+                    return error;
                 });
         };
 
@@ -107,6 +109,7 @@ app.model = (function(){
                 .then(function(data){
                     console.log(data);
                     deffer.resolve(data);
+                    return data;
                 }, function(error){
                     console.log(error.responseText);
                     deffer.reject(error);
@@ -114,13 +117,14 @@ app.model = (function(){
             return deffer.promise;
         };
 
-        Unit.prototype.updateUnit = function(url, headers, data, id) {
-            var requestUrl = url + id;
-            return app.ajaxRequester.putRequest(requestUrl, headers, data)
+        Unit.prototype.updateUnit = function(url, headers, data) {
+            return app.ajaxRequester.putRequest(url, headers, data)
                 .then(function(data){
                     console.log(data);
+                    return data;
                 }, function(error){
                     console.log(error.responseText);
+                    return error;
                 });
         };
 
@@ -138,13 +142,13 @@ app.model = (function(){
 
     var Album = (function(){
         function Album(baseUrl){
-            this._serviceUrl = baseUrl + 'classes/Album/';
+            this._serviceUrl = baseUrl + 'classes/Album';
             this._headers = Credentials.getHeaders();
             this._unit = new Unit();
         }
 
         Album.prototype.addAlbum = function(data) {
-            return this._unit.addUnit(this.serviceUrl, this._headers, data);
+            return this._unit.addUnit(this._serviceUrl, this._headers, data);
         };
 
         Album.prototype.getAlbums = function(id) {
@@ -152,7 +156,14 @@ app.model = (function(){
         };
 
         Album.prototype.editAlbum = function(data, id) {
-            return this._unit.updateUnit(this._serviceUrl, this._headers, data, id);
+            var url = this._serviceUrl + '/' + id;
+            return this._unit.updateUnit(url, this._headers, data)
+                .then(function(data){
+                    console.log(data);
+                    return data;
+                }, function(error){
+                    console.log(error.responseText);
+                });
         };
 
         Album.prototype.deleteAlbum = function(id) {
@@ -164,7 +175,7 @@ app.model = (function(){
 
     var Picture = (function(){
         function Picture(baseUrl){
-            this._serviceUrl = baseUrl + 'classes/Picture/';
+            this._serviceUrl = baseUrl + 'classes/Picture';
             this._headers = Credentials.getHeaders();
             this._unit = new Unit();
         }
@@ -190,8 +201,9 @@ app.model = (function(){
 
     var Category = (function(){
         function Category(baseUrl){
-            this._serviceUrl = baseUrl + 'classes/Category/';
+            this._serviceUrl = baseUrl + 'classes/Category';
             this._headers = Credentials.getHeaders();
+            this._unit = new Unit();
         }
 
         Category.prototype.addCategory = function(data) {
@@ -215,7 +227,7 @@ app.model = (function(){
 
     var Comment = (function(){
         function Comment(baseUrl){
-            this._serviceUrl = baseUrl + 'classes/Comment/';
+            this._serviceUrl = baseUrl + 'classes/Comment';
             this._headers = Credentials.getHeaders();
         }
 
