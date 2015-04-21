@@ -21,6 +21,7 @@ app.controller = (function(){
     Controller.prototype.getAlbumPage = function (selector) {
         this._model.albums.getAlbums()
             .then(function(data){
+                console.log(data);
                 app.albumsView.load(selector, data)
             }, function(error) {
             console.log(error);
@@ -93,8 +94,9 @@ app.controller = (function(){
                 .then(function(data){
                     console.log(data);
                     console.log('Successfully added new album');
-                    window.location.replace('#/Albums');
-                    window.location.reload(true);
+                    location.href='#/Albums/Create-album';
+                    //window.location.replace('#/Albums');
+                    //window.location.reload(true);
                     return data;
                 }, function(error) {
                     console.log(error);
