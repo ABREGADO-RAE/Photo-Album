@@ -18,10 +18,10 @@ app.controller = (function(){
         app.homeView.load(selector);
     };
 
-    Controller.prototype.getAlbumPage = function () {
+    Controller.prototype.getAlbumPage = function (selector) {
         this._model.albums.getAlbums()
             .then(function(data){
-                app.albumsView.load(data)
+                app.albumsView.load(selector, data)
             }, function(error) {
             console.log(error);
         })
