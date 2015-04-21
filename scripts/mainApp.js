@@ -17,12 +17,28 @@ var app = app || {};
             controller.getAlbumPage(selector);
         });
 
+        this.get('#/Albums/Create-album', function () {
+            this.redirect('#/Albums');
+        });
+
         this.get('#/Login', function () {
             controller.getLoginPage(selector);
         });
 
         this.get('#/Register', function () {
             controller.getRegisterPage(selector);
+        });
+
+        this.get('#/Latest', function () {
+        });
+
+        this.get('#/Random', function () {
+        });
+
+        this.get('#/Upload', function () {
+        });
+
+        this.get('#/Comments', function () {
         });
     });
 
