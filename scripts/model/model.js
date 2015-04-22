@@ -204,11 +204,12 @@ app.model = (function(){
             return this._unit.addUnit(this._serviceUrl, this._headers, data);
         };
 
-        Picture.prototype.uploadPictureData = function (fileName, file ) {
-            return this._unit.addUnit();
+        Picture.prototype.uploadPictureData = function (fileName, file) {
+            var url = this._uploadDataServiceUrl + fileName;
+            return this._unit.addUnit(fileName, file, url);
         }
 
-        Picture.prototype.getPicture = function(id) {
+        Picture.prototype.getPictureById = function(id) {
             return this._unit.getUnit(this._serviceUrl, this._headers, id);
         };
 
