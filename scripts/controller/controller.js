@@ -32,6 +32,16 @@ app.controller = (function () {
         app.uploadImageView.load(selector);
     };
 
+    Controller.prototype.logout = function(selector) {
+        this._model.users.logout()
+            .then(function() {
+                app.homeView.load(selector);
+                location.href = '#/';
+            }, function(error) {
+                console.log(error.responseText);
+            });
+    };
+
     Controller.prototype.attachEventHandlers = function (selector) {
         attachEventHandlerRegisterNewUser.call(this, selector);
         attachEventHandlerLoginUser.call(this, selector);
@@ -99,7 +109,8 @@ app.controller = (function () {
             var password = $('#login-password');
             _this._model.users.login(username.val(), password.val())
                 .then(function (data) {
-                    app.loggedInHomeView.load(selector, data);
+                    app.loggedInHomeView.load('header', data);
+                    location.href = '#/';
                     console.log('Login successful');
                 }, function (error) {
                     console.log('Login failed');

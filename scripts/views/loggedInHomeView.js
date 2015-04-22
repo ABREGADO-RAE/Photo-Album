@@ -4,6 +4,7 @@ app.loggedInHomeView = (function () {
     function LoggedInHomeView(selector, data) {
         $.get('templates/logged-in-view.html', function (template) {
             var output = Mustache.render(template, data);
+            $('log-reg').hide();
             $(selector).html(output);
         });
     }

@@ -42,6 +42,10 @@ var app = app || {};
 
         this.get('#/Comments', function () {
         });
+
+        this.get('#/Logout', function() {
+            controller.logout(selector);
+        })
     });
 
     app.router.run('#/');
