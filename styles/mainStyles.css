@@ -35,6 +35,12 @@ body div#container header section#links a, body div#container header div#signBox
     color: white;
 }
 
+body div#container header div#signBox {
+    font-family: 'PT Serif', serif;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
 body div#container header section#links a:hover, body div#container header div#mainMenu ul li:hover,
 body div#container header div#signBox a:hover {
     text-decoration: none;
@@ -112,18 +118,19 @@ body div#container header div#searchBox button#search-button:active {
     vertical-align: middle;
 }
 
-body div#container main {
+body div#container main#mainContent {
     text-align: center;
     color: white;
 }
 
-body div#container main input, body div#container main button {
+body div#container main#mainContent input, body div#container main#mainContent button,
+body div#container main#mainContent div#createAlbumContainer select#album-category {
     color: black;
     padding: 5px;
     margin: 16px;
 }
 
-body div#container main div#login-box, body div#container main div#register-box {
+body div#container main#mainContent div#login-box, body div#container main#mainContent div#register-box {
     display: inline-block;
     width: 400px;
     vertical-align: top;
@@ -136,7 +143,15 @@ body div#container main div#login-box:hover, body div#container main div#registe
     background: rgba(0, 0, 0, 0.16);
 }
 
-body div#container main div#login-box button, body div#container main div#register-box button{
+body div#container main#mainContent div#login-box h3, body div#container main#mainContent div#login-box h4,
+body div#container main#mainContent div#register-box h3, body div#container main#mainContent div#register-box h4 {
+    font-family: 'Lora', serif;
+    font-style: italic;
+}
+
+body div#container main#mainContent div#login-box button, body div#container main#mainContent div#register-box button,
+body div#container main#mainContent div#albums button, body div#container main#mainContent div#createAlbumContainer button,
+body div#container main#mainContent div#file-upload input#upload-button {
     padding: 11px;
     border-radius: 15px;
     border: none;
@@ -145,13 +160,20 @@ body div#container main div#login-box button, body div#container main div#regist
     color: white;
     background-color: #DC741F;
     font-weight: bold;
+    font-family: 'Lora', serif;
+    font-size: 1em;
 }
 
-body div#container main div#login-box button:hover, body div#container main div#register-box button:hover {
+body div#container main div#login-box button:hover, body div#container main div#register-box button:hover,
+body div#container main#mainContent div#albums button:hover, body div#container main#mainContent div#createAlbumContainer button:hover,
+body div#container main#mainContent div#file-upload input#upload-button:hover {
     background-color: #f0871f
 }
 
-body div#container main div#login-box button:active, body div#container main div#register-box button:active {
+body div#container main div#login-box button:active, body div#container main div#register-box button:active,
+body div#container main#mainContent div#albums button:active,
+body div#container main#mainContent div#createAlbumContainer button:active,
+body div#container main#mainContent div#file-upload input#upload-button:active {
     background-color: #b95f20;
 }
 
@@ -160,6 +182,11 @@ body div#container main div#login-box button, body div#container main div#regist
     float: right;
     clear: both;
     margin-right: 50px;
+}
+
+body div#container main#mainContent div#file-upload input#file-select {
+    color: white;
+    font-family: 'Open Sans', sans-serif;
 }
 
 body div#container main div#galleryContainer {
