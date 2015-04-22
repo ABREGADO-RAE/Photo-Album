@@ -58,54 +58,6 @@ You should **write your application from scratch**. You are **not allowed** to u
 
 ###Projects
 
-Please choose one of the projects below.
-
-#### Blog
-
-**Required** functionalities:
-
-1.	**View** all posts (optionally with paging).
-
-2.	Adding **new posts** by the blog owner (after login or password protected). Each post must have **tags**. 
-
-3.	Adding **comments** for every post by visitors – each visitor must fill out his name, email (optionally) and comment text.
-
-4.	Implement a sidebar holding a **list of posts** sorted by month / year / etc. and a list of the **most popular tags**.
-
-5.	**Counter of visits** for each post.
-
-6.	Functionality for **searching** by tags.
-
-**Optional** functionalities:
-
-1.	**User registration** and user profiles.
-
-2.	**Admin panel**: add / edit / delete posts, comments, tags, etc.
-
-#### Forum
-
-**Required** functionalities:
-
-1.	**View** all questions / categories (optionally with paging).
-
-2.	Implement a simple **registration** for forum users.
-
-3.	Adding **new question** by the forum users. Each question must have **tags** and **category**.
-
-4.	Implement **categories** for the forum questions.
-
-5.	Adding **answers** to the questions by the forum visitors – each visitor must fill out his name, email (optionally) and comment text.
-
-6.	**Counter** for visits for each question.
-
-**Optional** functionalities:
-
-1.	**Admin panel**: add /edit /delete forum posts, tags, answers, categories.
-
-2.	Functionality for **searching** by question, answer and tags.
-
-3.	Implement **ranking** according to user activity.
-
 #### Photo Album
 
 **Required** functionalities:
@@ -129,30 +81,6 @@ Please choose one of the projects below.
 2.	Functionality for **searching** by album name / category.
 
 3.	**Admin panel** (if registration is implemented): add / edit /delete albums, photos, comments.
-
-#### Audio Album 
-
-**Required** functionalities:
-
-1.	**View** all playlists / genres / songs (optionally with paging).
-
-2.	**Listening** to songs online. **Downloading** songs.
-
-3.	Creating **new playlist**.
-
-4.	**Uploading songs** (validating file size and type).
-
-5.	Adding **comments** to songs and playlists.
-
-6.	Implement playlists' and songs' **ranking system**. Show the most **highly ranked** playlists in a special section at the main page.
-
-**Optional** functionalities:
-
-1.	Implement **user registration**.
-
-2.	Functionality for **searching / filtering** by playlist name / song name / genre.
-
-3.	**Admin panel** (if registration is implemented): add / edit /delete songs, playlists, genres, comments.
 
 #### Deliverables
 
