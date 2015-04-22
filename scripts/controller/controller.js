@@ -99,6 +99,7 @@ app.controller = (function () {
             var password = $('#login-password');
             _this._model.users.login(username.val(), password.val())
                 .then(function (data) {
+                    app.loggedInHomeView.load(selector, data);
                     console.log('Login successful');
                 }, function (error) {
                     console.log('Login failed');
