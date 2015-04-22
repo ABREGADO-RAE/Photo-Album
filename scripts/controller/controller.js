@@ -33,13 +33,23 @@ app.controller = (function () {
     };
 
     Controller.prototype.logout = function(selector) {
+        var _this = this;
         this._model.users.logout()
             .then(function() {
                 app.homeView.load(selector);
                 location.href = '#/';
+                _this.getLoggedOutHomeView('#container');
             }, function(error) {
                 console.log(error.responseText);
             });
+    };
+
+    Controller.prototype.getLoggedOutHomeView = function (selector) {
+        app.loggedOutHomeView(selector);
+    };
+
+    Controller.prototype.getLoggedInHomeView = function(selector, data){
+        app.loggedInHomeView(selector, data);
     };
 
     Controller.prototype.attachEventHandlers = function (selector) {
@@ -111,6 +121,7 @@ app.controller = (function () {
                 .then(function (data) {
                     app.loggedInHomeView.load('header', data);
                     location.href = '#/';
+                    _this.getLoggedInHomeView('#container', data);
                     console.log('Login successful');
                 }, function (error) {
                     console.log('Login failed');
