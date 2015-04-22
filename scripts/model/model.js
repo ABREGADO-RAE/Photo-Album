@@ -2,6 +2,9 @@ var app = app  || {};
 
 app.model = (function(){
     'use strict';
+    var IMAGE_CONTENT_TYPE = 'image/jpeg';
+    var JSON_CONTENT_TYPE = 'application/json';
+
     function Model(baseUrl){
         this._baseUrl = baseUrl;
         this.users = new User(baseUrl);
@@ -46,7 +49,7 @@ app.model = (function(){
 
         User.prototype.logout = function () {
             var url = 'https://api.parse.com/1/logout';
-            return app.ajaxRequester.postRequest(url, this._headers, {})
+            return app.ajaxRequester.postRequest(url, this._headers, {}, JSON_CONTENT_TYPE)
                 .then(function (data) {
                     $('.logout').hide();
                     $('.log-reg').show();
@@ -58,14 +61,14 @@ app.model = (function(){
         User.prototype.login = function(username, password) {
             var url = this._serviceUrl + 'login?username=' + username + '&password=' + password;
             var _this = this;
-            return app.ajaxRequester.getRequest(url, this._headers)
+            return app.ajaxRequester.getRequest(url, this._headers, JSON_CONTENT_TYPE)
                 .then(function(data){
                     $('.log-reg').hide();
-                    var logout = $('<a/>').attr('href', '#/').text('Logout').addClass('logout')
-                    .click(function () {
-                        _this.logout();
-                    });
-                    $('#signBox').append(logout);
+                    //var logout = $('<a/>').attr('href', '#/').text('Logout').addClass('logout')
+                    //.click(function () {
+                    //    _this.logout();
+                    //});
+                    //$('#signBox').append(logout);
 
                     Credentials.setSessionToken(data.sessionToken);
                     console.log(data);
@@ -80,7 +83,7 @@ app.model = (function(){
             if (assurePasswordEquality(password, repeatedPwrd)) {
                 var userCredentials = {'username': username, 'password': password, 'email': email};
                 var url = this._serviceUrl + 'users';
-                return app.ajaxRequester.postRequest(url, this._headers, userCredentials)
+                return app.ajaxRequester.postRequest(url, this._headers, JSON.stringify(userCredentials), JSON_CONTENT_TYPE)
                     .then(function(data){
                         Credentials.setSessionToken(data.sessionToken);
                         console.log(data);
@@ -106,8 +109,8 @@ app.model = (function(){
 
         }
 
-        Unit.prototype.addUnit = function(url, headers, data){
-            return app.ajaxRequester.postRequest(url, headers, data)
+        Unit.prototype.addUnit = function(url, headers, data, contentType){
+            return app.ajaxRequester.postRequest(url, headers, data, contentType)
                 .then(function(data){
                     console.log(data);
                     return data;
@@ -117,14 +120,14 @@ app.model = (function(){
                 });
         };
 
-        Unit.prototype.getUnit = function(url, headers, id){
+        Unit.prototype.getUnit = function(url, headers, id, contentType){
             var deffer = Q.defer();
             var requestUrl = url;
             if(id){
                 requestUrl = url + id;
             }
 
-            app.ajaxRequester.getRequest(requestUrl, headers)
+            app.ajaxRequester.getRequest(requestUrl, headers, contentType)
                 .then(function(data){
                     console.log(data);
                     deffer.resolve(data);
@@ -136,8 +139,8 @@ app.model = (function(){
             return deffer.promise;
         };
 
-        Unit.prototype.updateUnit = function(url, headers, data) {
-            return app.ajaxRequester.putRequest(url, headers, data)
+        Unit.prototype.updateUnit = function(url, headers, data, contentType) {
+            return app.ajaxRequester.putRequest(url, headers, data, contentType)
                 .then(function(data){
                     console.log(data);
                     return data;
@@ -147,9 +150,9 @@ app.model = (function(){
                 });
         };
 
-        Unit.prototype.deleteUnit = function(url, headers, id) {
+        Unit.prototype.deleteUnit = function(url, headers, id, contentType) {
             var requestUrl = url + id;
-            return app.ajaxRequester.deleteRequest(requestUrl, headers)
+            return app.ajaxRequester.deleteRequest(requestUrl, headers, contentType)
                 .then(function(data){
                     console.log(data);
                 }, function(error){
@@ -167,16 +170,16 @@ app.model = (function(){
         }
 
         Album.prototype.addAlbum = function(data) {
-            return this._unit.addUnit(this._serviceUrl, this._headers, data);
+            return this._unit.addUnit(this._serviceUrl, this._headers, JSON.stringify(data), JSON_CONTENT_TYPE);
         };
 
         Album.prototype.getAlbums = function(id) {
-            return this._unit.getUnit(this._serviceUrl, this._headers, id)
+            return this._unit.getUnit(this._serviceUrl, this._headers, id, JSON_CONTENT_TYPE)
         };
 
         Album.prototype.editAlbum = function(data, id) {
             var url = this._serviceUrl + '/' + id;
-            return this._unit.updateUnit(url, this._headers, data)
+            return this._unit.updateUnit(url, this._headers, JSON.stringify(data), JSON_CONTENT_TYPE)
                 .then(function(data){
                     console.log(data);
                     return data;
@@ -186,7 +189,7 @@ app.model = (function(){
         };
 
         Album.prototype.deleteAlbum = function(id) {
-            return this._unit.deleteUnit(this._serviceUrl, this._headers, id);
+            return this._unit.deleteUnit(this._serviceUrl, this._headers, id, JSON_CONTENT_TYPE);
         };
 
         return Album;
@@ -201,24 +204,24 @@ app.model = (function(){
         }
 
         Picture.prototype.addPicture = function(data) {
-            return this._unit.addUnit(this._serviceUrl, this._headers, data);
+            return this._unit.addUnit(this._serviceUrl, this._headers, data, JSON_CONTENT_TYPE);
         };
 
         Picture.prototype.uploadPictureData = function (fileName, file) {
             var url = this._uploadDataServiceUrl + fileName;
-            return this._unit.addUnit(fileName, file, url);
-        }
+            return this._unit.addUnit(url, this._headers, file, IMAGE_CONTENT_TYPE);
+        };
 
         Picture.prototype.getPictureById = function(id) {
-            return this._unit.getUnit(this._serviceUrl, this._headers, id);
+            return this._unit.getUnit(this._serviceUrl, this._headers, id,IMAGE_CONTENT_TYPE);
         };
 
         Picture.prototype.editPicture = function(data, id) {
-            return this._unit.updateUnit(this._serviceUrl, this._headers, data, id);
+            return this._unit.updateUnit(this._serviceUrl, this._headers, data, id,IMAGE_CONTENT_TYPE);
         };
 
         Picture.prototype.deletePicture = function(id) {
-            return this._unit.deleteUnit(this._serviceUrl, this._headers, id);
+            return this._unit.deleteUnit(this._serviceUrl, this._headers, id, IMAGE_CONTENT_TYPE);
         };
 
         return Picture;
@@ -232,19 +235,19 @@ app.model = (function(){
         }
 
         Category.prototype.addCategory = function(data) {
-            return this._unit.addUnit(this._serviceUrl, this._headers, data);
+            return this._unit.addUnit(this._serviceUrl, this._headers, JSON.stringify(data), JSON_CONTENT_TYPE);
         };
 
         Category.prototype.getCategory = function(id) {
-            return this._unit.getUnit(this._serviceUrl, this._headers, id);
+            return this._unit.getUnit(this._serviceUrl, this._headers, id, JSON_CONTENT_TYPE);
         };
 
         Category.prototype.editCategory = function(data, id) {
-            return this._unit.updateUnit(this._serviceUrl, this._headers, data, id);
+            return this._unit.updateUnit(this._serviceUrl, this._headers, JSON.stringify(data), id, JSON_CONTENT_TYPE);
         };
 
         Category.prototype.deleteCategory = function(id) {
-            return this._unit.deleteUnit(this._serviceUrl, this._headers, id);
+            return this._unit.deleteUnit(this._serviceUrl, this._headers, id, JSON_CONTENT_TYPE);
         };
 
         return Category;
@@ -257,19 +260,19 @@ app.model = (function(){
         }
 
         Comment.prototype.addComment = function(data) {
-            return this._unit.addUnit(this._serviceUrl, this._headers, data);
+            return this._unit.addUnit(this._serviceUrl, this._headers, JSON.stringify(data), JSON_CONTENT_TYPE);
         };
 
         Comment.prototype.getComment = function(id) {
-            return this._unit.getUnit(this._serviceUrl, this._headers, id);
+            return this._unit.getUnit(this._serviceUrl, this._headers, id, JSON_CONTENT_TYPE);
         };
 
         Comment.prototype.editComment = function(data, id) {
-            return this._unit.updateUnit(this._serviceUrl, this._headers, data, id);
+            return this._unit.updateUnit(this._serviceUrl, this._headers, JSON.stringify(data), id, JSON_CONTENT_TYPE);
         };
 
         Comment.prototype.deleteComment = function(id) {
-            return this._unit.deleteUnit(this._serviceUrl, this._headers, id);
+            return this._unit.deleteUnit(this._serviceUrl, this._headers, id, JSON_CONTENT_TYPE);
         };
 
         return Comment;

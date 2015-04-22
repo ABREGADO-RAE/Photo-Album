@@ -1,38 +1,38 @@
-var app = app  || {};
+var app = app || {};
 
-app.controller = (function(){
+app.controller = (function () {
     'use strict';
-    function Controller(model){
+    function Controller(model) {
         this._model = model;
     }
 
-    Controller.prototype.getLoginPage = function(selector) {
+    Controller.prototype.getLoginPage = function (selector) {
         app.loginView.load(selector);
     };
 
-    Controller.prototype.getRegisterPage = function(selector) {
+    Controller.prototype.getRegisterPage = function (selector) {
         app.registerView.load(selector);
     };
 
-    Controller.prototype.getHomePage = function(selector) {
+    Controller.prototype.getHomePage = function (selector) {
         app.homeView.load(selector);
     };
 
     Controller.prototype.getAlbumPage = function (selector) {
         this._model.albums.getAlbums()
-            .then(function(data){
+            .then(function (data) {
                 console.log(data);
                 app.albumsView.load(selector, data)
-            }, function(error) {
-            console.log(error);
-        })
+            }, function (error) {
+                console.log(error);
+            })
     };
 
     Controller.prototype.getUploadPage = function (selector) {
         app.uploadImageView.load(selector);
     };
 
-    Controller.prototype.attachEventHandlers = function(selector) {
+    Controller.prototype.attachEventHandlers = function (selector) {
         attachEventHandlerRegisterNewUser.call(this, selector);
         attachEventHandlerLoginUser.call(this, selector);
         attachEventHandlerShowAddAlbumView.call(this, selector);
@@ -44,13 +44,26 @@ app.controller = (function(){
         var _this = this;
 
         $(selector).on('click', '#upload-button', function (ev) {
-            var $selectedFileInput =  $('#file-select');
+            var $selectedFileInput = $('#file-select');
             var hasSelectedFile = $.trim(($selectedFileInput).val());
             var $selectedFile = $selectedFileInput.prop('files')[0];
 
-            if (hasSelectedFile  != '') {
+            if (hasSelectedFile != '') {
                 var $fileName = ($selectedFileInput.val()).split('/').pop().split('\\').pop();
                 _this._model.pictures.uploadPictureData($fileName, $selectedFile)
+                    .then(function (data) {
+                        var dataToUpload = {
+                            'title': 'photo_title',
+                            "picture": {
+                                "name": data.name,
+                                "__type": "File"
+                            }
+                        };
+
+                        _this._model.pictures.addPicture(JSON.stringify(dataToUpload));
+                    }, function (error) {
+                        console.log(error.responseText);
+                    })
             } else {
                 console.log('No file selected');
             }
@@ -59,15 +72,15 @@ app.controller = (function(){
 
     var attachEventHandlerRegisterNewUser = function attachEventHandlerRegisterNewUser(selector) {
         var _this = this;
-        $(selector).on('click', '#reg-button', function(ev){
+        $(selector).on('click', '#reg-button', function (ev) {
             var username = $('#reg-username');
             var password = $('#reg-password');
             var repeatPassword = $('#repeat-password');
             var email = $('#email');
             _this._model.users.register(username.val(), password.val(), repeatPassword.val(), email.val())
-                .then(function(data) {
+                .then(function (data) {
                     console.log(data);
-                }, function(error) {
+                }, function (error) {
                     console.log(error);
                 });
             username.val('');
@@ -79,13 +92,13 @@ app.controller = (function(){
 
     var attachEventHandlerLoginUser = function attachEventHandlerLoginUser(selector) {
         var _this = this;
-        $(selector).on('click', '#login-button', function(ev){
+        $(selector).on('click', '#login-button', function (ev) {
             var username = $('#login-username');
             var password = $('#login-password');
             _this._model.users.login(username.val(), password.val())
-                .then(function(data) {
+                .then(function (data) {
                     console.log('Login successful');
-                }, function(error){
+                }, function (error) {
                     console.log('Login failed');
                 });
             username.val('');
@@ -95,12 +108,12 @@ app.controller = (function(){
 
     var attachEventHandlerShowAddAlbumView = function attachEventHandlerShowAddAlbumView(selector) {
         var _this = this;
-        $(selector).on('click', '#btn-show-add-album', function(ev){
+        $(selector).on('click', '#btn-show-add-album', function (ev) {
             _this._model.categories.getCategory()
-                .then(function(data){
+                .then(function (data) {
                     console.log(data);
                     app.showAddAlbumView.loadShowView(selector, data);
-                }, function(error) {
+                }, function (error) {
                     console.log(error);
                 });
         });
@@ -108,26 +121,29 @@ app.controller = (function(){
 
     var attachEventHandlerAddNewAlbum = function attachEventHandlerAddNewAlbum(selector) {
         var _this = this;
-        $(selector).on('click', '#create-album', function(ev) {
+        $(selector).on('click', '#create-album', function (ev) {
             var albumTitle = $('#album-title');
             var selectedCategoryId = $('select .categories:selected').data('id');
-            var albumData = {"title": albumTitle.val(), "category":{"__type":"Pointer","className":"Category","objectId":selectedCategoryId}};
+            var albumData = {
+                "title": albumTitle.val(),
+                "category": {"__type": "Pointer", "className": "Category", "objectId": selectedCategoryId}
+            };
             _this._model.albums.addAlbum(albumData)
-                .then(function(data){
+                .then(function (data) {
                     console.log(data);
                     console.log('Successfully added new album');
-                    location.href='#/Albums/Create-album';
+                    location.href = '#/Albums/Create-album';
                     //window.location.replace('#/Albums');
                     //window.location.reload(true);
                     return data;
-                }, function(error) {
+                }, function (error) {
                     console.log(error);
                 });
         });
     };
 
     return {
-        loadController: function(model) {
+        loadController: function (model) {
             return new Controller(model);
         }
     }
