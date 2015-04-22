@@ -1,11 +1,15 @@
 html, body {
     margin: 0;
     padding: 0;
+    height: 100%;
 }
 body {
     background: url("../images/background.jpg");
     background-size: cover;
     font-family: 'Open Sans', sans-serif;
+}
+body div#container {
+    min-height: 100%;
 }
 
 body div#container header {
@@ -17,7 +21,7 @@ body div#container header div#logo a img {
     height: 120px;
     width: 120px;
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 body div#container header section#links {
@@ -25,20 +29,22 @@ body div#container header section#links {
     margin-bottom: 20px;
 }
 
-body div#container header section#links a {
+body div#container header section#links a, body div#container header div#signBox a {
     text-decoration: none;
     padding: 15px;
     color: white;
 }
 
-body div#container header section#links a:hover, body div#container header div#mainMenu ul li:hover {
+body div#container header section#links a:hover, body div#container header div#mainMenu ul li:hover,
+body div#container header div#signBox a:hover {
     text-decoration: none;
-    background: #276a87;
+    background: #2a7e9b;
     cursor: pointer;
     border-radius: 20px;
 }
 
-body div#container header section#links a:active, body div#container header div#mainMenu ul li:active {
+body div#container header section#links a:active, body div#container header div#mainMenu ul li:active,
+body div#container header div#signBox a:active {
     background: #20465f;
 }
 
@@ -122,6 +128,8 @@ body div#container main div#login-box, body div#container main div#register-box 
     width: 400px;
     vertical-align: top;
     padding: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 body div#container main div#login-box:hover, body div#container main div#register-box:hover {
@@ -203,11 +211,12 @@ body div#container main div#galleryContainer div#fourth-row a {
     background-size: contain;
 }
 
-body div#container footer {
+footer {
     background: url("../images/footer.jpg");
     height: 50px;
-    margin-top: 15px;
     background-size: contain;
+    width: 100%;
+    clear: both;
 }
 
 body div#signBox > a {
