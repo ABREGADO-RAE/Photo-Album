@@ -29,9 +29,13 @@ body div#container header section#links {
     margin-bottom: 20px;
 }
 
+body div#container header section#links a {
+    margin: 0 5px;
+}
+
 body div#container header section#links a, body div#container header div#signBox a {
     text-decoration: none;
-    padding: 15px;
+    padding: 10px;
     color: white;
 }
 
@@ -164,10 +168,10 @@ body div#container main#mainContent div#file-upload input#upload-button {
     font-size: 1em;
 }
 
-body div#container main div#login-box button:hover, body div#container main div#register-box button:hover,
+body div#container main#mainContent  div#login-box button:hover, body div#container main#mainContent  div#register-box button:hover,
 body div#container main#mainContent div#albums button:hover, body div#container main#mainContent div#createAlbumContainer button:hover,
 body div#container main#mainContent div#file-upload input#upload-button:hover {
-    background-color: #f0871f
+    background-color: #f0871f;
 }
 
 body div#container main div#login-box button:active, body div#container main div#register-box button:active,
