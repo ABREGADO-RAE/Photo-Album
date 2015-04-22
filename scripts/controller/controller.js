@@ -40,6 +40,8 @@ app.controller = (function () {
         attachEventHandlerUploadImage.call(this, selector);
     };
 
+    //window.onunload(this._model.logout());
+
     var attachEventHandlerUploadImage = function attachEventHandlerUploadImage(selector) {
         var _this = this;
 

@@ -26,11 +26,11 @@ app.model = (function(){
         }
 
         function getSessionToken(){
-            return localStorage.getItem('sessionToken');
+            return sessionStorage.getItem('sessionToken');
         }
 
         function setSessionToken(sessionToken) {
-            return localStorage.setItem('sessionToken', sessionToken);
+            return sessionStorage.setItem('sessionToken', sessionToken);
         }
 
         return {
@@ -48,11 +48,12 @@ app.model = (function(){
         }
 
         User.prototype.logout = function () {
+            this._headers = Credentials.getHeaders();
+            var _this = this;
             var url = 'https://api.parse.com/1/logout';
-            return app.ajaxRequester.postRequest(url, this._headers, {}, JSON_CONTENT_TYPE)
-                .then(function (data) {
-                    $('.logout').hide();
-                    $('.log-reg').show();
+            return app.ajaxRequester.postRequest(url, this._headers, JSON.stringify({}), JSON_CONTENT_TYPE)
+                .then(function () {
+                    console.log(sessionStorage);
                 }, function (error) {
                     console.log(error);
                 })
@@ -63,14 +64,10 @@ app.model = (function(){
             var _this = this;
             return app.ajaxRequester.getRequest(url, this._headers, JSON_CONTENT_TYPE)
                 .then(function(data){
-                    $('.log-reg').hide();
-                    //var logout = $('<a/>').attr('href', '#/').text('Logout').addClass('logout')
-                    //.click(function () {
-                    //    _this.logout();
-                    //});
-                    //$('#signBox').append(logout);
-
                     Credentials.setSessionToken(data.sessionToken);
+                    _this._headers['X-Parse-Session-Token'] = data.sessionToken;
+                    sessionStorage['logged-in'] = true;
+                    //_this.logout();
                     console.log(data);
                     return data;
                 }, function(error){
@@ -86,6 +83,7 @@ app.model = (function(){
                 return app.ajaxRequester.postRequest(url, this._headers, JSON.stringify(userCredentials), JSON_CONTENT_TYPE)
                     .then(function(data){
                         Credentials.setSessionToken(data.sessionToken);
+                        sessionStorage['logged-in'] = true;
                         console.log(data);
                         return data;
                     }, function(error){

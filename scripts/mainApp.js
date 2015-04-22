@@ -5,6 +5,7 @@ var app = app || {};
     var rootUrl = 'https://api.parse.com/1/';
     var selector = '#mainContent';
     var model = app.model.loadModel(rootUrl);
+    //var eventHandlers = app.eventHandlers.loadEventHandlers(model);
     var controller = app.controller.loadController(model);
     controller.attachEventHandlers(selector);
 
