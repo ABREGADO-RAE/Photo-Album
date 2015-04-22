@@ -45,11 +45,11 @@ app.controller = (function () {
     };
 
     Controller.prototype.getLoggedOutHomeView = function (selector) {
-        app.loggedOutHomeView(selector);
+        app.loggedOutHomeView.load(selector);
     };
 
     Controller.prototype.getLoggedInHomeView = function(selector, data){
-        app.loggedInHomeView(selector, data);
+        app.loggedInHomeView.load(selector, data);
     };
 
     Controller.prototype.attachEventHandlers = function (selector) {
