@@ -48,6 +48,14 @@ app.model = (function(){
             var url = this._serviceUrl + 'login?username=' + username + '&password=' + password;
             return app.ajaxRequester.getRequest(url, this._headers)
                 .then(function(data){
+                    $('.log-reg').hide();
+                    var logout = $('<a/>').attr('href', '#/').text('Logout').addClass('logout')
+                    .click(function () {
+                        $('.logout').hide();
+                        $('.log-reg').show();
+                    });
+                    $('#signBox').append(logout);
+
                     Credentials.setSessionToken(data.sessionToken);
                     console.log(data);
                     return data;
