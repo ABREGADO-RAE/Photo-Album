@@ -28,11 +28,33 @@ app.controller = (function(){
         })
     };
 
+    Controller.prototype.getUploadPage = function (selector) {
+        app.uploadImageView.load(selector);
+    };
+
     Controller.prototype.attachEventHandlers = function(selector) {
         attachEventHandlerRegisterNewUser.call(this, selector);
         attachEventHandlerLoginUser.call(this, selector);
         attachEventHandlerShowAddAlbumView.call(this, selector);
         attachEventHandlerAddNewAlbum.call(this, selector);
+        attachEventHandlerUploadImage.call(this, selector);
+    };
+
+    var attachEventHandlerUploadImage = function attachEventHandlerUploadImage(selector) {
+        var _this = this;
+
+        $(selector).on('click', '#upload-button', function (ev) {
+            var $selectedFileInput =  $('#file-select');
+            var hasSelectedFile = $.trim(($selectedFileInput).val());
+            var $selectedFile = $selectedFileInput.prop('files')[0];
+
+            if (hasSelectedFile  != '') {
+                var $fileName = ($selectedFileInput.val()).split('/').pop().split('\\').pop();
+                _this._model.pictures.uploadPictureData($fileName, $selectedFile)
+            } else {
+                console.log('No file selected');
+            }
+        })
     };
 
     var attachEventHandlerRegisterNewUser = function attachEventHandlerRegisterNewUser(selector) {

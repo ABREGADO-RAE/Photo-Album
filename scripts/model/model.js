@@ -195,6 +195,7 @@ app.model = (function(){
     var Picture = (function(){
         function Picture(baseUrl){
             this._serviceUrl = baseUrl + 'classes/Picture';
+            this._uploadDataServiceUrl = baseUrl + 'files/';
             this._headers = Credentials.getHeaders();
             this._unit = new Unit();
         }
@@ -202,6 +203,10 @@ app.model = (function(){
         Picture.prototype.addPicture = function(data) {
             return this._unit.addUnit(this._serviceUrl, this._headers, data);
         };
+
+        Picture.prototype.uploadPictureData = function (fileName, file ) {
+            return this._unit.addUnit();
+        }
 
         Picture.prototype.getPicture = function(id) {
             return this._unit.getUnit(this._serviceUrl, this._headers, id);

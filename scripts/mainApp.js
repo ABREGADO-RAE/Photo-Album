@@ -36,6 +36,7 @@ var app = app || {};
         });
 
         this.get('#/Upload', function () {
+            controller.getUploadPage(selector);
         });
 
         this.get('#/Comments', function () {
