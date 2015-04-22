@@ -44,15 +44,26 @@ app.model = (function(){
             this._headers = Credentials.getHeaders();
         }
 
+        User.prototype.logout = function () {
+            var url = 'https://api.parse.com/1/logout';
+            return app.ajaxRequester.postRequest(url, this._headers, {})
+                .then(function (data) {
+                    $('.logout').hide();
+                    $('.log-reg').show();
+                }, function (error) {
+                    console.log(error);
+                })
+        };
+
         User.prototype.login = function(username, password) {
             var url = this._serviceUrl + 'login?username=' + username + '&password=' + password;
+            var _this = this;
             return app.ajaxRequester.getRequest(url, this._headers)
                 .then(function(data){
                     $('.log-reg').hide();
                     var logout = $('<a/>').attr('href', '#/').text('Logout').addClass('logout')
                     .click(function () {
-                        $('.logout').hide();
-                        $('.log-reg').show();
+                        _this.logout();
                     });
                     $('#signBox').append(logout);
 
