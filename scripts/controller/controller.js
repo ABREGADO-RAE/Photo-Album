@@ -3,6 +3,7 @@ var app = app || {};
 app.controller = (function () {
     'use strict';
     var MAIN_CONTAINER_SELECTOR = '#mainContent';
+    var MAX_IMAGE_SIZE = 1100000;
 
     function Controller(model) {
         this._model = model;
@@ -93,7 +94,8 @@ app.controller = (function () {
             console.log('document height: ' + $(document).height());
             //console.log('scroll top' + $(window).scrollTop());
 
-            if ($(window).scrollTop() + 400 + $(window).height() >= $(document).height()) {
+            if (($(window).scrollTop() + 400 + $(window).height() >= $(document).height()) &&
+                 $('#mainContent .image-container').length) {
                 _this._model.pictures.loadMorePictures()
                     .then(function (data) {
                         app.loadMorePicturesView.load(MAIN_CONTAINER_SELECTOR, data);
@@ -137,25 +139,30 @@ app.controller = (function () {
             if (hasSelectedFile != '') {
                 var $fileName = ($selectedFileInput.val()).split('/').pop().split('\\').pop();
                 var selectedAlbumId = $('select .albums:selected').data('id');
+                var $imageSize = $selectedFileInput[0].files[0].size;
 
-                _this._model.pictures.uploadPictureData($fileName, $selectedFile)
-                    .then(function (data) {
-                        var dataToUpload = {
-                            'title': 'photo_title',
-                            "picture": {
-                                "name": data.name,
-                                "__type": "File"
-                            },
-                            "album": {"__type": "Pointer", "className": "Album", "objectId": selectedAlbumId}
-                        };
+                if ($imageSize < MAX_IMAGE_SIZE) {
+                    _this._model.pictures.uploadPictureData($fileName, $selectedFile)
+                        .then(function (data) {
+                            var dataToUpload = {
+                                'title': 'photo_title',
+                                "picture": {
+                                    "name": data.name,
+                                    "__type": "File"
+                                },
+                                "album": {"__type": "Pointer", "className": "Album", "objectId": selectedAlbumId}
+                            };
 
-                        _this._model.pictures.addPicture(JSON.stringify(dataToUpload));
-                        $selectedFileInput.val('');
-                    }, function (error) {
-                        console.log(error.responseText);
-                    })
+                            _this._model.pictures.addPicture(JSON.stringify(dataToUpload));
+                            $selectedFileInput.val('');
+                        }, function (error) {
+                            console.log(error.responseText);
+                        })
+                } else {
+                    //TO DO: Show to the user that max picture size is 1mb
+                }
             } else {
-                console.log('No file selected');
+                //TO DO: Show to the user that no file has been selected
             }
         })
     };

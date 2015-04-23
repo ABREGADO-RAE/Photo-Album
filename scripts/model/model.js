@@ -229,14 +229,14 @@ app.model = (function(){
             var url = this._serviceUrl + '?where={"album": {"__type":"Pointer", "className" : "Album", "objectId" : "'+id+'"}}';
             return this._unit.getUnit(url, this._headers, undefined, IMAGE_CONTENT_TYPE);
         };
-        //?where={"album": {"__type":"Pointer", "className" : "Album", "objectId" : "cTk60P2cTh"}}
+
         Picture.prototype.getPhotosByLimit = function (limit) {
             var url = this._serviceUrl + '?order=-createdAt&limit=' + limit;
             return this._unit.getUnit(url, this._headers, null, IMAGE_CONTENT_TYPE);
         };
 
         Picture.prototype.loadMorePictures = function () {
-            this._imageCounter += 16;
+            this._imageCounter += LOAD_MORE_PICTURES_LIMIT;
             var url = this._serviceUrl + '?order=-createdAt&skip=' + this._imageCounter + '&limit=' + LOAD_MORE_PICTURES_LIMIT;
             return this._unit.getUnit(url, this._headers, undefined, IMAGE_CONTENT_TYPE);
         };
