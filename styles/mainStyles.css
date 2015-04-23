@@ -17,11 +17,21 @@ body div#container header {
     color: white;
 }
 
-body div#container header div#logo a img {
-    height: 120px;
-    width: 120px;
-    margin-top: 10px;
-    margin-bottom: 20px;
+body div#container header div#logo a#logo-img {
+    display: block;
+    height: 200px;
+    width: 200px;
+    background-image: url("../images/logo2.png");
+    text-indent: -9999px;
+    margin: 20px auto;
+}
+
+body div#container header div#logo a#logo-img:hover {
+    background-image: url("../images/logo2hover.png");
+}
+
+body div#container header div#logo a#logo-img:active {
+    background-image: url("../images/logo2active.png");
 }
 
 body div#container header section#links {
