@@ -4,7 +4,7 @@ html, body {
     height: 100%;
 }
 body {
-    background: url("../images/background.jpg");
+    background: url("../images/background2.jpg");
     background-size: cover;
     font-family: 'Open Sans', sans-serif;
 }
@@ -58,14 +58,14 @@ body div#container header div#signBox {
 body div#container header section#links a:hover, body div#container header div#mainMenu ul li:hover,
 body div#container header div#signBox a:hover {
     text-decoration: none;
-    background: #2a7e9b;
+    background: rgba(0, 0, 0, 0.22);
     cursor: pointer;
     border-radius: 20px;
 }
 
 body div#container header section#links a:active, body div#container header div#mainMenu ul li:active,
 body div#container header div#signBox a:active {
-    background: #20465f;
+    background: rgba(0, 0, 0, 0.36);
 }
 
 body div#container header div#mainMenu ul {
