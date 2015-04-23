@@ -51,9 +51,10 @@ app.model = (function(){
             this._headers = Credentials.getHeaders();
             var _this = this;
             var url = 'https://api.parse.com/1/logout';
-            return app.ajaxRequester.postRequest(url, this._headers, JSON.stringify({}), JSON_CONTENT_TYPE)
+            return app.ajaxRequester.postRequest(url, this._headers, null, JSON_CONTENT_TYPE)
                 .then(function () {
                     sessionStorage.clear();
+                    _this._headers['X-Parse-Session-Token'] = null;
                 }, function (error) {
                     console.log(error.responseText);
                 })
@@ -62,7 +63,8 @@ app.model = (function(){
         User.prototype.login = function(username, password) {
             var url = this._serviceUrl + 'login?username=' + username + '&password=' + password;
             var _this = this;
-            return app.ajaxRequester.getRequest(url, this._headers, JSON_CONTENT_TYPE)
+            var headers  = Credentials.getHeaders();
+            return app.ajaxRequester.getRequest(url, headers, JSON_CONTENT_TYPE)
                 .then(function(data){
                     Credentials.setSessionToken(data.sessionToken);
                     _this._headers['X-Parse-Session-Token'] = data.sessionToken;
@@ -77,6 +79,7 @@ app.model = (function(){
         };
 
         User.prototype.register = function(username, password, repeatedPwrd, email) {
+            var _this = this;
             if (assurePasswordEquality(password, repeatedPwrd)) {
                 var userCredentials = {'username': username, 'password': password, 'email': email};
                 var url = this._serviceUrl + 'users';
@@ -84,6 +87,8 @@ app.model = (function(){
                     .then(function(data){
                         Credentials.setSessionToken(data.sessionToken);
                         sessionStorage['logged-in'] = true;
+                        data['username'] = username;
+                        _this._headers['X-Parse-Session-Token'] = data.sessionToken;
                         console.log(data);
                         return data;
                     }, function(error){

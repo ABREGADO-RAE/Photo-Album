@@ -1,17 +1,20 @@
 var app = app || {};
 
 app.loggedInHomeView = (function () {
-    function LoggedInHomeView(selector, data) {
+    function LoggedInHomeView(selector, data, controller) {
         $.get('templates/logged-in-view.html', function (template) {
             var output = Mustache.render(template, data);
             $(selector).html(output);
             $('#login-box').hide();
-        });
+        })
+            .then(function(data) {
+                controller.attachEventHandlers(selector);
+            });
     }
 
     return {
-        load:function(selector, data) {
-            return new LoggedInHomeView(selector, data);
+        load:function(selector, data, controller) {
+            return new LoggedInHomeView(selector, data, controller);
         }
     }
 }());

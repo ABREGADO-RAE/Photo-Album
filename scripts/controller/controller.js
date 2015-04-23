@@ -48,49 +48,46 @@ app.controller = (function () {
         app.uploadImageView.load(selector);
     };
 
-    Controller.prototype.logout = function(selector) {
-        var _this = this;
-        this._model.users.logout()
-            .then(function() {
-                app.homeView.load(selector);
-                location.href = '#/';
-                _this.getLoggedOutHomeView('#container');
-            }, function(error) {
-                console.log(error.responseText);
-            });
-    };
+    //Controller.prototype.logout = function(selector) {
+    //    var _this = this;
+    //    this._model.users.logout()
+    //        .then(function() {
+    //            app.homeView.load(selector);
+    //            location.href = '#/';
+    //            _this.getLoggedOutHomeView('#container');
+    //        }, function(error) {
+    //            console.log(error.responseText);
+    //        });
+    //};
 
     Controller.prototype.getLoggedOutHomeView = function (selector) {
         app.loggedOutHomeView.load(selector);
     };
 
     Controller.prototype.getLoggedInHomeView = function(selector, data){
-        app.loggedInHomeView.load(selector, data);
+        app.loggedInHomeView.load(selector, data, this);
     };
 
     Controller.prototype.attachEventHandlers = function (selector) {
         attachEventHandlerRegisterNewUser.call(this, selector);
         attachEventHandlerLoginUser.call(this, selector);
+        attachEventHandlerLogoutUser.call(this, selector);
         attachEventHandlerShowAddAlbumView.call(this, selector);
         attachEventHandlerAddNewAlbum.call(this, selector);
         attachEventHandlerUploadImage.call(this, selector);
     };
 
-    //window.onunload(this._model.logout());
-
-    var attachEventHandlerAddNewPhoto = function attachEventHandlerAddNewPhoto() {
+    var attachEventHandlerLogoutUser = function attachEventHandlerLogoutUser(selector) {
         var _this = this;
-        var selector = $('#links');
-        var containerToChange = $('#main-content');
-
-        $(selector).on('click', '.upload-image', function (ev) {
-            _this._model.albums.getAlbums()
-                .then(function (data) {
-                    app.uploadImageView.load(containerToChange, data);
-                }, function (error) {
-                    console.log(error);
+        $(selector).on('click', '#btn-logout', function(ev) {
+            _this._model.users.logout()
+                .then(function() {
+                    location.href = '#/';
+                    _this.getLoggedOutHomeView(selector);
+                }, function(error) {
+                    console.log(error.responseText);
                 });
-        })
+        });
     };
 
     var attachEventHandlerUploadImage = function attachEventHandlerUploadImage(selector) {
@@ -134,6 +131,10 @@ app.controller = (function () {
             _this._model.users.register(username.val(), password.val(), repeatPassword.val(), email.val())
                 .then(function (data) {
                     console.log(data);
+                    app.loggedInHomeView.load('header', data, _this);
+                    location.href = '#/';
+                    _this.getLoggedInHomeView('#container', data);
+                    console.log('Register succesfful');
                 }, function (error) {
                     console.log(error);
                 });
@@ -151,9 +152,10 @@ app.controller = (function () {
             var password = $('#login-password');
             _this._model.users.login(username.val(), password.val())
                 .then(function (data) {
-                    app.loggedInHomeView.load('header', data);
-                    location.href = '#/';
+                    app.loggedInHomeView.load('header', data, _this);
+                    location.href = '#/logged-in-view';
                     _this.getLoggedInHomeView('#container', data);
+                    sessionStorage.setItem('currentUserName', username.val());
                     console.log('Login successful');
                 }, function (error) {
                     console.log('Login failed');

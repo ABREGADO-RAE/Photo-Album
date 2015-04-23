@@ -44,8 +44,10 @@ var app = app || {};
         this.get('#/Comments', function () {
         });
 
-        this.get('#/Logout', function() {
-            controller.logout(selector);
+        this.get('#/logged-in-view', function() {
+            var _selector = $('#container header');
+            var currentUserName = {};sessionStorage.getItem('currentUserName');
+            controller.getLoggedInHomeView(_selector, JSON.stringify(currentUserName));
         })
     });
 
