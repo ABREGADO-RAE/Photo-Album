@@ -75,6 +75,23 @@ app.controller = (function () {
         attachEventHandlerShowAddAlbumView.call(this, selector);
         attachEventHandlerAddNewAlbum.call(this, selector);
         attachEventHandlerUploadImage.call(this, selector);
+        attachEventHandlerShowPicture.call(this, selector);
+    };
+
+    var attachEventHandlerShowPicture = function attachEventHandlerShowPicture(selector) {
+        var _this = this;
+        $(selector).on('click', '.albums-list', function(ev) {
+            var albumId = $(ev.target).data('id');
+            _this._model.pictures.getAllPicturesByAlbumId(albumId)
+                .then(function(data) {
+                    var _selector = '#mainContent';
+                    console.log(data);
+                    console.log('Successfully showed pictures');
+                    app.pictureByAlbumView.loadPictureByAlbum(_selector, data);
+                }, function(error){
+                    console.log(error.responseText);
+                })
+        });
     };
 
     var attachEventHandlerLogoutUser = function attachEventHandlerLogoutUser(selector) {
