@@ -29,7 +29,7 @@ app.controller = (function () {
     };
 
     Controller.prototype.getLatestPhotosPage = function (selector) {
-        this._model.pictures.getPhotosByLimit(10)
+        this._model.pictures.getPhotosByLimit(16)
             .then(function (data) {
                 app.showLimitedImageView.load(selector, data);
             }, function (error) {
@@ -46,6 +46,11 @@ app.controller = (function () {
             });
 
         app.uploadImageView.load(selector);
+    };
+
+    Controller.prototype.getPicturesByAlbumPage = function () {
+        var albumId = sessionStorage.getItem('AlbumId');
+        getPicturesByAlbum(this, albumId);
     };
 
     //Controller.prototype.logout = function(selector) {
@@ -82,15 +87,8 @@ app.controller = (function () {
         var _this = this;
         $(selector).on('click', '.albums-list', function(ev) {
             var albumId = $(ev.target).data('id');
-            _this._model.pictures.getAllPicturesByAlbumId(albumId)
-                .then(function(data) {
-                    var _selector = '#mainContent';
-                    console.log(data);
-                    console.log('Successfully showed pictures');
-                    app.pictureByAlbumView.loadPictureByAlbum(_selector, data);
-                }, function(error){
-                    console.log(error.responseText);
-                })
+            sessionStorage.setItem('AlbumId', albumId);
+            getPicturesByAlbum(_this, albumId);
         });
     };
 
@@ -117,6 +115,8 @@ app.controller = (function () {
 
             if (hasSelectedFile != '') {
                 var $fileName = ($selectedFileInput.val()).split('/').pop().split('\\').pop();
+                var selectedAlbumId = $('select .albums:selected').data('id');
+
                 _this._model.pictures.uploadPictureData($fileName, $selectedFile)
                     .then(function (data) {
                         var dataToUpload = {
@@ -124,7 +124,8 @@ app.controller = (function () {
                             "picture": {
                                 "name": data.name,
                                 "__type": "File"
-                            }
+                            },
+                            "album": {"__type": "Pointer", "className": "Album", "objectId": selectedAlbumId}
                         };
 
                         _this._model.pictures.addPicture(JSON.stringify(dataToUpload));
@@ -217,6 +218,19 @@ app.controller = (function () {
                 });
         });
     };
+
+    function getPicturesByAlbum (controller, albumId) {
+        controller._model.pictures.getAllPicturesByAlbumId(albumId)
+            .then(function(data) {
+                location.href = '#/Albums/Pictures-by-album';
+                var _selector = '#mainContent';
+                console.log(data);
+                console.log('Successfully showed pictures');
+                app.pictureByAlbumView.loadPictureByAlbum(_selector, data);
+            }, function(error){
+                console.log(error.responseText);
+            })
+    }
 
     return {
         loadController: function (model) {

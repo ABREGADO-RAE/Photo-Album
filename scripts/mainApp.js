@@ -22,6 +22,10 @@ var app = app || {};
             this.redirect('#/Albums');
         });
 
+        this.get('#/Albums/Pictures-by-album', function () {
+            controller.getPicturesByAlbumPage();
+        });
+
         this.get('#/Login', function () {
             controller.getLoginPage(selector);
         });
