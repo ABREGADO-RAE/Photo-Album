@@ -125,6 +125,8 @@ body div#container header div#searchBox button#search-button:active {
 body div#container main#mainContent {
     text-align: center;
     color: white;
+    width: 90%;
+    margin: 2% auto;
 }
 
 body div#container main#mainContent input, body div#container main#mainContent button,
@@ -252,4 +254,22 @@ footer {
 
 body div#signBox > a {
     color: white;
+}
+
+.thumbnail-container {
+    display: inline-block;
+    width: 210px;
+    height: 160px;
+    margin: 1% 0.5%;
+    vertical-align: middle;
+    text-align: center;
+    white-space: normal;
+    background-color: black;
+    box-shadow: 0 0 4px rgba(0,0,0,.8);
+}
+
+.thumbnail {
+    min-height: 100%;
+    max-height: 160px;
+    max-width: 100%;
 }

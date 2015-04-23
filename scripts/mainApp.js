@@ -31,6 +31,7 @@ var app = app || {};
         });
 
         this.get('#/Latest', function () {
+            controller.getLatestPhotosPage(selector);
         });
 
         this.get('#/Random', function () {

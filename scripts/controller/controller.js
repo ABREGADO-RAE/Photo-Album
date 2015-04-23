@@ -28,6 +28,15 @@ app.controller = (function () {
             })
     };
 
+    Controller.prototype.getLatestPhotosPage = function (selector) {
+        this._model.pictures.getPhotosByLimit(10)
+            .then(function (data) {
+                app.showLimitedImageView.load(selector, data);
+            }, function (error) {
+                console.log(error.responseText);
+            });
+    };
+
     Controller.prototype.getUploadPage = function (selector) {
         this._model.albums.getAlbums()
             .then(function (data) {

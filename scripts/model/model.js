@@ -218,6 +218,11 @@ app.model = (function(){
             return this._unit.getUnit(this._serviceUrl, this._headers, id,IMAGE_CONTENT_TYPE);
         };
 
+        Picture.prototype.getPhotosByLimit = function (limit) {
+            var url = this._serviceUrl + '?order=-createdAt&limit=' + limit;
+            return this._unit.getUnit(url, this._headers, null, IMAGE_CONTENT_TYPE);
+        };
+
         Picture.prototype.editPicture = function(data, id) {
             return this._unit.updateUnit(this._serviceUrl, this._headers, data, id,IMAGE_CONTENT_TYPE);
         };
