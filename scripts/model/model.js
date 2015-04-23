@@ -53,9 +53,9 @@ app.model = (function(){
             var url = 'https://api.parse.com/1/logout';
             return app.ajaxRequester.postRequest(url, this._headers, JSON.stringify({}), JSON_CONTENT_TYPE)
                 .then(function () {
-                    console.log(sessionStorage);
+                    sessionStorage.clear();
                 }, function (error) {
-                    console.log(error);
+                    console.log(error.responseText);
                 })
         };
 
@@ -71,7 +71,7 @@ app.model = (function(){
                     console.log(data);
                     return data;
                 }, function(error){
-                    console.log(error);
+                    console.log(error.responseText);
                     return error;
                 });
         };
@@ -87,7 +87,7 @@ app.model = (function(){
                         console.log(data);
                         return data;
                     }, function(error){
-                        console.log(error);
+                        console.log(error.responseText);
                         return error;
                     });
             } else {
