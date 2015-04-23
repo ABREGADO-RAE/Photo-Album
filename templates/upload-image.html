@@ -1,4 +1,10 @@
 <div id="file-upload">
     <input type="file" name="file-select" id="file-select">
+    <label for="select-image-album">Albums: </label>
+    <select id="select-image-album">
+        {{#results}}
+        <option data-id="{{objectId}}" value="{{title}}" class="albums">{{title}}</option>
+        {{/results}}
+    </select>
     <input id="upload-button" type="button" value="Upload"/>
 </div>

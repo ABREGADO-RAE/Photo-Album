@@ -171,8 +171,12 @@ app.model = (function(){
             return this._unit.addUnit(this._serviceUrl, this._headers, JSON.stringify(data), JSON_CONTENT_TYPE);
         };
 
-        Album.prototype.getAlbums = function(id) {
-            return this._unit.getUnit(this._serviceUrl, this._headers, id, JSON_CONTENT_TYPE)
+        Album.prototype.getAlbums = function() {
+            return this._unit.getUnit(this._serviceUrl, this._headers, null, JSON_CONTENT_TYPE)
+        };
+
+        Album.prototype.getAlbumById = function(id) {
+            //return this._unit.getUnit(this._serviceUrl, this._headers, id, JSON_CONTENT_TYPE)
         };
 
         Album.prototype.editAlbum = function(data, id) {

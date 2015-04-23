@@ -29,6 +29,13 @@ app.controller = (function () {
     };
 
     Controller.prototype.getUploadPage = function (selector) {
+        this._model.albums.getAlbums()
+            .then(function (data) {
+                app.uploadImageView.load(selector, data);
+            }, function (error) {
+                console.log(error);
+            });
+
         app.uploadImageView.load(selector);
     };
 
@@ -62,6 +69,21 @@ app.controller = (function () {
 
     //window.onunload(this._model.logout());
 
+    var attachEventHandlerAddNewPhoto = function attachEventHandlerAddNewPhoto() {
+        var _this = this;
+        var selector = $('#links');
+        var containerToChange = $('#main-content');
+
+        $(selector).on('click', '.upload-image', function (ev) {
+            _this._model.albums.getAlbums()
+                .then(function (data) {
+                    app.uploadImageView.load(containerToChange, data);
+                }, function (error) {
+                    console.log(error);
+                });
+        })
+    };
+
     var attachEventHandlerUploadImage = function attachEventHandlerUploadImage(selector) {
         var _this = this;
 
@@ -83,6 +105,7 @@ app.controller = (function () {
                         };
 
                         _this._model.pictures.addPicture(JSON.stringify(dataToUpload));
+                        $selectedFileInput.val('');
                     }, function (error) {
                         console.log(error.responseText);
                     })
