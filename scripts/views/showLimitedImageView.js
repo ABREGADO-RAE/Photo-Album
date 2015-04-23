@@ -9,7 +9,7 @@ app.showLimitedImageView = (function () {
     }
 
     return {
-        load: function(selector, data) {
+        load: function (selector, data) {
             return ShowLimitedImageView(selector, data);
         }
     }

@@ -2,6 +2,8 @@ var app = app || {};
 
 app.controller = (function () {
     'use strict';
+    var MAIN_CONTAINER_SELECTOR = '#mainContent';
+
     function Controller(model) {
         this._model = model;
     }
@@ -81,6 +83,25 @@ app.controller = (function () {
         attachEventHandlerAddNewAlbum.call(this, selector);
         attachEventHandlerUploadImage.call(this, selector);
         attachEventHandlerShowPicture.call(this, selector);
+        attachEventHandlerLoadMorePictures.call(this);
+    };
+
+    var attachEventHandlerLoadMorePictures = function attachEventHandlerLoadMorePictures() {
+        var _this = this;
+        $(document).scroll(function(){
+            //console.log('window height: ' + $(window).height());
+            console.log('document height: ' + $(document).height());
+            //console.log('scroll top' + $(window).scrollTop());
+
+            if ($(window).scrollTop() + 400 + $(window).height() >= $(document).height()) {
+                _this._model.pictures.loadMorePictures()
+                    .then(function (data) {
+                        app.loadMorePicturesView.load(MAIN_CONTAINER_SELECTOR, data);
+                    }, function (error) {
+                        console.log(error.responseText);
+                    })
+            }
+        });
     };
 
     var attachEventHandlerShowPicture = function attachEventHandlerShowPicture(selector) {
@@ -223,10 +244,9 @@ app.controller = (function () {
         controller._model.pictures.getAllPicturesByAlbumId(albumId)
             .then(function(data) {
                 location.href = '#/Albums/Pictures-by-album';
-                var _selector = '#mainContent';
                 console.log(data);
                 console.log('Successfully showed pictures');
-                app.pictureByAlbumView.loadPictureByAlbum(_selector, data);
+                app.pictureByAlbumView.loadPictureByAlbum(MAIN_CONTAINER_SELECTOR, data);
             }, function(error){
                 console.log(error.responseText);
             })

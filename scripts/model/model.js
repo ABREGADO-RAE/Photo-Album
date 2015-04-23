@@ -203,11 +203,13 @@ app.model = (function(){
     }());
 
     var Picture = (function(){
+        var LOAD_MORE_PICTURES_LIMIT = 16;
         function Picture(baseUrl){
             this._serviceUrl = baseUrl + 'classes/Picture';
             this._uploadDataServiceUrl = baseUrl + 'files/';
             this._headers = Credentials.getHeaders();
             this._unit = new Unit();
+            this._imageCounter = 0;
         }
 
         Picture.prototype.addPicture = function(data) {
@@ -231,6 +233,12 @@ app.model = (function(){
         Picture.prototype.getPhotosByLimit = function (limit) {
             var url = this._serviceUrl + '?order=-createdAt&limit=' + limit;
             return this._unit.getUnit(url, this._headers, null, IMAGE_CONTENT_TYPE);
+        };
+
+        Picture.prototype.loadMorePictures = function () {
+            this._imageCounter += 16;
+            var url = this._serviceUrl + '?order=-createdAt&skip=' + this._imageCounter + '&limit=' + LOAD_MORE_PICTURES_LIMIT;
+            return this._unit.getUnit(url, this._headers, undefined, IMAGE_CONTENT_TYPE);
         };
 
         Picture.prototype.editPicture = function(data, id) {
