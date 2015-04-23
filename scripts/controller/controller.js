@@ -155,7 +155,7 @@ app.controller = (function () {
                     app.loggedInHomeView.load('header', data, _this);
                     location.href = '#/logged-in-view';
                     _this.getLoggedInHomeView('#container', data);
-                    sessionStorage.setItem('currentUserName', username.val());
+                    sessionStorage.setItem('currentUserName', data.username);
                     console.log('Login successful');
                 }, function (error) {
                     console.log('Login failed');

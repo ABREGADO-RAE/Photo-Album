@@ -46,8 +46,7 @@ var app = app || {};
 
         this.get('#/logged-in-view', function() {
             var _selector = $('#container header');
-            var currentUserName = {};sessionStorage.getItem('currentUserName');
-            controller.getLoggedInHomeView(_selector, JSON.stringify(currentUserName));
+            controller.getLoggedInHomeView(_selector);
         })
     });
 

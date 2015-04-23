@@ -3,6 +3,11 @@ var app = app || {};
 app.loggedInHomeView = (function () {
     function LoggedInHomeView(selector, data, controller) {
         $.get('templates/logged-in-view.html', function (template) {
+            if (!data) {
+                data = {
+                    username: sessionStorage['currentUserName']
+                }
+            }
             var output = Mustache.render(template, data);
             $(selector).html(output);
             $('#login-box').hide();
