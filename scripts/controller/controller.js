@@ -30,7 +30,9 @@ app.controller = (function () {
                     var album = {
                         title: result.title,
                         id: result.objectId,
-                        pictureUrl: undefined
+                        pictureUrl: undefined,
+                        likes: result.likes,
+                        dislikes: result.dislikes
                     };
                     albums.push(album);
                 });
@@ -137,6 +139,46 @@ app.controller = (function () {
         attachEventHandlerUploadImage.call(this, selector);
         attachEventHandlerShowPicture.call(this, selector);
         attachEventHandlerLoadMorePictures.call(this);
+        attachEventLikeAlbum.call(this, selector);
+        attachEventDislikeAlbum.call(this, selector);
+    };
+
+    var attachEventLikeAlbum = function attachEventLikeAlbum(selector) {
+        var _this = this;
+        $(selector).on('click', '#btn-like-album', function(ev) {
+            if ( $(this).is("span")) {
+                var albumId = $(this).parent().parent().data('id');
+                var likes = $(ev.target);
+                var data = {"likes":{"__op":"Increment","amount":1}};
+                _this._model.albums.editAlbum(data, albumId)
+                    .then(function(data){
+                        console.log(data);
+                        var currentLikes = likes.text();
+                        likes.text(Number(currentLikes)+1);
+                    }, function(error){
+                        console.log(error.responseText);
+                    })
+            }
+        })
+    };
+
+    var attachEventDislikeAlbum = function attachEventDislikeAlbum(selector) {
+        var _this = this;
+        $(selector).on('click', '#btn-dislike-album', function(ev) {
+            if ( $(this).is("span")) {
+                var albumId = $(this).parent().parent().data('id');
+                var dislikes = $(ev.target);
+                var data = {"dislikes":{"__op":"Increment","amount":-1}};
+                _this._model.albums.editAlbum(data, albumId)
+                    .then(function(data){
+                        console.log(data);
+                        var currentDislikes = dislikes.text();
+                        dislikes.text(Number(currentDislikes)-1);
+                    }, function(error){
+                        console.log(error.responseText);
+                    })
+            }
+        })
     };
 
     var attachEventHandlerLoadMorePictures = function attachEventHandlerLoadMorePictures() {
@@ -161,7 +203,7 @@ app.controller = (function () {
 
     var attachEventHandlerShowPicture = function attachEventHandlerShowPicture(selector) {
         var _this = this;
-        $(selector).on('click', '.albums-list', function(ev) {
+        $(selector).on('click', '.albums-list > h3', function(ev) {
             var albumId = $(ev.target).data('id');
             sessionStorage.setItem('AlbumId', albumId);
             getPicturesByAlbum(_this, albumId);

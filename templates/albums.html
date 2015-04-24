@@ -1,11 +1,11 @@
 <div id="albums">
 {{#albums}}
-<div class="albums-list" >
+<div class="albums-list" data-id="{{id}}">
     <h3 data-id="{{id}}">{{title}}</h3>
     <img src="{{pictureUrl}}" alt="image"/>
     <div class="voteBox">
-        <span class="likes">0</span>
-        <span class="dislikes">0</span>
+        <span>Likes</span><span class="voteButtons likes" id="btn-like-album">{{likes}}</span>
+        <span>Disikes</span><span class="voteButtons dislikes" id="btn-dislike-album">{{dislikes}}</span>
     </div>
 </div>
 {{/albums}}

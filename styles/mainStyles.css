@@ -339,3 +339,14 @@ body div#signBox > a {
         display: block;
     }
 }
+
+/*Vote buttons*/
+.voteButtons {
+    display: inline-block;
+    padding: 10px;
+    border: 2px solid red;
+}
+
+.voteButtons:hover {
+    cursor: pointer;
+}
