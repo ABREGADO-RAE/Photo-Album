@@ -40,7 +40,7 @@ body div#container header section#links {
 }
 
 body div#container header section#links a {
-    margin: 0 5px;
+    margin: 5px;
 }
 
 body div#container header section#links a, body div#container header div#signBox a {
@@ -58,14 +58,14 @@ body div#container header div#signBox {
 body div#container header section#links a:hover, body div#container header div#mainMenu ul li:hover,
 body div#container header div#signBox a:hover {
     text-decoration: none;
-    background: rgba(0, 0, 0, 0.22);
+    color: #f0871f;
     cursor: pointer;
     border-radius: 20px;
 }
 
 body div#container header section#links a:active, body div#container header div#mainMenu ul li:active,
 body div#container header div#signBox a:active {
-    background: rgba(0, 0, 0, 0.36);
+    color: #b95f20;
 }
 
 body div#container header div#mainMenu ul {
@@ -139,20 +139,43 @@ body div#container main#mainContent {
     margin: 2% auto;
 }
 
+body div#container main#mainContent div#galleryContainer {
+    max-width: 80%;
+}
+
 body div#container main#mainContent input, body div#container main#mainContent button,
 body div#container main#mainContent div#createAlbumContainer select#album-category {
     color: black;
     padding: 5px;
-    margin: 16px;
+    margin: 14px;
 }
 
 body div#container main#mainContent div#login-box, body div#container main#mainContent div#register-box {
     display: inline-block;
-    width: 400px;
+    width: 360px;
+    max-width: 95%;
     vertical-align: top;
     padding: 15px;
     margin-top: 15px;
     margin-bottom: 15px;
+}
+
+body div#container main#mainContent div#login-box div input#login-username,
+body div#container main#mainContent div#register-box div input#reg-username {
+    background: white url("../images/user.png") left no-repeat;
+    padding-left: 20px;
+}
+
+body div#container main#mainContent div#login-box div input#login-password,
+body div#container main#mainContent div#register-box div input#reg-password,
+body div#container main#mainContent div#register-box div input#repeat-password {
+    background: white url("../images/password.png") left no-repeat;
+    padding-left: 20px;
+}
+
+body div#container main#mainContent div#register-box div input#email {
+    background: white url("../images/email.png") left no-repeat;
+    padding-left: 20px;
 }
 
 body div#container main div#login-box:hover, body div#container main div#register-box:hover {
@@ -282,4 +305,10 @@ body div#signBox > a {
     min-height: 100%;
     max-height: 200px;
     max-width: 100%;
+}
+
+@media (max-width: 475px) {
+    body div#container header section#links a {
+        display: block;
+    }
 }
