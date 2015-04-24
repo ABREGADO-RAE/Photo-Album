@@ -235,6 +235,16 @@ app.model = (function(){
             return this._unit.getUnit(url, this._headers, null, IMAGE_CONTENT_TYPE);
         };
 
+        Picture.prototype.getAlbumLatestPicture = function(id) {
+            var url = this._serviceUrl + '?where={"album": {"__type":"Pointer", "className" : "Album", "objectId" : '+id+'}}&order=-createdAt&limit=1';
+            return this._unit.getUnit(url, this._headers, undefined, JSON_CONTENT_TYPE)
+                .then(function(data) {
+                    console.log(data);
+                }, function(error) {
+                    console.log(error.responseText);
+                });
+        };
+
         Picture.prototype.loadMorePictures = function () {
             this._imageCounter += LOAD_MORE_PICTURES_LIMIT;
             var url = this._serviceUrl + '?order=-createdAt&skip=' + this._imageCounter + '&limit=' + LOAD_MORE_PICTURES_LIMIT;

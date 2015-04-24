@@ -23,13 +23,29 @@ app.controller = (function () {
 
     Controller.prototype.getAlbumPage = function (selector) {
         this._model.albums.getAlbums()
-            .then(function (data) {
+            .then(function(data) {
                 console.log(data);
-                app.albumsView.load(selector, data)
-            }, function (error) {
-                console.log(error);
+                app.albumsView.load(selector, data);
+
+            }, function(error) {
+                console.log(error.responseText);
             })
     };
+
+    //function getLatestPicture(albums, controller) {
+    //    for (var album in albums) {
+    //        var currentAlbum = albums[album];
+    //        controller._model.pictures.getAlbumLatestPicture(currentAlbum.objectId)
+    //            .then(function(picture) {
+    //                console.log(picture);
+    //                albums[album].picture.url = picture.picture.url;
+    //                app.albumsView.load(selector, albums);
+    //            }, function(error) {
+    //                console.log(error.responseText);
+    //            });
+    //        console.log('skip');
+    //    }
+    //}
 
     Controller.prototype.getLatestPhotosPage = function (selector) {
         this._model.pictures.getPhotosByLimit(16)
@@ -90,8 +106,9 @@ app.controller = (function () {
     var attachEventHandlerLoadMorePictures = function attachEventHandlerLoadMorePictures() {
         var _this = this;
         $(document).scroll(function(){
+            //console.log('Scrolled...');
             //console.log('window height: ' + $(window).height());
-            console.log('document height: ' + $(document).height());
+           // console.log('document height: ' + $(document).height());
             //console.log('scroll top' + $(window).scrollTop());
 
             if (($(window).scrollTop() + 400 + $(window).height() >= $(document).height()) &&
@@ -150,6 +167,8 @@ app.controller = (function () {
                                     "name": data.name,
                                     "__type": "File"
                                 },
+                                "likes": 0,
+                                "dislikes": 0,
                                 "album": {"__type": "Pointer", "className": "Album", "objectId": selectedAlbumId}
                             };
 
@@ -231,6 +250,8 @@ app.controller = (function () {
             var selectedCategoryId = $('select .categories:selected').data('id');
             var albumData = {
                 "title": albumTitle.val(),
+                "likes": 0,
+                "dislikes":0,
                 "category": {"__type": "Pointer", "className": "Category", "objectId": selectedCategoryId}
             };
             _this._model.albums.addAlbum(albumData)
