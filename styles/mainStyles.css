@@ -1,3 +1,18 @@
+@font-face {
+    font-family: Champagne and Limousines;
+    src: url("../fonts/Champagne & Limousines.ttf");
+}
+
+@font-face {
+    font-family: Helvetica Neue;
+    src: url("../fonts/HelveticaNeueLTStd%20Lt.otf");
+}
+
+@font-face {
+    font-family: Linux;
+    src: url("../fonts/LinLibertine_R.ttf");
+}
+
 html, body {
     margin: 0;
     padding: 0;
@@ -6,7 +21,8 @@ html, body {
 body {
     background: url("../images/background2.jpg");
     background-size: cover;
-    font-family: 'Open Sans', sans-serif;
+    font-family: Champagne and Limousines;
+    font-size: 20px;
 }
 body div#container {
     min-height: 100%;
@@ -199,7 +215,7 @@ body div#container main#mainContent div#file-upload input#upload-button {
     color: white;
     background-color: #DC741F;
     font-weight: bold;
-    font-family: 'Lora', serif;
+    font-family: "Linux";
     font-size: 1em;
 }
 
@@ -228,7 +244,11 @@ body div#container main#mainContent div#file-upload input#file-select {
     font-family: 'Open Sans', sans-serif;
 }
 
-body div#container main div#galleryContainer {
+body div#container main#mainContent div#albums div.albums-list  img {
+    max-width: 90%;
+}
+
+body div#container main#mainContent div#galleryContainer {
     margin: 10px auto;
     width: 825px;
     padding: 5px;
