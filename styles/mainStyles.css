@@ -22,7 +22,7 @@ body {
     background: url("../images/background2.jpg");
     background-size: cover;
     font-family: Champagne and Limousines;
-    font-size: 20px;
+    font-size: 35px;
 }
 body div#container {
     min-height: 100%;
@@ -173,6 +173,10 @@ body div#container main#mainContent div#login-box, body div#container main#mainC
     padding: 15px;
     margin-top: 15px;
     margin-bottom: 15px;
+}
+
+body div#container main#mainContent div#login-box label, body div#container main#mainContent div#register-box label {
+    font-size: 0.5em;
 }
 
 body div#container main#mainContent div#login-box div input#login-username,
