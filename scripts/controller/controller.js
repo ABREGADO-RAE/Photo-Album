@@ -22,30 +22,64 @@ app.controller = (function () {
     };
 
     Controller.prototype.getAlbumPage = function (selector) {
+        var _this = this;
         this._model.albums.getAlbums()
             .then(function(data) {
-                console.log(data);
-                app.albumsView.load(selector, data);
+                var albums = [];
+                data.results.forEach(function(result) {
+                    var album = {
+                        title: result.title,
+                        id: result.objectId,
+                        pictureUrl: undefined
+                    };
+                    albums.push(album);
+                });
+                getLatestPicture(_this, albums, selector)
+                    .then(function(data) {
+                        console.log(data);
+                        var output = {
+                            albums: albums
+                        };
+                        app.albumsView.load(selector, output);
+                    }, function(error) {
+                        console.log(error.responseText);
+                    }).done();
+
+
+
 
             }, function(error) {
                 console.log(error.responseText);
             })
     };
 
-    //function getLatestPicture(albums, controller) {
-    //    for (var album in albums) {
-    //        var currentAlbum = albums[album];
-    //        controller._model.pictures.getAlbumLatestPicture(currentAlbum.objectId)
-    //            .then(function(picture) {
-    //                console.log(picture);
-    //                albums[album].picture.url = picture.picture.url;
-    //                app.albumsView.load(selector, albums);
-    //            }, function(error) {
-    //                console.log(error.responseText);
-    //            });
-    //        console.log('skip');
-    //    }
-    //}
+    function getLatestPicture(controller, albums, selector) {
+        var defer = Q.defer();
+        var promises = [];
+
+        albums.forEach(function(album) {
+            var id = album.id;
+
+            promises.push(controller._model.pictures.getAlbumLatestPicture(id));
+        });
+
+        Q.allSettled(promises)
+                .then(function (results) {
+                    results.forEach(function(data) {
+                        if(data.value.results.length
+                        ) {
+                            albums.filter(function(album) {
+                                return album.id === data.value.results[0].album.objectId;
+                            })[0].pictureUrl = data.value.results[0].picture.url;
+                        }
+                    });
+                    defer.resolve('All pictures loaded successfully!');
+                }, function (error) {
+                    defer.reject(error.responseText);
+                });
+
+        return defer.promise;
+    }
 
     Controller.prototype.getLatestPhotosPage = function (selector) {
         this._model.pictures.getPhotosByLimit(16)

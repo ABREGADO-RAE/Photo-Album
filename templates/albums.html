@@ -1,13 +1,13 @@
 <div id="albums">
-{{#results}}
+{{#albums}}
 <div class="albums-list" >
-    <h3 data-id="{{objectId}}">{{title}}</h3>
-    <img src="{{picture.picture.url}}" alt="image"/>
+    <h3 data-id="{{id}}">{{title}}</h3>
+    <img src="{{pictureUrl}}" alt="image"/>
     <div class="voteBox">
         <span class="likes">0</span>
         <span class="dislikes">0</span>
     </div>
 </div>
-{{/results}}
+{{/albums}}
 <button id="btn-show-add-album">Add new album</button>
 </div>
