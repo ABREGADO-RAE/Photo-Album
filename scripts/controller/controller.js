@@ -91,14 +91,16 @@ app.controller = (function () {
     };
 
     Controller.prototype.getUploadPage = function (selector) {
-        this._model.albums.getAlbums()
-            .then(function (data) {
-                app.uploadImageView.load(selector, data);
-            }, function (error) {
-                console.log(error);
-            });
+        if(isLoggedIn()) {
+            this._model.albums.getAlbums()
+                .then(function (data) {
+                    app.uploadImageView.load(selector, data);
+                }, function (error) {
+                    console.log(error);
+                });
 
-        app.uploadImageView.load(selector);
+            app.uploadImageView.load(selector);
+        }
     };
 
     Controller.prototype.getPicturesByAlbumPage = function () {
@@ -267,13 +269,16 @@ app.controller = (function () {
     var attachEventHandlerShowAddAlbumView = function attachEventHandlerShowAddAlbumView(selector) {
         var _this = this;
         $(selector).on('click', '#btn-show-add-album', function (ev) {
-            _this._model.categories.getCategory()
-                .then(function (data) {
-                    console.log(data);
-                    app.showAddAlbumView.loadShowView(selector, data);
-                }, function (error) {
-                    console.log(error);
-                });
+            location.href = '#/add-new-album';
+            if (isLoggedIn()) {
+                _this._model.categories.getCategory()
+                    .then(function (data) {
+                        console.log(data);
+                        app.showAddAlbumView.loadShowView(selector, data);
+                    }, function (error) {
+                        console.log(error);
+                    });
+            }
         });
     };
 
@@ -313,6 +318,17 @@ app.controller = (function () {
                 console.log(error.responseText);
             })
     }
+
+    function isLoggedIn() {
+        if (!sessionStorage['logged-in']) {
+            location.href = '#/Login';
+            return false;
+        }
+
+
+        return true;
+    }
+
 
     return {
         loadController: function (model) {
