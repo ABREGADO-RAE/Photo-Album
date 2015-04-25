@@ -1,12 +1,15 @@
 <div id="picture-by-album">
     {{#results}}
     <div class="thumbnail-container">
-        <img src="{{picture.url}}" class="thumbnail" alt="{{title}}"/>
+        <a href="{{picture.url}}" data-lightbox="image-1" data-title='{{title}}' ><img class="thumbnail" src="{{picture.url}}" alt=""/></a>
     </div>
     {{/results}}
     <section class="comments">
-        <h3>Post a Comment</h3>
-        <textarea class="album-comments"></textarea>
+        <h3 class="album-comments-title">Comments</h3>
+        <ul class="album-comments">
+            <li class="album-comment"></li>
+        </ul>
+        <textarea class="add-album-comment"></textarea>
         <button id="btn-add-album-comment">Post Comment</button>
     </section>
 </div>
