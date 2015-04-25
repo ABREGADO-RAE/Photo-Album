@@ -1,0 +1,6 @@
+1. ѕри refresh на логнат потребител, който не се намира в home page, да не се визуализират register/login бутоните.
+2. Like/Dislike a picture
+3. Comment a picture
+4. Admin panel
+5. Picture view
+6. Comment view
