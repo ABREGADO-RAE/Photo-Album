@@ -366,3 +366,13 @@ body div#signBox > a {
 .album-comments-title {
     margin: 2% 0 1% 0;
 }
+
+.add-album-comment-area {
+    min-width: 60%;
+    max-width: 60%;
+    max-height: 55px;
+    min-height: 55px;
+    margin: 0 auto;
+    display: block;
+    padding: 1%;
+}

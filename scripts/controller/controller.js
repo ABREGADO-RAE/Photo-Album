@@ -350,6 +350,8 @@ app.controller = (function () {
     };
 
     function getPicturesByAlbum (controller, albumId) {
+        var condition = '?where={"picture": {"__type":"Pointer", "className" : "Picture", "objectId" : "' + albumId + '"}}';
+
         controller._model.pictures.getAllPicturesByAlbumId(albumId)
             .then(function(data) {
                 location.href = '#/Albums/Pictures-by-album';
@@ -359,6 +361,17 @@ app.controller = (function () {
             }, function(error){
                 console.log(error.responseText);
             })
+            .then(function () {
+                controller._model.comments.getAllComments(condition)
+                    .then(function (data) {
+                        var selector = '.comments';
+                        app.showCommentsView.load(selector, data);
+                    }, function (error) {
+                        console.log(error.responseText);
+                    })
+            }, function (error) {
+                console.log(error.responseText);
+            });
     }
 
     function isLoggedIn() {

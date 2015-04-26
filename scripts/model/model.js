@@ -293,7 +293,11 @@ app.model = (function(){
             return this._unit.addUnit(this._serviceUrl, this._headers, JSON.stringify(data), JSON_CONTENT_TYPE);
         };
 
-        Comment.prototype.getComment = function(id) {
+        Comment.prototype.getAllComments = function(condition) {
+            return this._unit.getUnit(this._serviceUrl + condition, this._headers, null, JSON_CONTENT_TYPE);
+        };
+
+        Comment.prototype.getCommentById = function(id) {
             return this._unit.getUnit(this._serviceUrl, this._headers, id, JSON_CONTENT_TYPE);
         };
 
