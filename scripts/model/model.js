@@ -287,6 +287,7 @@ app.model = (function(){
         function Comment(baseUrl){
             this._serviceUrl = baseUrl + 'classes/Comment';
             this._headers = Credentials.getHeaders();
+            this._unit = new Unit();
         }
 
         Comment.prototype.addComment = function(data) {

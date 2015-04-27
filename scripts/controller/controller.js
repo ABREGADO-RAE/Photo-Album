@@ -359,19 +359,21 @@ app.controller = (function () {
                 console.log('Successfully showed pictures');
                 app.pictureByAlbumView.loadPictureByAlbum(MAIN_CONTAINER_SELECTOR, data);
             }, function(error){
-                console.log(error.responseText);
+                console.log(error);
             })
             .then(function () {
-                controller._model.comments.getAllComments(condition)
-                    .then(function (data) {
-                        var selector = '.comments';
-                        app.showCommentsView.load(selector, data);
-                    }, function (error) {
-                        console.log(error.responseText);
-                    })
+                return controller._model.comments.getAllComments(condition);
             }, function (error) {
-                console.log(error.responseText);
-            });
+                console.log(error);
+            })
+            .then(function (data) {
+                var selector = '.comments';
+                app.showCommentsView.load(selector, data);
+            }, function (error) {
+                console.log(error);
+            })
+            .done();
+
     }
 
     function isLoggedIn() {
@@ -379,11 +381,8 @@ app.controller = (function () {
             location.href = '#/Login';
             return false;
         }
-
-
         return true;
     }
-
 
     return {
         loadController: function (model) {

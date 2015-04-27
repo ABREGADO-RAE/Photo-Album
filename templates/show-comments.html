@@ -1,8 +1,8 @@
 <h3 class="album-comments-title">Comments</h3>
 <ul class="album-comments">
-    {{#result}}
-    <li class="album-comment"></li>
-    {{/result}}
+    {{#results}}
+    <li class="album-comment">{{content}}</li>
+    {{/results}}
 </ul>
 <textarea class="add-album-comment-area"></textarea>
 <button id="btn-add-album-comment">Post Comment</button>
