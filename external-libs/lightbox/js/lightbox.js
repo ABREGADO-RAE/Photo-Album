@@ -310,8 +310,11 @@
       var newWidth  = imageWidth + this.containerLeftPadding + this.containerRightPadding;
       var newHeight = imageHeight + this.containerTopPadding + this.containerBottomPadding;
 
+      var a = $('.lb-outerContainer').width();
+      console.log(a);
+
       function postResize() {
-        self.$lightbox.find('.lb-dataContainer').width(newWidth);
+        self.$lightbox.find('.lb-dataContainer').width(a);
         self.$lightbox.find('.lb-prevLink').height(newHeight);
         self.$lightbox.find('.lb-nextLink').height(newHeight);
         self.showImage();

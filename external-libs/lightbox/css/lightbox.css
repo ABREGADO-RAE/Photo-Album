@@ -164,7 +164,8 @@ body:after {
 
 .lb-dataContainer {
   margin: 0 auto;
-  padding-top: 5px;
+  margin-left: 0;
+  padding-top: 0;
   *zoom: 1;
   width: 100%;
   -moz-border-radius-bottomleft: 4px;
@@ -187,7 +188,7 @@ body:after {
 }
 
 .lb-data .lb-details {
-  width: 85%;
+  width: 100%;
   float: left;
   text-align: left;
   line-height: 1.1em;
@@ -208,6 +209,8 @@ body:after {
 }
 
 .lb-data .lb-close {
+  margin-top: -5% !important;
+  padding: 0;
   display: block;
   float: right;
   width: 30px;
@@ -232,9 +235,9 @@ body:after {
 .lb-download{
   border-radius: 5px;
   display: block;
-  height: 40px;
-  width: 40px;
-  background: url(../../../images/download.png);
+  height: 35px;
+  width: 35px;
+  background: url(../../../images/download-arrow.png);
   background-color: rgba(0,0,0,.5);
   transition: .2s;
   opacity: .3;
@@ -247,8 +250,9 @@ body:after {
   opacity: 1;
 }
 
-
-
+.lb-download-container{
+  margin: 0;
+}
 
 
 #txtComment{
