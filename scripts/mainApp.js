@@ -10,6 +10,13 @@ var app = app || {};
     controller.attachEventHandlers(selector);
 
     app.router = Sammy(function () {
+        this.before(function() {
+            if(sessionStorage['logged-in']) {
+                var _selector = $('#container header');
+                controller.getLoggedInHomeView(_selector);
+            }
+        });
+
         this.get('#/', function () {
             controller.getHomePage(selector);
         });
@@ -49,8 +56,7 @@ var app = app || {};
         });
 
         this.get('#/logged-in-view', function() {
-            var _selector = $('#container header');
-            controller.getLoggedInHomeView(_selector);
+            location.href = '#/';
         })
     });
 
