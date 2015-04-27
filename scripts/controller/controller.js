@@ -141,7 +141,37 @@ app.controller = (function () {
         attachEventHandlerLoadMorePictures.call(this);
         attachEventLikeAlbum.call(this, selector);
         attachEventDislikeAlbum.call(this, selector);
+        attachEventAddComment.call(this, selector);
     };
+
+    var attachEventAddComment = function attachEventAddComment(selector) {
+        var _this = this;
+        $(selector).on('click', '#btn-add-album-comment', function(ev) {
+            var commentArea = $('#commend-area').val();
+            var currentAlbumId = sessionStorage['AlbumId'];
+            var comment = {"album": {"__type": "Pointer","className": "Album","objectId": currentAlbumId}, "content":commentArea};
+            _this._model.comments.addComment(comment)
+                .then(function(data) {
+                    console.log(data);
+                }, function(error) {
+                    console.log(error);
+                })
+                .then(function(data){
+                    var condition = '?where={"album": {"__type":"Pointer", "className" : "Album", "objectId" : "' + currentAlbumId + '"}}';
+                   return _this._model.comments.getAllComments(condition)
+                }, function(error) {
+                    console.log(error);
+                })
+                .then(function(album) {
+                    var selector = '.comments';
+                    app.showCommentsView.load(selector, album);
+                }, function(err) {
+                    console.log(err);
+                });
+            commentArea.val('');
+        });
+    };
+
 
     var attachEventLikeAlbum = function attachEventLikeAlbum(selector) {
         var _this = this;
@@ -350,7 +380,7 @@ app.controller = (function () {
     };
 
     function getPicturesByAlbum (controller, albumId) {
-        var condition = '?where={"picture": {"__type":"Pointer", "className" : "Picture", "objectId" : "' + albumId + '"}}';
+        var condition = '?where={"album": {"__type":"Pointer", "className" : "Album", "objectId" : "' + albumId + '"}}';
 
         controller._model.pictures.getAllPicturesByAlbumId(albumId)
             .then(function(data) {
