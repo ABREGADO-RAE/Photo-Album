@@ -62,11 +62,13 @@
           "<div id='lightbox' class='lightbox'>" +
             "<div class='lb-outerContainer'>" +
               "<div class='lb-container'>" +
+              "<div class='lb-image-container'>" +
                 "<img class='lb-image' src='' />" +
-                "<div id='commentBox'>" +
-                  "<input type='text' id='txtComment'/>" +
-                    "<button class=\"btn btn-primary btn-sm\" type='button' id='commentButton' onclick='onCommentClick()'>Comment</button>" +
-                      "<div id='commentsConainer'></div>" +
+              "</div>" +
+              "<div id='commentBox'>" +
+                "<input type='text' id='txtComment'/>" +
+                  "<button class=\"btn btn-primary btn-sm\" type='button' id='commentButton' onclick='onCommentClick()'>Comment</button>" +
+                    "<div id='commentsConainer'></div>" +
                 "</div>" +
               "<div class='lb-nav'>" +
                 "<a class='lb-prev' href='' ></a>" +
@@ -217,11 +219,18 @@
 
       // Position Lightbox
       var top  = $window.scrollTop() + this.options.positionFromTop;
+      console.log(this);
       var left = $window.scrollLeft();
+
       this.$lightbox.css({
         top: top + 'px',
         left: left + 'px'
       }).fadeIn(this.options.fadeDuration);
+
+      $('html, body').css({
+        'overflow': 'hidden',
+        'height': '100%'
+      });
 
       this.changeImage(imageNumber);
     };
@@ -370,7 +379,7 @@
     Lightbox.prototype.updateDetails = function() {
       var self = this;
 
-      // Enable anchor clicks in the injected caption html.
+      // Enable anchor ends in the injected caption html.
       // Thanks Nate Wright for the fix. @https://github.com/NateWr
       if (typeof this.album[this.currentImageIndex].title !== 'undefined' && this.album[this.currentImageIndex].title !== "") {
         this.$lightbox.find('.lb-caption')
@@ -446,6 +455,11 @@
       this.$overlay.fadeOut(this.options.fadeDuration);
       $('select, object, embed').css({
         visibility: "visible"
+      });
+
+      $('html, body').css({
+        'overflow': 'auto',
+        'height': 'auto'
       });
     };
 
