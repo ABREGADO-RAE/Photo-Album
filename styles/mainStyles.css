@@ -1,16 +1,21 @@
 @font-face {
-    font-family: Champagne and Limousines;
-    src: url("../fonts/Champagne & Limousines.ttf");
-}
-
-@font-face {
     font-family: Helvetica Neue;
     src: url("../fonts/HelveticaNeueLTStd%20Lt.otf");
 }
 
 @font-face {
+    font-family: Champagne;
+    src: url("../fonts/Champagne%20&%20Limousines.ttf");
+}
+
+@font-face {
     font-family: Linux;
     src: url("../fonts/LinLibertine_R.ttf");
+}
+
+@font-face {
+    font-family: Apple;
+    src: url("../fonts/AppleGaramond.ttf");
 }
 
 html, body {
@@ -21,8 +26,8 @@ html, body {
 body {
     background: url("../images/background2.jpg");
     background-size: cover;
-    font-family: Champagne and Limousines;
     font-size: 35px;
+    font-family: 'Champagne';
 }
 body div#container {
     min-height: 100%;
@@ -68,10 +73,12 @@ body div#container header section#links a, body div#container header div#signBox
 body div#container header div#signBox {
     margin-top: 20px;
     margin-bottom: 40px;
+    font-weight: bold;
+    font-family: 'Apple';
 }
 
 body div#container header section#links a:hover, body div#container header div#mainMenu ul li:hover,
-body div#container header div#signBox a:hover {
+body div#container header div#signBox a:hover, body div#container main#mainContent div#albums div.albums-list h3:hover {
     text-decoration: none;
     color: #f0871f;
     cursor: pointer;
@@ -79,7 +86,7 @@ body div#container header div#signBox a:hover {
 }
 
 body div#container header section#links a:active, body div#container header div#mainMenu ul li:active,
-body div#container header div#signBox a:active {
+body div#container header div#signBox a:active, body div#container main#mainContent div#albums div.albums-list h3:active {
     color: #b95f20;
 }
 
@@ -95,8 +102,8 @@ body div#container header div#mainMenu ul li {
 }
 
 body div#container header div#mainMenu ul li a {
-text-decoration: none;
-color: white;
+    text-decoration: none;
+    color: white;
 }
 
 body div#container header div#loginBox form {
@@ -150,12 +157,35 @@ body div#container header div#searchBox button#search-button:active {
 body div#container main#mainContent {
     text-align: center;
     color: white;
-    width: 90%;
+    width: 60%;
     margin: 2% auto;
 }
 
 body div#container main#mainContent div#galleryContainer {
     max-width: 80%;
+}
+
+body div#container main#mainContent div#galleryContainer h2,
+body div#container main#mainContent div#picture-by-album section.comments h3{
+    font-family: 'Lora', serif;
+    font-style: italic;
+}
+
+body div#container main#mainContent div#galleryContainer div:hover {
+    background: rgba(255, 255, 255, 0.11);
+}
+
+body div#container main#mainContent div#galleryContainer div span {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.7em;
+    color: #f0871f;
+}
+
+body div#container main#mainContent div#albums div.albums-list h3 {
+    font-family: 'Apple', serif;
+    font-style: italic;
+    font-size: 0.9em;
+    cursor: pointer;
 }
 
 body div#container main#mainContent input, body div#container main#mainContent button,
@@ -212,10 +242,14 @@ body div#container header div#signBox p button#btn-logout {
     margin: 10px auto;
 }
 
-body div#container main#mainContent div#login-box button, body div#container main#mainContent div#register-box button,
-body div#container main#mainContent div#albums button, body div#container main#mainContent div#createAlbumContainer button,
+body div#container main#mainContent div#login-box button,
+body div#container main#mainContent div#register-box button,
+body div#container main#mainContent div#albums button,
+body div#container main#mainContent div#createAlbumContainer button,
 body div#container main#mainContent div#file-upload input#upload-button,
-body div#container header div#signBox p button#btn-logout {
+body div#container header div#signBox p button#btn-logout,
+body div#container main#mainContent div#picture-by-album section.comments button,
+#commentButton {
     padding: 8px;
     border-radius: 15px;
     border: none;
@@ -228,10 +262,14 @@ body div#container header div#signBox p button#btn-logout {
     font-size: 0.8em;
 }
 
-body div#container main#mainContent  div#login-box button:hover, body div#container main#mainContent  div#register-box button:hover,
-body div#container main#mainContent div#albums button:hover, body div#container main#mainContent div#createAlbumContainer button:hover,
+body div#container main#mainContent  div#login-box button:hover,
+body div#container main#mainContent  div#register-box button:hover,
+body div#container main#mainContent div#albums button:hover,
+body div#container main#mainContent div#createAlbumContainer button:hover,
 body div#container main#mainContent div#file-upload input#upload-button:hover,
-body div#container header div#signBox p button#btn-logout:hover {
+body div#container header div#signBox p button#btn-logout:hover,
+body div#container main#mainContent div#picture-by-album section.comments button:hover,
+#commentButton:hover {
     background-color: #f0871f;
 }
 
@@ -239,7 +277,9 @@ body div#container main div#login-box button:active, body div#container main div
 body div#container main#mainContent div#albums button:active,
 body div#container main#mainContent div#createAlbumContainer button:active,
 body div#container main#mainContent div#file-upload input#upload-button:active,
-body div#container header div#signBox p button#btn-logout:active {
+body div#container header div#signBox p button#btn-logout:active,
+body div#container main#mainContent div#picture-by-album section.comments button:active,
+#commentButton:active {
     background-color: #b95f20;
 }
 
@@ -264,10 +304,6 @@ body div#container main#mainContent div#galleryContainer {
     width: 825px;
     padding: 5px;
     border-radius: 10px;
-}
-
-body div#container main div#galleryContainer:hover {
-    background: rgba(255, 255, 255, 0.16);
 }
 
 #first-row, #second-row, #third-row, #fourth-row {
@@ -347,8 +383,37 @@ body div#signBox > a {
 /*Vote buttons*/
 .voteButtons {
     display: inline-block;
-    padding: 10px;
-    border: 2px solid red;
+    padding: 10px 15px;
+}
+
+#btn-like-album {
+    background: #56d27f;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 20px;
+}
+
+#btn-like-album:hover {
+    background: #60f699;
+}
+
+#btn-like-album:active {
+    background: #4faf63;
+}
+
+#btn-dislike-album {
+    background: #b50600;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 20px;
+}
+
+#btn-dislike-album:hover {
+    background: #d70600;
+}
+
+#btn-dislike-album:active {
+    background: #9c0600;
 }
 
 .voteButtons:hover {

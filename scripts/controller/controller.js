@@ -374,7 +374,7 @@ app.controller = (function () {
                 _this._model.categories.getCategory()
                     .then(function (data) {
                         console.log(data);
-                        app.showAddAlbumView.loadShowView(selector, data);
+                        app.showAddAlbumView.loadShowView(MAIN_CONTAINER_SELECTOR, data);
                     }, function (error) {
                         console.log(error);
                     });
