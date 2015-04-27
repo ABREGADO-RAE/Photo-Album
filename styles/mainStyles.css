@@ -190,6 +190,10 @@ body div#container main#mainContent div#galleryContainer div:hover {
     background: rgba(255, 255, 255, 0.11);
 }
 
+body div#container main#mainContent div#galleryContainer div.top-albums {
+    border-radius: 50px;
+}
+
 body div#container main#mainContent div#galleryContainer div span {
     font-family: 'Raleway', sans-serif;
     font-size: 0.7em;
@@ -200,6 +204,11 @@ body div#container main#mainContent div#albums div.albums-list {
     padding: 10px;
     margin-top: 10px;
     margin-bottom: 20px;
+    border-radius: 100px;
+}
+
+body div#container main#mainContent div#albums button#btn-show-add-album {
+    margin-top: 25px;
 }
 
 body div#container main#mainContent div#albums div.albums-list:hover {
@@ -485,9 +494,6 @@ body div#signBox > a {
     margin-top: 10px;
 }
 
-#lightbox > div.lb-outerContainer > div > a {
-    margin: 400px auto;
-    position: static;
-    background-size: contain;
-    cursor: pointer;
+#commentBox {
+    background-color: transparent;
 }
