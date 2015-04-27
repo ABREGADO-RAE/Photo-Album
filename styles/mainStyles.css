@@ -25,7 +25,7 @@ html, body {
 }
 body {
     background: url("../images/background2.jpg");
-    background-size: cover;
+    background-size: contain;
     font-size: 35px;
     font-family: 'Champagne';
 }
@@ -83,7 +83,8 @@ body div#container header div#mainMenu ul li:hover,
 body div#container header div#signBox a:hover,
 body div#container main#mainContent div#albums div.albums-list h3:hover,
 body div#container main#mainContent div#categories div.albums-list h3:hover,
-body div#container main#mainContent div#categories div.albums-list h3:hover {
+body div#container main#mainContent div#categories div.albums-list h3:hover,
+body div#container main#mainContent div#galleryContainer div.top-albums h3:hover {
     text-decoration: none;
     color: #f0871f;
     cursor: pointer;
@@ -95,7 +96,8 @@ body div#container header div#mainMenu ul li:active,
 body div#container header div#signBox a:active,
 body div#container main#mainContent div#albums div.albums-list h3:active,
 body div#container main#mainContent div#categories div.albums-list h3:active,
-body div#container main#mainContent div#categories div.albums-list h3:active {
+body div#container main#mainContent div#categories div.albums-list h3:active,
+body div#container main#mainContent div#galleryContainer div.top-albums h3:active {
     color: #b95f20;
 }
 
