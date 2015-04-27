@@ -18,7 +18,13 @@ app.controller = (function () {
     };
 
     Controller.prototype.getHomePage = function (selector) {
-        app.homeView.load(selector);
+        this._model.albums.getMostHighlyRankedAlbums()
+            .then(function(data){
+                console.log(data);
+                app.homeView.load(selector, data);
+            }, function(error){
+                console.log(error);
+            })
     };
 
     Controller.prototype.getAlbumPage = function (selector) {
@@ -201,7 +207,7 @@ app.controller = (function () {
             if ( $(this).is("span")) {
                 var albumId = $(this).parent().parent().data('id');
                 var likes = $(ev.target);
-                var data = {"likes":{"__op":"Increment","amount":1}};
+                var data = {"likes":{"__op":"Increment","amount":1}, "rating":{"__op":"Increment","amount":1}};
                 _this._model.albums.editAlbum(data, albumId)
                     .then(function(data){
                         console.log(data);
@@ -220,7 +226,7 @@ app.controller = (function () {
             if ( $(this).is("span")) {
                 var albumId = $(this).parent().parent().data('id');
                 var dislikes = $(ev.target);
-                var data = {"dislikes":{"__op":"Increment","amount":-1}};
+                var data = {"dislikes":{"__op":"Increment","amount":-1}, "rating":{"__op":"Increment","amount":-1}};
                 _this._model.albums.editAlbum(data, albumId)
                     .then(function(data){
                         console.log(data);
@@ -385,6 +391,7 @@ app.controller = (function () {
                 "title": albumTitle.val(),
                 "likes": 0,
                 "dislikes":0,
+                "rating": 0,
                 "category": {"__type": "Pointer", "className": "Category", "objectId": selectedCategoryId}
             };
             _this._model.albums.addAlbum(albumData)
