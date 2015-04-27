@@ -17,23 +17,40 @@ body:after {
 
 .lightbox {
   position: absolute;
-  left: 0;
-  width: 100%;
+  left: 5% !important;
+  width: 90%;
   z-index: 10000;
   text-align: center;
   line-height: 0;
   font-weight: normal;
 }
 
+
+.lb-image-container {
+
+}
+
+.lb-image-container * {
+  max-height: 550px;
+}
+
 .lightbox .lb-image {
-  display: block;
-  height: auto;
-  max-width: inherit;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -ms-border-radius: 3px;
-  -o-border-radius: 3px;
-  border-radius: 3px;
+  max-width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  /*width: 100% !important;*/
+  /*display: block;*/
+  /*height: auto;*/
+  /*max-width: inherit;*/
+  /*-webkit-border-radius: 3px;*/
+  /*-moz-border-radius: 3px;*/
+  /*-ms-border-radius: 3px;*/
+  /*-o-border-radius: 3px;*/
+  /*border-radius: 3px;*/
 }
 
 .lightbox a img {
@@ -42,11 +59,12 @@ body:after {
 
 .lb-outerContainer {
   position: relative;
-  background-color: white;
+  background-color: #000;
   *zoom: 1;
-  width: 250px;
-  height: 250px;
-  margin: 0 auto;
+  width: 75% !important;
+  max-height: 550px !important;
+  min-height: 500px !important;
+  /*margin: 0 auto;*/
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
@@ -233,16 +251,14 @@ body:after {
 
 
 
-
-
-
 #txtComment{
   padding: 3px;
 }
 #commentBox{
   background-color: #FFF;
-  margin-left: 101%;
-  margin-top: -350px;
+  margin-left: 100%;
+  margin-top: 0;
+  top: 0;
   height: 300px;
   width: 300px;
   padding-top:10px;
@@ -251,6 +267,7 @@ body:after {
   -ms-border-radius: 4px;
   -o-border-radius: 4px;
   border-radius: 4px;
+  position: absolute;
 }
 #txtComment:focus{
   border: 1px solid #b15315;

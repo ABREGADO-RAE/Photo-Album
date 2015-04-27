@@ -219,7 +219,7 @@
 
       // Position Lightbox
       var top  = $window.scrollTop() + this.options.positionFromTop;
-      console.log(this);
+
       var left = $window.scrollLeft();
 
       this.$lightbox.css({
@@ -286,6 +286,7 @@
             }
           }
         }
+
         self.sizeContainer($image.width(), $image.height());
       };
 
