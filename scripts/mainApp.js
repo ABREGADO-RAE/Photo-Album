@@ -52,12 +52,17 @@ var app = app || {};
             controller.getUploadPage(selector);
         });
 
-        this.get('#/Comments', function () {
+        this.get('#/Categories', function () {
+            controller.getCategories(selector);
         });
 
         this.get('#/logged-in-view', function() {
             location.href = '#/';
-        })
+        });
+
+        this.get('#/AddCategory', function() {
+           controller.addCategory();
+        });
     });
 
     app.router.run('#/');

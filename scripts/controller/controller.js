@@ -130,6 +130,28 @@ app.controller = (function () {
         app.loggedInHomeView.load(selector, data, this);
     };
 
+    Controller.prototype.getCategories = function(selector) {
+        this._model.categories.getCategory()
+            .then(function(data) {
+                app.categoriesView.load(selector, data);
+            }, function(error) {
+                console.log(error);
+            })
+    };
+
+    Controller.prototype.addCategory = function() {
+        if(isLoggedIn()) {
+            var categoryName = $('#categoryName').val();
+            var data = {'name': categoryName};
+            this._model.categories.addCategory(data)
+                .then(function() {
+                    location.href = '#/Categories';
+                }, function(error) {
+                    console.log(error);
+                })
+        }
+    };
+
     Controller.prototype.attachEventHandlers = function (selector) {
         attachEventHandlerRegisterNewUser.call(this, selector);
         attachEventHandlerLoginUser.call(this, selector);
