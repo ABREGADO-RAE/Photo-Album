@@ -133,7 +133,7 @@ app.controller = (function () {
     };
 
     Controller.prototype.getLoggedInHomeView = function(selector, data){
-        app.loggedInHomeView.load(selector, data, this);
+        app.loggedInHomeView.load('header', data, this);
     };
 
     Controller.prototype.getCategories = function(selector) {

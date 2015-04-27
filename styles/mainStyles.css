@@ -64,7 +64,8 @@ body div#container header section#links a {
     margin: 5px;
 }
 
-body div#container header section#links a, body div#container header div#signBox a {
+body div#container header section#links a,
+body div#container header div#signBox a {
     text-decoration: none;
     padding: 10px;
     color: white;
@@ -77,16 +78,20 @@ body div#container header div#signBox {
     font-family: 'Apple';
 }
 
-body div#container header section#links a:hover, body div#container header div#mainMenu ul li:hover,
-body div#container header div#signBox a:hover, body div#container main#mainContent div#albums div.albums-list h3:hover {
+body div#container header section#links a:hover,
+body div#container header div#mainMenu ul li:hover,
+body div#container header div#signBox a:hover,
+body div#container main#mainContent div#albums div.albums-list h3:hover {
     text-decoration: none;
     color: #f0871f;
     cursor: pointer;
     border-radius: 20px;
 }
 
-body div#container header section#links a:active, body div#container header div#mainMenu ul li:active,
-body div#container header div#signBox a:active, body div#container main#mainContent div#albums div.albums-list h3:active {
+body div#container header section#links a:active,
+body div#container header div#mainMenu ul li:active,
+body div#container header div#signBox a:active,
+body div#container main#mainContent div#albums div.albums-list h3:active {
     color: #b95f20;
 }
 
@@ -111,7 +116,8 @@ body div#container header div#loginBox form {
     margin-bottom: 20px;
 }
 
-body div#container header div#loginBox form input, body div#container header div#searchBox input {
+body div#container header div#loginBox form input,
+body div#container header div#searchBox input {
     padding: 5px;
     color: black;
 }
@@ -188,14 +194,18 @@ body div#container main#mainContent div#albums div.albums-list h3 {
     cursor: pointer;
 }
 
-body div#container main#mainContent input, body div#container main#mainContent button,
-body div#container main#mainContent div#createAlbumContainer select#album-category {
+body div#container main#mainContent input,
+body div#container main#mainContent button,
+body div#container main#mainContent div#createAlbumContainer select#album-category,
+select {
     color: black;
     padding: 5px;
     margin: 14px;
+    vertical-align: middle;
 }
 
-body div#container main#mainContent div#login-box, body div#container main#mainContent div#register-box {
+body div#container main#mainContent div#login-box,
+body div#container main#mainContent div#register-box {
     display: inline-block;
     width: 360px;
     max-width: 95%;
@@ -205,7 +215,8 @@ body div#container main#mainContent div#login-box, body div#container main#mainC
     margin-bottom: 15px;
 }
 
-body div#container main#mainContent div#login-box label, body div#container main#mainContent div#register-box label {
+body div#container main#mainContent div#login-box label,
+body div#container main#mainContent div#register-box label {
     font-size: 0.5em;
 }
 
@@ -227,12 +238,15 @@ body div#container main#mainContent div#register-box div input#email {
     padding-left: 20px;
 }
 
-body div#container main div#login-box:hover, body div#container main div#register-box:hover {
+body div#container main div#login-box:hover,
+body div#container main div#register-box:hover {
     background: rgba(0, 0, 0, 0.16);
 }
 
-body div#container main#mainContent div#login-box h3, body div#container main#mainContent div#login-box h4,
-body div#container main#mainContent div#register-box h3, body div#container main#mainContent div#register-box h4 {
+body div#container main#mainContent div#login-box h3,
+body div#container main#mainContent div#login-box h4,
+body div#container main#mainContent div#register-box h3,
+body div#container main#mainContent div#register-box h4 {
     font-family: 'Lora', serif;
     font-style: italic;
 }
@@ -273,7 +287,8 @@ body div#container main#mainContent div#picture-by-album section.comments button
     background-color: #f0871f;
 }
 
-body div#container main div#login-box button:active, body div#container main div#register-box button:active,
+body div#container main div#login-box button:active,
+body div#container main div#register-box button:active,
 body div#container main#mainContent div#albums button:active,
 body div#container main#mainContent div#createAlbumContainer button:active,
 body div#container main#mainContent div#file-upload input#upload-button:active,
@@ -283,8 +298,10 @@ body div#container main#mainContent div#picture-by-album section.comments button
     background-color: #b95f20;
 }
 
-body div#container main div#login-box div, body div#container main div#register-box div,
-body div#container main div#login-box button, body div#container main div#register-box button{
+body div#container main div#login-box div,
+body div#container main div#register-box div,
+body div#container main div#login-box button,
+body div#container main div#register-box button{
     float: right;
     clear: both;
     margin-right: 50px;
