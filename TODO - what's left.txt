@@ -1,4 +1,4 @@
-1. ѕри refresh на логнат потребител, който не се намира в home page, да не се визуализират register/login бутоните.
+1. Don't show login/register buttons on refresh when logged in out of the home page.
 2. Like/Dislike a picture
 3. Comment a picture
 4. Admin panel
