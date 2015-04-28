@@ -132,7 +132,6 @@ app.model = (function(){
 
             app.ajaxRequester.getRequest(requestUrl, headers, contentType)
                 .then(function(data){
-                    console.log(data);
                     deffer.resolve(data);
                     return data;
                 }, function(error){

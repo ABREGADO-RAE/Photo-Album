@@ -170,6 +170,8 @@ app.controller = (function () {
         attachEventLikeAlbum.call(this, selector);
         attachEventDislikeAlbum.call(this, selector);
         attachEventAddComment.call(this, selector);
+        attachEventSelectPictureToUpload.call(this, selector);
+        attachEventClearSelectedPicture.call(this, selector);
     };
 
     var attachEventAddComment = function attachEventAddComment(selector) {
@@ -281,6 +283,32 @@ app.controller = (function () {
         });
     };
 
+    var attachEventSelectPictureToUpload = function attachEventSelectPictureToUpload(selector) {
+        $(selector).on('change', '#file-select', function (input) {
+            var $selectedFileInput = $('#file-select');
+            var hasSelectedFile = $.trim(($selectedFileInput).val());
+            var $selectedFile = $selectedFileInput.prop('files')[0];
+            $('.upload-image-preview').addClass('upload-image-preview-selected').removeClass('upload-image-preview');
+
+            if (hasSelectedFile) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('.upload-image-preview-selected').attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL($selectedFile);
+            }
+        })
+    };
+
+    var attachEventClearSelectedPicture = function attachEventClearSelectedPicture(selector) {
+        $(selector).on('click', '#clear-img-button', function (ev) {
+            $("#file-select").val("");
+            $('.upload-image-preview-selected').toggleClass('upload-image-preview-selected upload-image-preview');
+            $('.upload-image-preview').attr('src', 'http://iconizer.net/files/Sabre/orig/folder_black_web_upload.png');
+        })
+    };
+
     var attachEventHandlerUploadImage = function attachEventHandlerUploadImage(selector) {
         var _this = this;
 
@@ -293,12 +321,13 @@ app.controller = (function () {
                 var $fileName = ($selectedFileInput.val()).split('/').pop().split('\\').pop();
                 var selectedAlbumId = $('select .albums:selected').data('id');
                 var $imageSize = $selectedFileInput[0].files[0].size;
+                var $imageTitle = $('#img-title').val();
 
                 if ($imageSize < MAX_IMAGE_SIZE) {
                     _this._model.pictures.uploadPictureData($fileName, $selectedFile)
                         .then(function (data) {
                             var dataToUpload = {
-                                'title': 'photo_title',
+                                'title': $imageTitle,
                                 "picture": {
                                     "name": data.name,
                                     "__type": "File"
@@ -310,6 +339,9 @@ app.controller = (function () {
 
                             _this._model.pictures.addPicture(JSON.stringify(dataToUpload));
                             $selectedFileInput.val('');
+                            $('.upload-image-preview-selected').toggleClass('upload-image-preview-selected upload-image-preview');
+                            $('.upload-image-preview').attr('src', 'http://iconizer.net/files/Sabre/orig/folder_black_web_upload.png');
+                            $('#img-title').val('');
                         }, function (error) {
                             console.log(error.responseText);
                         })

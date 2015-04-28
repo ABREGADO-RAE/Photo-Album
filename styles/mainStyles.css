@@ -23,12 +23,14 @@ html, body {
     padding: 0;
     height: 100%;
 }
+
 body {
     background: url("../images/background2.jpg");
     background-size: contain;
     font-size: 35px;
     font-family: 'Champagne';
 }
+
 body div#container {
     min-height: 100%;
 }
@@ -174,7 +176,7 @@ body div#container header div#searchBox button#search-button:active {
 body div#container main#mainContent {
     text-align: center;
     color: white;
-    width: 60%;
+    width: 85%;
     margin: 2% auto;
 }
 
@@ -183,7 +185,7 @@ body div#container main#mainContent div#galleryContainer {
 }
 
 body div#container main#mainContent div#galleryContainer h2,
-body div#container main#mainContent div#picture-by-album section.comments h3{
+body div#container main#mainContent div#picture-by-album section.comments h3 {
     font-family: 'Lora', serif;
     font-style: italic;
 }
@@ -294,8 +296,9 @@ body div#container main#mainContent div#file-upload input#upload-button,
 body div#container header div#signBox p button#btn-logout,
 body div#container main#mainContent div#picture-by-album section.comments button,
 body div#container main#mainContent div#categories div a,
+body div#container main#mainContent div#file-upload #clear-img-button,
 #commentButton {
-    padding: 8px;
+    padding: 8px 15px;
     border-radius: 15px;
     border: none;
     outline: none;
@@ -304,17 +307,18 @@ body div#container main#mainContent div#categories div a,
     background-color: #DC741F;
     font-weight: bold;
     font-family: "Linux";
-    font-size: 0.8em;
+    font-size: 0.7em;
 }
 
-body div#container main#mainContent  div#login-box button:hover,
-body div#container main#mainContent  div#register-box button:hover,
+body div#container main#mainContent div#login-box button:hover,
+body div#container main#mainContent div#register-box button:hover,
 body div#container main#mainContent div#albums button:hover,
 body div#container main#mainContent div#createAlbumContainer button:hover,
 body div#container main#mainContent div#file-upload input#upload-button:hover,
 body div#container header div#signBox p button#btn-logout:hover,
 body div#container main#mainContent div#picture-by-album section.comments button:hover,
 body div#container main#mainContent div#categories div a:hover,
+body div#container main#mainContent div#file-upload #clear-img-button:hover,
 #commentButton:hover {
     background-color: #f0871f;
 }
@@ -334,7 +338,7 @@ body div#container main#mainContent div#categories div a:active
 body div#container main div#login-box div,
 body div#container main div#register-box div,
 body div#container main div#login-box button,
-body div#container main div#register-box button{
+body div#container main div#register-box button {
     float: right;
     clear: both;
     margin-right: 50px;
@@ -345,7 +349,7 @@ body div#container main#mainContent div#file-upload input#file-select {
     font-family: 'Open Sans', sans-serif;
 }
 
-body div#container main#mainContent div#albums div.albums-list  img {
+body div#container main#mainContent div#albums div.albums-list img {
     max-width: 90%;
 }
 
@@ -415,7 +419,7 @@ body div#signBox > a {
     text-align: center;
     white-space: normal;
     background-color: black;
-    box-shadow: 0 0 4px rgba(0,0,0,.8);
+    box-shadow: 0 0 4px rgba(0, 0, 0, .8);
 }
 
 .thumbnail {
@@ -498,4 +502,61 @@ body div#signBox > a {
 
 #commentBox {
     background-color: transparent;
+}
+
+#file-upload {
+    margin: 6% 0 0;
+}
+
+#upload-img-main {
+    /*border: 1px solid red;*/
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+}
+
+#upload-img-aside {
+    /*border: 1px solid blue;*/
+
+}
+
+#file-select {
+
+}
+
+#upload-image-preview-section {
+    margin: 1% auto;
+}
+
+.upload-image-preview {
+    width: 20%;
+}
+
+.upload-image-preview-selected {
+    width: 30%;
+    border: 1px solid #000;
+    text-align: center;
+    white-space: normal;
+    background-color: #222;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.9);
+}
+
+#upload-img-options > label {
+    font-size: 24px;
+}
+
+#img-tags, #select-image-album, #img-title {
+    width: 16%;
+    height: 18px;
+    margin-left: 0 !important;
+    margin-right: 4% !important;
+}
+
+#select-image-album {
+    height: 32px;
+}
+
+#upload-img-buttons {
+    margin: 2% auto;
+    margin-bottom: 0;
 }

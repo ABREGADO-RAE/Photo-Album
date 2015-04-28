@@ -1,10 +1,49 @@
-<div id="file-upload">
-    <input type="file" name="file-select" id="file-select">
-    <label for="select-image-album">Albums: </label>
-    <select id="select-image-album">
-        {{#results}}
-        <option data-id="{{objectId}}" value="{{title}}" class="albums">{{title}}</option>
-        {{/results}}
-    </select>
-    <input id="upload-button" type="button" value="Upload"/>
+<div id="file-upload" xmlns="http://www.w3.org/1999/html">
+    <article id="upload-img-main">
+        <input type="file" name="file-select" id="file-select">
+        <section id="upload-image-preview-section">
+            <img class="upload-image-preview" src="http://iconizer.net/files/Sabre/orig/folder_black_web_upload.png" alt="Image to upload"/>
+        </section>
+        <section id="upload-img-options">
+            <label for="select-image-album">Albums: </label>
+            <select id="select-image-album">
+                {{#results}}
+                <option data-id="{{objectId}}" value="{{title}}" class="albums">{{title}}</option>
+                {{/results}}
+            </select>
+            <label for="img-tags">Tags:</label>
+            <input type="text" id="img-tags" placeholder="Add Tags..."/>
+            <label for="img-title">Title:</label>
+            <input type="text" id="img-title" placeholder="Title..."/>
+        </section>
+        <section id="upload-img-buttons">
+            <input id="clear-img-button" type="button" value="Clear"/>
+            <input id="upload-button" type="button" value="Upload"/>
+        </section>
+    </article>
 </div>
+
+<!--<div id="file-upload">-->
+    <!--<article id="upload-img-main">-->
+        <!--<input type="file" name="file-select" id="file-select">-->
+        <!--<section id="upload-img-albums">-->
+            <!--<label for="select-image-album">Albums: </label>-->
+            <!--<select id="select-image-album">-->
+                <!--{{#results}}-->
+                <!--<option data-id="{{objectId}}" value="{{title}}" class="albums">{{title}}</option>-->
+                <!--{{/results}}-->
+            <!--</select>-->
+        <!--</section>-->
+        <!--<section id="upload-img-tags">-->
+            <!--<label for="img-tags">Tags:</label>-->
+            <!--<input type="text" id="img-tags" placeholder="Add Tags..."/>-->
+        <!--</section>-->
+        <!--<section id="upload-img-buttons">-->
+            <!--<input id="clear-img-button" type="button" value="Clear"/>-->
+            <!--<input id="upload-button" type="button" value="Upload"/>-->
+        <!--</section>-->
+    <!--</article>-->
+    <!--<aside id="upload-img-aside">-->
+        <!--<img src="../images/upload-image.png" alt="Image to upload"/>-->
+    <!--</aside>-->
+<!--</div>-->
