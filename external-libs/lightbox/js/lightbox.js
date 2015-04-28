@@ -66,8 +66,8 @@
                 "<img class='lb-image' src='' />" +
               "</div>" +
               "<div id='commentBox'>" +
-                "<input type='text' id='txtComment'/>" +
-                  "<button class=\"btn btn-primary btn-sm\" type='button' id='commentButton' onclick='onCommentClick()'>Comment</button>" +
+                "<input type='text' id='picture-comment-text'/>" +
+                  "<button  type='button' id='comment-picture-button' onclick='onCommentClick()'>Comment</button>" +
                     "<div id='commentsConainer'></div>" +
                 "</div>" +
               "<div class='lb-nav'>" +
@@ -92,6 +92,8 @@
           "</div>" +
         "</div>" +
       "</div>").appendTo($('body'));
+
+      //class=\"btn btn-primary btn-sm\"
 
       // Cache jQuery objects
       this.$lightbox       = $('#lightbox');
@@ -287,6 +289,7 @@
           }
         }
 
+        //$('#commentBox').height(imageHeight);
         self.sizeContainer($image.width(), $image.height());
       };
 
@@ -460,6 +463,8 @@
       $('select, object, embed').css({
         visibility: "visible"
       });
+
+      $('#picture-comment-text').val('');
 
       $('html, body').css({
         'overflow': 'auto',

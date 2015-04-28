@@ -169,12 +169,18 @@ app.controller = (function () {
         attachEventHandlerLoadMorePictures.call(this);
         attachEventLikeAlbum.call(this, selector);
         attachEventDislikeAlbum.call(this, selector);
-        attachEventAddComment.call(this, selector);
+        attachEventAddAlbumComment.call(this, selector);
         attachEventSelectPictureToUpload.call(this, selector);
         attachEventClearSelectedPicture.call(this, selector);
+        attachEventAddPictureComment.call(this, selector);
     };
 
-    var attachEventAddComment = function attachEventAddComment(selector) {
+    var attachEventAddPictureComment = function attachEventAddPictureComment(selector) {
+        var _this = this;
+
+    }
+
+    var attachEventAddAlbumComment = function attachEventAddAlbumComment(selector) {
         var _this = this;
         $(selector).on('click', '#btn-add-album-comment', function(ev) {
             var commentArea = $('#commend-area').val();

@@ -335,11 +335,21 @@ body div#container header div#signBox p button#btn-logout,
 body div#container main#mainContent div#picture-by-album section.comments button,
 body div#container main#mainContent div#categories div a,
 body div#container main#mainContent div#file-upload #clear-img-button,
+<<<<<<< HEAD
 #commentButton {
+=======
+#comment-picture-button {
+    display: block;
+    margin: 0 auto;
+    margin-top: 4%;
+    padding: 8px 15px;
+    border-radius: 15px;
+>>>>>>> e0a0faf569a0ead9d4580f25fa2dc455dfb0d108
     border: none;
     outline: none;
     cursor: pointer;
     color: white;
+<<<<<<< HEAD
     font-family: 'Roboto', sans-serif;
     font-size: 0.6em;
     -webkit-transition: all .2s ease;
@@ -355,6 +365,12 @@ body div#container main#mainContent div#file-upload #clear-img-button,
     background: -ms-linear-gradient(top,  #FF6619,  #A64210);
     background: -webkit-gradient(linear, left top, left bottom, from(#FF6619), to(#A64210));
     background: -moz-linear-gradient(top,  #FF6619,  #A64210);
+=======
+    background-color: #DC741F;
+    font-weight: normal;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.5em;
+>>>>>>> e0a0faf569a0ead9d4580f25fa2dc455dfb0d108
 }
 
 body div#container main#mainContent div#login-box button:hover,
@@ -618,6 +634,11 @@ body div#signBox > a {
 
 #commentBox {
     background-color: transparent;
+}
+
+#picture-comment-text {
+    width: 70%;
+    padding: 1% 1.8%;
 }
 
 #file-upload {
