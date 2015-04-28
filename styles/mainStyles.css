@@ -299,7 +299,10 @@ body div#container header div#signBox p button#btn-logout,
 body div#container main#mainContent div#picture-by-album section.comments button,
 body div#container main#mainContent div#categories div a,
 body div#container main#mainContent div#file-upload #clear-img-button,
-#commentButton {
+#comment-picture-button {
+    display: block;
+    margin: 0 auto;
+    margin-top: 4%;
     padding: 8px 15px;
     border-radius: 15px;
     border: none;
@@ -307,9 +310,9 @@ body div#container main#mainContent div#file-upload #clear-img-button,
     cursor: pointer;
     color: white;
     background-color: #DC741F;
-    font-weight: bold;
+    font-weight: normal;
     font-family: 'Roboto', sans-serif;
-    font-size: 0.7em;
+    font-size: 0.5em;
 }
 
 body div#container main#mainContent div#login-box button:hover,
@@ -509,6 +512,11 @@ body div#signBox > a {
 
 #commentBox {
     background-color: transparent;
+}
+
+#picture-comment-text {
+    width: 70%;
+    padding: 1% 1.8%;
 }
 
 #file-upload {
