@@ -18,6 +18,11 @@
     src: url("../fonts/AppleGaramond.ttf");
 }
 
+@font-face {
+    font-family: Roboto;
+    src: url("../fonts/Roboto-Condensed.ttf");
+}
+
 html, body {
     margin: 0;
     padding: 0;
@@ -76,7 +81,6 @@ body div#container header div#signBox a {
 body div#container header div#signBox {
     margin-top: 20px;
     margin-bottom: 40px;
-    font-weight: bold;
     font-family: 'Apple';
 }
 
@@ -85,8 +89,7 @@ body div#container header div#mainMenu ul li:hover,
 body div#container header div#signBox a:hover,
 body div#container main#mainContent div#albums div.albums-list h3:hover,
 body div#container main#mainContent div#categories div.albums-list h3:hover,
-body div#container main#mainContent div#categories div.albums-list h3:hover,
-body div#container main#mainContent div#galleryContainer div.top-albums h3:hover {
+body div#container main#mainContent div#categories div.albums-list h3:hover {
     text-decoration: none;
     color: #f0871f;
     cursor: pointer;
@@ -98,8 +101,7 @@ body div#container header div#mainMenu ul li:active,
 body div#container header div#signBox a:active,
 body div#container main#mainContent div#albums div.albums-list h3:active,
 body div#container main#mainContent div#categories div.albums-list h3:active,
-body div#container main#mainContent div#categories div.albums-list h3:active,
-body div#container main#mainContent div#galleryContainer div.top-albums h3:active {
+body div#container main#mainContent div#categories div.albums-list h3:active {
     color: #b95f20;
 }
 
@@ -306,7 +308,7 @@ body div#container main#mainContent div#file-upload #clear-img-button,
     color: white;
     background-color: #DC741F;
     font-weight: bold;
-    font-family: "Linux";
+    font-family: 'Roboto', sans-serif;
     font-size: 0.7em;
 }
 
@@ -347,6 +349,11 @@ body div#container main div#register-box button {
 body div#container main#mainContent div#file-upload input#file-select {
     color: white;
     font-family: 'Open Sans', sans-serif;
+}
+
+body div#container div#createAlbumContainer h3 {
+    font-family: 'Lora', serif;
+    font-style: italic;
 }
 
 body div#container main#mainContent div#albums div.albums-list img {
@@ -441,18 +448,18 @@ body div#signBox > a {
 }
 
 #btn-like-album {
-    background: #56d27f;
+    background: #2cc861;
     margin-left: 10px;
     margin-right: 10px;
     border-radius: 20px;
 }
 
 #btn-like-album:hover {
-    background: #60f699;
+    background: #2ce86a;
 }
 
 #btn-like-album:active {
-    background: #4faf63;
+    background: #29a552;
 }
 
 #btn-dislike-album {
