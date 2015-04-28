@@ -137,6 +137,7 @@ app.controller = (function () {
             this._model.categories.addCategory(data)
                 .then(function() {
                     location.href = '#/Categories';
+                    app.showSuccessPopup.showAddCategorySuccess();
                 }, function(error) {
                     console.log(error);
                     app.showErrorPopup.showErrorAddCategoryFailed();
@@ -164,7 +165,7 @@ app.controller = (function () {
     var attachEventAddPictureComment = function attachEventAddPictureComment(selector) {
         var _this = this;
 
-    }
+    };
 
     var attachEventAddAlbumComment = function attachEventAddAlbumComment(selector) {
         var _this = this;
@@ -187,6 +188,7 @@ app.controller = (function () {
                 .then(function(album) {
                     var selector = '.comments';
                     app.showCommentsView.load(selector, album);
+                    app.showSuccessPopup.showPostCommentSuccess();
                 }, function(err) {
                     console.log(err);
                 });
@@ -332,6 +334,7 @@ app.controller = (function () {
                             $('.upload-image-preview').attr('src', 'http://iconizer.net/files/Sabre/orig/folder_black_web_upload.png');
                             $('#img-title').val('');
                             $('#img-tags').val('');
+                            app.showSuccessPopup.showPictureUploadSuccess();
                         }, function (error) {
                             console.log(error.responseText);
                             app.showErrorPopup.showErrorDuringPictureUpload();
@@ -354,11 +357,10 @@ app.controller = (function () {
             var email = $('#email');
             _this._model.users.register(username.val(), password.val(), repeatPassword.val(), email.val())
                 .then(function (data) {
-                    console.log(data);
                     app.loggedInHomeView.load('header', data, _this);
                     location.href = '#/';
                     _this.getLoggedInHomeView('#container', data);
-                    console.log('Register succesfful');
+                    app.showSuccessPopup.showRegistrationSuccess();
                 }, function (error) {
                     console.log(error);
                     app.showErrorPopup.showErrorDuringRegister();
@@ -383,8 +385,7 @@ app.controller = (function () {
                     sessionStorage.setItem('currentUserName', data.username);
                     //console.log('Login successful');
                 }, function (error) {
-                    console.log('Login failed');
-                    app.showErrorPopup.showInvalidUserCredentials();
+                   // console.log('Login failed');
                 });
             username.val('');
             password.val('');
@@ -426,6 +427,7 @@ app.controller = (function () {
                     location.href = '#/Albums/Create-album';
                     window.location.replace('#/Albums');
                     //window.location.reload(true);
+                    app.showSuccessPopup.showAddAlbumSuccess();
                     return data;
                 }, function (error) {
                     console.log(error);
@@ -456,9 +458,6 @@ app.controller = (function () {
                 app.showCommentsView.load(selector, data);
             }, function (error) {
                 console.log(error);
-            })
-            .done(function(){
-                app.showErrorPopup.showErrorUnableToRetrievePictureForSelectedAlbum();
             });
 
     }

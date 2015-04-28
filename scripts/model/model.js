@@ -55,7 +55,7 @@ app.model = (function(){
                     sessionStorage.clear();
                     _this._headers['X-Parse-Session-Token'] = null;
                 }, function (error) {
-                    console.log(error.responseText);
+                    //console.log(error.responseText);
                 })
         };
 

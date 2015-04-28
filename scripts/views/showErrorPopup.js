@@ -2,14 +2,6 @@ var app = app || {};
 
 app.showErrorPopup = (function () {
     var DEFAULT_ERROR_TIMEOUT = 2000;
-    function showInvalidUserCredentials() {
-        return noty({
-            text: 'Invalid username/password',
-            type: 'error',
-            layout: 'topCenter',
-            timeout:DEFAULT_ERROR_TIMEOUT
-        });
-    }
 
     function showErrorDuringRegister() {
         return noty({
@@ -32,15 +24,6 @@ app.showErrorPopup = (function () {
     function showErrorDuringAddingAlbum() {
         return noty({
             text: 'Adding album failed. Please try again.',
-            type: 'error',
-            layout: 'topCenter',
-            timeout:DEFAULT_ERROR_TIMEOUT
-        });
-    }
-
-    function showErrorUnableToRetrievePictureForSelectedAlbum() {
-        return noty({
-            text: 'Unable to retrieve pictures for selected album. Please try again',
             type: 'error',
             layout: 'topCenter',
             timeout:DEFAULT_ERROR_TIMEOUT
@@ -84,14 +67,12 @@ app.showErrorPopup = (function () {
     }
 
     return {
-        showInvalidUserCredentials: showInvalidUserCredentials,
         showErrorDuringRegister: showErrorDuringRegister,
         showErrorDuringAddingAlbum: showErrorDuringAddingAlbum,
         showErrorDuringPictureUpload: showErrorDuringPictureUpload,
         showErrorMaximumPictureSizeExceeded: showErrorMaximumPictureSizeExceeded,
         showErrorNoPictureWasSelected: showErrorNoPictureWasSelected,
         showErrorAddCategoryFailed:showErrorAddCategoryFailed,
-        showErrorUnableToRetrieveAlbums:showErrorUnableToRetrieveAlbums,
-        showErrorUnableToRetrievePictureForSelectedAlbum: showErrorUnableToRetrievePictureForSelectedAlbum
+        showErrorUnableToRetrieveAlbums:showErrorUnableToRetrieveAlbums
     }
 }());
