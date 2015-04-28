@@ -54,6 +54,7 @@ body div#container header div#logo a#logo-img {
     margin: 20px auto;
     -webkit-transition: background-image 0.2s ease-in-out;
     transition: background-image 0.2s ease-in-out;
+    outline: none;
 }
 
 body div#container header div#logo a#logo-img:hover {
@@ -176,8 +177,8 @@ body div#container header div#searchBox img {
 body div#container header div#searchBox button#search-button {
     background: url("../images/search.png");
     background-size: cover;
-    width: 35px;
-    height: 35px;
+    width: 45px;
+    height: 45px;
     border: none;
     outline: none;
     vertical-align: middle;
@@ -193,8 +194,8 @@ body div#container header div#searchBox button#search-button::-moz-focus-inner {
 body div#container header div#searchBox button#search-button:hover {
     background: url("../images/search-hover.png");
     background-size: cover;
-    width: 35px;
-    height: 35px;
+    width: 45px;
+    height: 45px;
     border: none;
     outline: none;
     vertical-align: middle;
@@ -204,8 +205,8 @@ body div#container header div#searchBox button#search-button:hover {
 body div#container header div#searchBox button#search-button:active {
     background: url("../images/search-clicked.png");
     background-size: cover;
-    width: 35px;
-    height: 35px;
+    width: 45px;
+    height: 45px;
     border: none;
     outline: none;
     vertical-align: middle;
