@@ -20,7 +20,7 @@ app.controller = (function () {
     Controller.prototype.getHomePage = function (selector) {
         this._model.albums.getMostHighlyRankedAlbums()
             .then(function(data){
-                console.log(data);
+                //console.log(data);
                 app.homeView.load(selector, data);
             }, function(error){
                 console.log(error);
@@ -44,7 +44,7 @@ app.controller = (function () {
                 });
                 getLatestPicture(_this, albums, selector)
                     .then(function(data) {
-                        console.log(data);
+                        //console.log(data);
                         var output = {
                             albums: albums
                         };
@@ -52,12 +52,9 @@ app.controller = (function () {
                     }, function(error) {
                         console.log(error.responseText);
                     }).done();
-
-
-
-
             }, function(error) {
-                console.log(error.responseText);
+                console.log(error);
+                app.showErrorPopup.showErrorUnableToRetrieveAlbums();
             })
     };
 
@@ -116,18 +113,6 @@ app.controller = (function () {
         getPicturesByAlbum(this, albumId);
     };
 
-    //Controller.prototype.logout = function(selector) {
-    //    var _this = this;
-    //    this._model.users.logout()
-    //        .then(function() {
-    //            app.homeView.load(selector);
-    //            location.href = '#/';
-    //            _this.getLoggedOutHomeView('#container');
-    //        }, function(error) {
-    //            console.log(error.responseText);
-    //        });
-    //};
-
     Controller.prototype.getLoggedOutHomeView = function (selector) {
         app.loggedOutHomeView.load(selector);
     };
@@ -154,6 +139,7 @@ app.controller = (function () {
                     location.href = '#/Categories';
                 }, function(error) {
                     console.log(error);
+                    app.showErrorPopup.showErrorAddCategoryFailed();
                 })
         }
     };
@@ -188,7 +174,7 @@ app.controller = (function () {
             var comment = {"album": {"__type": "Pointer","className": "Album","objectId": currentAlbumId}, "content":commentArea};
             _this._model.comments.addComment(comment)
                 .then(function(data) {
-                    console.log(data);
+                   // console.log(data);
                 }, function(error) {
                     console.log(error);
                 })
@@ -208,7 +194,6 @@ app.controller = (function () {
         });
     };
 
-
     var attachEventLikeAlbum = function attachEventLikeAlbum(selector) {
         var _this = this;
         $(selector).on('click', '#btn-like-album', function(ev) {
@@ -218,7 +203,7 @@ app.controller = (function () {
                 var data = {"likes":{"__op":"Increment","amount":1}, "rating":{"__op":"Increment","amount":1}};
                 _this._model.albums.editAlbum(data, albumId)
                     .then(function(data){
-                        console.log(data);
+                        //console.log(data);
                         var currentLikes = likes.text();
                         likes.text(Number(currentLikes)+1);
                     }, function(error){
@@ -237,11 +222,11 @@ app.controller = (function () {
                 var data = {"dislikes":{"__op":"Increment","amount":-1}, "rating":{"__op":"Increment","amount":-1}};
                 _this._model.albums.editAlbum(data, albumId)
                     .then(function(data){
-                        console.log(data);
+                        //console.log(data);
                         var currentDislikes = dislikes.text();
                         dislikes.text(Number(currentDislikes)-1);
                     }, function(error){
-                        console.log(error.responseText);
+                        console.log(error);
                     })
             }
         })
@@ -250,18 +235,13 @@ app.controller = (function () {
     var attachEventHandlerLoadMorePictures = function attachEventHandlerLoadMorePictures() {
         var _this = this;
         $(document).scroll(function(){
-            //console.log('Scrolled...');
-            //console.log('window height: ' + $(window).height());
-           // console.log('document height: ' + $(document).height());
-            //console.log('scroll top' + $(window).scrollTop());
-
             if (($(window).scrollTop() + 400 + $(window).height() >= $(document).height()) &&
                  $('#mainContent .image-container').length) {
                 _this._model.pictures.loadMorePictures()
                     .then(function (data) {
                         app.loadMorePicturesView.load(MAIN_CONTAINER_SELECTOR, data);
                     }, function (error) {
-                        console.log(error.responseText);
+                        console.log(error);
                     })
             }
         });
@@ -284,7 +264,7 @@ app.controller = (function () {
                     location.href = '#/';
                     _this.getLoggedOutHomeView(selector);
                 }, function(error) {
-                    console.log(error.responseText);
+                    console.log(error);
                 });
         });
     };
@@ -354,12 +334,13 @@ app.controller = (function () {
                             $('#img-tags').val('');
                         }, function (error) {
                             console.log(error.responseText);
+                            app.showErrorPopup.showErrorDuringPictureUpload();
                         })
                 } else {
-                    //TO DO: Show to the user that max picture size is 1mb
+                    app.showErrorPopup.showErrorMaximumPictureSizeExceeded();
                 }
             } else {
-                //TO DO: Show to the user that no file has been selected
+                app.showErrorPopup.showErrorNoPictureWasSelected();
             }
         })
     };
@@ -380,6 +361,7 @@ app.controller = (function () {
                     console.log('Register succesfful');
                 }, function (error) {
                     console.log(error);
+                    app.showErrorPopup.showErrorDuringRegister();
                 });
             username.val('');
             password.val('');
@@ -399,9 +381,10 @@ app.controller = (function () {
                     location.href = '#/logged-in-view';
                     _this.getLoggedInHomeView('#container', data);
                     sessionStorage.setItem('currentUserName', data.username);
-                    console.log('Login successful');
+                    //console.log('Login successful');
                 }, function (error) {
                     console.log('Login failed');
+                    app.showErrorPopup.showInvalidUserCredentials();
                 });
             username.val('');
             password.val('');
@@ -415,7 +398,7 @@ app.controller = (function () {
             if (isLoggedIn()) {
                 _this._model.categories.getCategory()
                     .then(function (data) {
-                        console.log(data);
+                       // console.log(data);
                         app.showAddAlbumView.loadShowView(MAIN_CONTAINER_SELECTOR, data);
                     }, function (error) {
                         console.log(error);
@@ -438,7 +421,7 @@ app.controller = (function () {
             };
             _this._model.albums.addAlbum(albumData)
                 .then(function (data) {
-                    console.log(data);
+                    //console.log(data);
                     console.log('Successfully added new album');
                     location.href = '#/Albums/Create-album';
                     window.location.replace('#/Albums');
@@ -446,6 +429,7 @@ app.controller = (function () {
                     return data;
                 }, function (error) {
                     console.log(error);
+                    app.showErrorPopup.showErrorDuringAddingAlbum();
                 });
         });
     };
@@ -456,7 +440,7 @@ app.controller = (function () {
         controller._model.pictures.getAllPicturesByAlbumId(albumId)
             .then(function(data) {
                 location.href = '#/Albums/Pictures-by-album';
-                console.log(data);
+                //console.log(data);
                 console.log('Successfully showed pictures');
                 app.pictureByAlbumView.loadPictureByAlbum(MAIN_CONTAINER_SELECTOR, data);
             }, function(error){
@@ -473,7 +457,9 @@ app.controller = (function () {
             }, function (error) {
                 console.log(error);
             })
-            .done();
+            .done(function(){
+                app.showErrorPopup.showErrorUnableToRetrievePictureForSelectedAlbum();
+            });
 
     }
 

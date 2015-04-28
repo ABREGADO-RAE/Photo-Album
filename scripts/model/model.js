@@ -40,7 +40,6 @@ app.model = (function(){
         }
     }());
 
-
     var User = (function(){
         function User(baseUrl){
             this._serviceUrl = baseUrl;
@@ -69,8 +68,6 @@ app.model = (function(){
                     Credentials.setSessionToken(data.sessionToken);
                     _this._headers['X-Parse-Session-Token'] = data.sessionToken;
                     sessionStorage['logged-in'] = true;
-                    //_this.logout();
-                    console.log(data);
                     return data;
                 }, function(error){
                     console.log(error.responseText);
@@ -89,7 +86,7 @@ app.model = (function(){
                         sessionStorage['logged-in'] = true;
                         data['username'] = username;
                         _this._headers['X-Parse-Session-Token'] = data.sessionToken;
-                        console.log(data);
+                       // console.log(data);
                         return data;
                     }, function(error){
                         console.log(error.responseText);
@@ -115,7 +112,7 @@ app.model = (function(){
         Unit.prototype.addUnit = function(url, headers, data, contentType){
             return app.ajaxRequester.postRequest(url, headers, data, contentType)
                 .then(function(data){
-                    console.log(data);
+                   // console.log(data);
                     return data;
                 }, function(error){
                     console.log(error.responseText);
@@ -144,7 +141,7 @@ app.model = (function(){
         Unit.prototype.updateUnit = function(url, headers, data, contentType) {
             return app.ajaxRequester.putRequest(url, headers, data, contentType)
                 .then(function(data){
-                    console.log(data);
+                   // console.log(data);
                     return data;
                 }, function(error){
                     console.log(error.responseText);
@@ -156,7 +153,7 @@ app.model = (function(){
             var requestUrl = url + id;
             return app.ajaxRequester.deleteRequest(requestUrl, headers, contentType)
                 .then(function(data){
-                    console.log(data);
+                   // console.log(data);
                 }, function(error){
                     console.log(error.responseText);
                 });
@@ -188,7 +185,7 @@ app.model = (function(){
             var url = this._serviceUrl + '/' + id;
             return this._unit.updateUnit(url, this._headers, JSON.stringify(data), JSON_CONTENT_TYPE)
                 .then(function(data){
-                    console.log(data);
+                  //  console.log(data);
                     return data;
                 }, function(error){
                     console.log(error.responseText);
