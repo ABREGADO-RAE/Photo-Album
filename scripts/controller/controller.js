@@ -323,6 +323,8 @@ app.controller = (function () {
                 var $imageSize = $selectedFileInput[0].files[0].size;
                 var $imageTitle = $('#img-title').val();
 
+                var $imageTags = $('#img-tags').val().split(/','/g);
+
                 if ($imageSize < MAX_IMAGE_SIZE) {
                     _this._model.pictures.uploadPictureData($fileName, $selectedFile)
                         .then(function (data) {
@@ -334,6 +336,7 @@ app.controller = (function () {
                                 },
                                 "likes": 0,
                                 "dislikes": 0,
+                                "tags": $imageTags,
                                 "album": {"__type": "Pointer", "className": "Album", "objectId": selectedAlbumId}
                             };
 
@@ -342,6 +345,7 @@ app.controller = (function () {
                             $('.upload-image-preview-selected').toggleClass('upload-image-preview-selected upload-image-preview');
                             $('.upload-image-preview').attr('src', 'http://iconizer.net/files/Sabre/orig/folder_black_web_upload.png');
                             $('#img-title').val('');
+                            $('#img-tags').val('');
                         }, function (error) {
                             console.log(error.responseText);
                         })
