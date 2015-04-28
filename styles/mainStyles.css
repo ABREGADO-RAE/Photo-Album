@@ -20,7 +20,7 @@
 
 @font-face {
     font-family: Roboto;
-    src: url("../fonts/Roboto-Condensed.ttf");
+    src: url("../fonts/Roboto-Light.ttf");
 }
 
 html, body {
@@ -52,6 +52,8 @@ body div#container header div#logo a#logo-img {
     background-image: url("../images/logo4.png");
     text-indent: -9999px;
     margin: 20px auto;
+    -webkit-transition: background-image 0.2s ease-in-out;
+    transition: background-image 0.2s ease-in-out;
 }
 
 body div#container header div#logo a#logo-img:hover {
@@ -84,6 +86,16 @@ body div#container header div#signBox {
     font-family: 'Apple';
 }
 
+body div#container header section#links a,
+body div#container header div#mainMenu ul li,
+body div#container header div#signBox a,
+body div#container main#mainContent div#albums div.albums-list h3,
+body div#container main#mainContent div#categories div.albums-list h3,
+body div#container main#mainContent div#categories div.albums-list h3 {
+    -webkit-transition: all .4s ease;
+    -moz-transition: all .4s ease;
+}
+
 body div#container header section#links a:hover,
 body div#container header div#mainMenu ul li:hover,
 body div#container header div#signBox a:hover,
@@ -103,6 +115,24 @@ body div#container main#mainContent div#albums div.albums-list h3:active,
 body div#container main#mainContent div#categories div.albums-list h3:active,
 body div#container main#mainContent div#categories div.albums-list h3:active {
     color: #b95f20;
+}
+
+body div#container header section#links a::-moz-focus-inner,
+body div#container header div#mainMenu ul li::-moz-focus-inner,
+body div#container header div#signBox a::-moz-focus-inner,
+body div#container main#mainContent div#albums div.albums-list h3::-moz-focus-inner,
+body div#container main#mainContent div#categories div.albums-list h3::-moz-focus-inner,
+body div#container main#mainContent div#categories div.albums-list h3::-moz-focus-inner {
+    border: 0
+}
+
+body div#container header section#links a:focus,
+body div#container header div#mainMenu ul li:focus,
+body div#container header div#signBox a:focus,
+body div#container main#mainContent div#albums div.albums-list h3:focus,
+body div#container main#mainContent div#categories div.albums-list h3:focus,
+body div#container main#mainContent div#categories div.albums-list h3:focus {
+    outline: none;
 }
 
 body div#container header div#mainMenu ul {
@@ -152,6 +182,12 @@ body div#container header div#searchBox button#search-button {
     outline: none;
     vertical-align: middle;
     cursor: pointer;
+    -webkit-transition: all .4s ease;
+    -moz-transition: all .4s ease;
+}
+
+body div#container header div#searchBox button#search-button::-moz-focus-inner {
+    border: 0;
 }
 
 body div#container header div#searchBox button#search-button:hover {
@@ -241,7 +277,7 @@ select {
 body div#container main#mainContent div#login-box,
 body div#container main#mainContent div#register-box {
     display: inline-block;
-    width: 360px;
+    width: 380px;
     max-width: 95%;
     vertical-align: top;
     padding: 15px;
@@ -251,7 +287,7 @@ body div#container main#mainContent div#register-box {
 
 body div#container main#mainContent div#login-box label,
 body div#container main#mainContent div#register-box label {
-    font-size: 0.5em;
+    font-size: 0.7em;
 }
 
 body div#container main#mainContent div#login-box div input#login-username,
@@ -300,16 +336,25 @@ body div#container main#mainContent div#picture-by-album section.comments button
 body div#container main#mainContent div#categories div a,
 body div#container main#mainContent div#file-upload #clear-img-button,
 #commentButton {
-    padding: 8px 15px;
-    border-radius: 15px;
     border: none;
     outline: none;
     cursor: pointer;
     color: white;
-    background-color: #DC741F;
-    font-weight: bold;
     font-family: 'Roboto', sans-serif;
-    font-size: 0.7em;
+    font-size: 0.6em;
+    -webkit-transition: all .2s ease;
+    -moz-transition: all .2s ease;
+    text-shadow: 1px 2px 5px #000000;
+    box-shadow: 1px 1px 5px #000000;
+    padding: 8px 18px;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    border-radius: 25px;
+    background: #63B8EE;
+    background: linear-gradient(top,  #FF6619,  #A64210);
+    background: -ms-linear-gradient(top,  #FF6619,  #A64210);
+    background: -webkit-gradient(linear, left top, left bottom, from(#FF6619), to(#A64210));
+    background: -moz-linear-gradient(top,  #FF6619,  #A64210);
 }
 
 body div#container main#mainContent div#login-box button:hover,
@@ -322,7 +367,12 @@ body div#container main#mainContent div#picture-by-album section.comments button
 body div#container main#mainContent div#categories div a:hover,
 body div#container main#mainContent div#file-upload #clear-img-button:hover,
 #commentButton:hover {
-    background-color: #f0871f;
+    color: #FFFFFF !important;
+    background: #468CCF;
+    background: linear-gradient(top,  #A64210,  #FF6619);
+    background: -ms-linear-gradient(top,  #A64210,  #FF6619);
+    background: -webkit-gradient(linear, left top, left bottom, from(#A64210), to(#FF6619));
+    background: -moz-linear-gradient(top,  #A64210,  #FF6619);
 }
 
 body div#container main div#login-box button:active,
@@ -332,9 +382,34 @@ body div#container main#mainContent div#createAlbumContainer button:active,
 body div#container main#mainContent div#file-upload input#upload-button:active,
 body div#container header div#signBox p button#btn-logout:active,
 body div#container main#mainContent div#picture-by-album section.comments button:active,
-body div#container main#mainContent div#categories div a:active
+body div#container main#mainContent div#categories div a:active,
 #commentButton:active {
-    background-color: #b95f20;
+    background-color: #7f7f7f;
+}
+
+body div#container main div#login-box button:focus,
+body div#container main div#register-box button:focus,
+body div#container main#mainContent div#albums button:focus,
+body div#container main#mainContent div#createAlbumContainer button:focus,
+body div#container main#mainContent div#file-upload input#upload-button:focus,
+body div#container header div#signBox p button#btn-logout:focus,
+body div#container main#mainContent div#picture-by-album section.comments button:focus,
+body div#container main#mainContent div#categories div a:focus,
+#commentButton:focus {
+    outline: none;
+}
+
+body div#container main#mainContent div#login-box button::-moz-focus-inner,
+body div#container main#mainContent div#register-box button::-moz-focus-inner,
+body div#container main#mainContent div#albums button::-moz-focus-inner,
+body div#container main#mainContent div#createAlbumContainer button::-moz-focus-inner,
+body div#container main#mainContent div#file-upload input#upload-button::-moz-focus-inner,
+body div#container header div#signBox p button#btn-logout::-moz-focus-inner,
+body div#container main#mainContent div#picture-by-album section.comments button::-moz-focus-inner,
+body div#container main#mainContent div#categories div a::-moz-focus-inner,
+body div#container main#mainContent div#file-upload #clear-img-button::-moz-focus-inner,
+#commentButton::-moz-focus-inner {
+    border: 0;
 }
 
 body div#container main div#login-box div,
@@ -365,6 +440,7 @@ body div#container main#mainContent div#galleryContainer {
     width: 825px;
     padding: 5px;
     border-radius: 10px;
+    font-family: 'Apple', serif;
 }
 
 #first-row, #second-row, #third-row, #fourth-row {
@@ -448,33 +524,65 @@ body div#signBox > a {
 }
 
 #btn-like-album {
-    background: #2cc861;
     margin-left: 10px;
     margin-right: 10px;
-    border-radius: 20px;
+    font-weight: bold;
+    color: #FFFFFF;
+    font-size: 0.7em;
+    text-shadow: 2px 2px 5px #000000;
+    box-shadow: 1px 1px 4px #000000;
+    padding: 8px 18px;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    border-radius: 25px;
+    background: #00FF55;
+    background: linear-gradient(top,  #00FF55,  #00B53C);
+    background: -ms-linear-gradient(top,  #00FF55,  #00B53C);
+    background: -webkit-gradient(linear, left top, left bottom, from(#00FF55), to(#00B53C));
+    background: -moz-linear-gradient(top,  #00FF55,  #00B53C);
 }
 
 #btn-like-album:hover {
-    background: #2ce86a;
+    background: #00FF55;
+    background: linear-gradient(top,  #00B53C,  #00FF55);
+    background: -ms-linear-gradient(top,  #00B53C,  #00FF55);
+    background: -webkit-gradient(linear, left top, left bottom, from(#00B53C), to(#00FF55));
+    background: -moz-linear-gradient(top,  #00B53C,  #00FF55);
 }
 
 #btn-like-album:active {
-    background: #29a552;
+    color: #000;
 }
 
 #btn-dislike-album {
-    background: #b50600;
     margin-left: 10px;
     margin-right: 10px;
-    border-radius: 20px;
+    font-weight: bold;
+    color: #FFFFFF;
+    font-size: 0.7em;
+    text-shadow: 2px 2px 5px #000000;
+    box-shadow: 1px 1px 4px #000000;
+    padding: 8px 18px;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    border-radius: 25px;
+    background: #FF0800;
+    background: linear-gradient(top,  #FF0800,  #B50600);
+    background: -ms-linear-gradient(top,  #FF0800,  #B50600);
+    background: -webkit-gradient(linear, left top, left bottom, from(#FF0800), to(#B50600));
+    background: -moz-linear-gradient(top,  #FF0800,  #B50600);
 }
 
 #btn-dislike-album:hover {
-    background: #d70600;
+    background: #FF0800;
+    background: linear-gradient(top,  #B50600,  #FF0800);
+    background: -ms-linear-gradient(top,  #B50600,  #FF0800);
+    background: -webkit-gradient(linear, left top, left bottom, from(#B50600), to(#FF0800));
+    background: -moz-linear-gradient(top,  #B50600,  #FF0800);
 }
 
 #btn-dislike-album:active {
-    background: #9c0600;
+    color: #000;
 }
 
 .voteButtons:hover {
@@ -504,7 +612,8 @@ body div#signBox > a {
 }
 
 #commentButton {
-    margin-top: 10px;
+    margin: 10px auto;
+    display: block;
 }
 
 #commentBox {
