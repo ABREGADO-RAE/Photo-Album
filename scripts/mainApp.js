@@ -33,6 +33,10 @@ var app = app || {};
             controller.getPicturesByAlbumPage();
         });
 
+        this.get('#/Albums/Albums-by-category', function () {
+            controller.getAlbumsByCategoryPage();
+        });
+
         this.get('#/Login', function () {
             controller.getLoginPage(selector);
         });

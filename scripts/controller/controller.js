@@ -133,6 +133,30 @@ app.controller = (function () {
         getPicturesByAlbum(this, albumId);
     };
 
+    Controller.prototype.getAlbumsByCategoryPage = function (data) {
+        var _this = this;
+        var albums = [];
+        data.results.forEach(function (result) {
+            var album = {
+                title: result.title,
+                id: result.objectId,
+                pictureUrl: undefined,
+                likes: result.likes,
+                dislikes: result.dislikes
+            };
+            albums.push(album);
+        });
+        getLatestPicture(_this, albums, MAIN_CONTAINER_SELECTOR)
+            .then(function (data) {
+                var output = {
+                    albums: albums
+                };
+                app.albumsView.load(MAIN_CONTAINER_SELECTOR, output);
+            }, function (error) {
+                console.log(error.responseText);
+            }).done();
+    };
+
     Controller.prototype.getLoggedOutHomeView = function (selector) {
         app.loggedOutHomeView.load(selector);
     };
@@ -173,6 +197,7 @@ app.controller = (function () {
         attachEventHandlerAddNewAlbum.call(this, selector);
         attachEventHandlerUploadImage.call(this, selector);
         attachEventHandlerShowPicture.call(this, selector);
+        attachEventHandlerShowAlbumsInCategory.call(this, selector);
         attachEventHandlerLoadMorePictures.call(this);
         attachEventLikeAlbum.call(this, selector);
         attachEventDislikeAlbum.call(this, selector);
@@ -292,6 +317,15 @@ app.controller = (function () {
                         console.log(error);
                     })
             }
+        });
+    };
+
+    var attachEventHandlerShowAlbumsInCategory = function attachEventHandlerShowAlbumsInCategory(selector) {
+        var _this = this;
+        $(selector).on('click', '.category-list > h3', function (ev) {
+            var categoryId = $(ev.target).data('id');
+            sessionStorage.setItem('CategoryId', categoryId);
+            getAlbumsByCategory(_this, categoryId);
         });
     };
 
@@ -491,6 +525,17 @@ app.controller = (function () {
                 });
         });
     };
+
+    function getAlbumsByCategory(controller, categoryId) {
+        controller._model.albums.getAllAlbumsByCategoryId(categoryId)
+            .then(function (data) {
+                location.href = '#/Albums/Albums-by-category';
+                controller.getAlbumsByCategoryPage(data);
+                //app.albumsByCategoryView.load(MAIN_CONTAINER_SELECTOR, data);
+            }, function (error) {
+                console.log(error.responseText);
+            })
+    }
 
     function getPicturesByAlbum(controller, albumId) {
         var condition = '?where={"album": {"__type":"Pointer", "className" : "Album", "objectId" : "' + albumId + '"}}';

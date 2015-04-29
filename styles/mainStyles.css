@@ -92,7 +92,8 @@ body div#container header div#mainMenu ul li,
 body div#container header div#signBox a,
 body div#container main#mainContent div#albums div.albums-list h3,
 body div#container main#mainContent div#categories div.albums-list h3,
-body div#container main#mainContent div#categories div.albums-list h3 {
+body div#container main#mainContent div#categories div.albums-list h3
+.category-list h3{
     -webkit-transition: all .4s ease;
     -moz-transition: all .4s ease;
 }
@@ -102,7 +103,8 @@ body div#container header div#mainMenu ul li:hover,
 body div#container header div#signBox a:hover,
 body div#container main#mainContent div#albums div.albums-list h3:hover,
 body div#container main#mainContent div#categories div.albums-list h3:hover,
-body div#container main#mainContent div#categories div.albums-list h3:hover {
+body div#container main#mainContent div#categories div.albums-list h3:hover
+.category-list h3:hover {
     text-decoration: none;
     cursor: pointer;
     border-radius: 20px;
@@ -114,7 +116,8 @@ body div#container header div#mainMenu ul li:active,
 body div#container header div#signBox a:active,
 body div#container main#mainContent div#albums div.albums-list h3:active,
 body div#container main#mainContent div#categories div.albums-list h3:active,
-body div#container main#mainContent div#categories div.albums-list h3:active {
+body div#container main#mainContent div#categories div.albums-list h3:active
+.category-list h3:active{
     color: #ba6707;
 }
 
@@ -254,7 +257,7 @@ body div#container main#mainContent div#albums button#btn-show-add-album {
     margin-top: 25px;
 }
 
-body div#container main#mainContent div#albums div.albums-list:hover {
+body div#container main#mainContent div#albums div.albums-list:hover{
     background: rgba(255, 255, 255, 0.1);
 }
 
@@ -758,4 +761,8 @@ body div#signBox > a {
 
 .category-name {
     margin: 2.7%;
+}
+
+.category-list:hover {
+    cursor: pointer;
 }

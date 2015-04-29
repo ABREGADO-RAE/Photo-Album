@@ -1,0 +1,8 @@
+<div id="albums-by-category">
+    {{#results}}
+    <div class="thumbnail-container">
+        <a href="{{picture.url}}" data-lightbox="image-1" data-title='{{title}}' data-id="{{objectId}}"><img class="thumbnail" data-id="{{objectId}}" src="{{picture.url}}" alt=""/></a>
+    </div>
+    {{/results}}
+    <section class="comments"></section>
+</div>

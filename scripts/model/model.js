@@ -176,6 +176,16 @@ app.model = (function(){
             return this._unit.getUnit(this._serviceUrl, this._headers, null, JSON_CONTENT_TYPE)
         };
 
+        Album.prototype.getAlbumsById = function(id) {
+            var url = this._serviceUrl + id;
+            return this._unit.getUnit(this._serviceUrl, this._headers, null, JSON_CONTENT_TYPE)
+        };
+
+        Album.prototype.getAllAlbumsByCategoryId =  function(id) {
+            var url = this._serviceUrl + '?where={"category": {"__type":"Pointer", "className" : "Category", "objectId" : "' + id + '"}}';
+            return this._unit.getUnit(url, this._headers, undefined, IMAGE_CONTENT_TYPE);
+        };
+
         Album.prototype.getMostHighlyRankedAlbums = function() {
             var url =  this._serviceUrl + '?keys=rating,title&order=-rating&limit=5';
             return this._unit.getUnit(url, this._headers, undefined, JSON_CONTENT_TYPE)
