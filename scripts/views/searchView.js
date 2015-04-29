@@ -6,7 +6,7 @@ app.searchView = (function () {
             var output = Mustache.render(template, data);
             $(selector).html(output);
             if (!data.albums.length) {
-                $('.page-title').text('Sorry, no wallpapers found!');
+                $('.page-title').text('Sorry, no albums found!');
             }
         });
     }

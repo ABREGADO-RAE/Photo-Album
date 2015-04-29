@@ -428,8 +428,9 @@ app.controller = (function () {
 
                 var $imageTags = $('#img-tags').val().split(/','/g);
 
+                console.log($fileName);
                 if ($imageSize < MAX_IMAGE_SIZE) {
-                    if ($selectedFile.type.match(/\.(gif|jpg|jpeg|tiff|png)$/i)) {
+                    if ($fileName.match(/\.(gif|jpg|jpeg|tiff|png)$/i)) {
                         _this._model.pictures.uploadPictureData($fileName, $selectedFile)
                             .then(function (data) {
                                 var dataToUpload = {
