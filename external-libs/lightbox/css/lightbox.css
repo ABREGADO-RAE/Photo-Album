@@ -61,7 +61,7 @@ body:after {
   position: relative;
   background-color: #000;
   *zoom: 1;
-  width: 70% !important;
+  width: 75% !important;
   max-height: 550px !important;
   min-height: 500px !important;
   /*margin: 0 auto;*/
@@ -259,7 +259,8 @@ body:after {
   padding: 3px;
 }
 #commentBox{
-  background-color: rgba(126, 128, 127, 0.40) !important;
+  background-color: #818181 !important;
+  /*rgba(199, 201, 200, 0.100)*/
   margin-left: 100%;
   margin-top: 0;
   top: 0;

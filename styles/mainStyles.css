@@ -617,6 +617,7 @@ body div#signBox > a {
     display: block;
     margin: 0 auto;
     padding: .5% 1%;
+    list-style: none;
 }
 
 .album-comments-title {
@@ -763,6 +764,18 @@ body div#signBox > a {
     margin: 2.7%;
 }
 
-.category-list:hover {
+.category-list:hover, .homepage-albums-review {
     cursor: pointer;
+}
+
+#comment-picture-button {
+    font-size: 0.5em;
+}
+
+.page-title {
+    margin: .5% 0 0 0;
+}
+
+.album-comment {
+    font-size: 0.8em;
 }

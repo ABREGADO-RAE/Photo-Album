@@ -178,7 +178,12 @@ app.model = (function(){
 
         Album.prototype.getAlbumsById = function(id) {
             var url = this._serviceUrl + id;
-            return this._unit.getUnit(this._serviceUrl, this._headers, null, JSON_CONTENT_TYPE)
+            return this._unit.getUnit(url, this._headers, null, JSON_CONTENT_TYPE)
+        };
+
+        Album.prototype.searchAlbumsBy = function(word) {
+            var url = this._serviceUrl + '?where={"title":{"$regex":"\\\\' + word + '","$options":"i"}}';
+            return this._unit.getUnit(url, this._headers, null, JSON_CONTENT_TYPE)
         };
 
         Album.prototype.getAllAlbumsByCategoryId =  function(id) {

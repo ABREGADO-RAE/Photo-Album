@@ -67,6 +67,9 @@ var app = app || {};
         this.get('#/AddCategory', function() {
            controller.addCategory();
         });
+
+        this.get('#/Search', function() {
+        });
     });
 
     app.router.run('#/');

@@ -206,6 +206,25 @@ app.controller = (function () {
         attachEventClearSelectedPicture.call(this, selector);
         attachEventAddPictureComment.call(this, selector);
         attachEventPictureOnFocus.call(this, selector);
+        attachEventHandlerSearch.call(this);
+
+    };
+
+    var attachEventHandlerSearch = function attachEventHandlerSearch() {
+        var selector = '#searchBox';
+        var _this = this;
+        $(selector).on('click', '#search-button', function (ev) {
+            makeSearch(_this);
+        });
+
+        $(selector).keypress(function (e) {
+            var ENTER_BUTTON_NUMBER = 13;
+            var $searchInput = $('#search');
+
+            if (e.which == ENTER_BUTTON_NUMBER && $searchInput.is(':focus')) {
+                makeSearch(_this);
+            }
+        });
     };
 
     var attachEventPictureOnFocus = function attachEventPictureOnFocus(selector) {
@@ -307,15 +326,26 @@ app.controller = (function () {
 
     var attachEventHandlerLoadMorePictures = function attachEventHandlerLoadMorePictures() {
         var _this = this;
+        var lastScrollTop = 0;
+        var lastDataAmount = 1;
+
         $(document).scroll(function () {
             if (($(window).scrollTop() + 400 + $(window).height() >= $(document).height()) &&
-                $('#mainContent .image-container').length) {
-                _this._model.pictures.loadMorePictures()
-                    .then(function (data) {
-                        app.loadMorePicturesView.load(MAIN_CONTAINER_SELECTOR, data);
-                    }, function (error) {
-                        console.log(error);
-                    })
+                $('#mainContent .image-container').length && lastDataAmount > 0) {
+                var st = $(this).scrollTop();
+                if (st > lastScrollTop) {
+                    _this._model.pictures.loadMorePictures()
+                        .then(function (data) {
+                            lastDataAmount = data.results.length;
+                            console.log(lastDataAmount);
+                            app.loadMorePicturesView.load(MAIN_CONTAINER_SELECTOR, data);
+                        }, function (error) {
+                            console.log(error);
+                        });
+                    console.log('scroll down');
+                } else {
+                    console.log('scroll up');
+                }
             }
         });
     };
@@ -331,7 +361,7 @@ app.controller = (function () {
 
     var attachEventHandlerShowPicture = function attachEventHandlerShowPicture(selector) {
         var _this = this;
-        $(selector).on('click', '.albums-list > h3', function (ev) {
+        $(selector).on('click', '.albums-list > h3, .top-albums > h3', function (ev) {
             var albumId = $(ev.target).data('id');
             sessionStorage.setItem('AlbumId', albumId);
             getPicturesByAlbum(_this, albumId);
@@ -561,6 +591,38 @@ app.controller = (function () {
                 console.log(error);
             });
 
+    }
+
+    function makeSearch(controller) {
+        var $searchedWord = $('#search').val();
+        controller._model.albums.searchAlbumsBy($searchedWord)
+            .then(function (data) {
+                location.href = '#/Search';
+                var albums = [];
+                data.results.forEach(function (result) {
+                    var album = {
+                        title: result.title,
+                        id: result.objectId,
+                        pictureUrl: undefined,
+                        likes: result.likes,
+                        dislikes: result.dislikes
+                    };
+                    albums.push(album);
+                });
+                getLatestPicture(controller, albums, MAIN_CONTAINER_SELECTOR)
+                    .then(function (data) {
+                        var output = {
+                            albums: albums
+                        };
+                        app.searchView.load(MAIN_CONTAINER_SELECTOR, output);
+                        $('#search').val('');
+                    }, function (error) {
+                        console.log(error.responseText);
+                    }).done();
+            }, function (error) {
+                console.log(error);
+                app.showErrorPopup.showErrorUnableToRetrieveAlbums();
+            })
     }
 
     function isLoggedIn() {

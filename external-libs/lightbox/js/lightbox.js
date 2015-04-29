@@ -293,7 +293,7 @@
           }
         }
 
-        //$('#commentBox').height(imageHeight);
+        $('#commentBox').height(imageHeight);
         self.sizeContainer($image.width(), $image.height());
       };
 
