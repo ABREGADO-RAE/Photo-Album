@@ -65,11 +65,6 @@
               "<div class='lb-image-container'>" +
                 "<img class='lb-image' src='' />" +
               "</div>" +
-              "<div id='commentBox'>" +
-                "<input type='text' id='picture-comment-text'/>" +
-                  "<button  type='button' id='comment-picture-button' onclick='onCommentClick()'>Comment</button>" +
-                    "<div id='commentsConainer'></div>" +
-                "</div>" +
               "<div class='lb-nav'>" +
                 "<a class='lb-prev' href='' ></a>" +
                 "<a class='lb-next' href='' ></a>" +
@@ -293,7 +288,7 @@
           }
         }
 
-        $('#commentBox').height(imageHeight);
+        //$('#commentBox').height(imageHeight);
         self.sizeContainer($image.width(), $image.height());
       };
 

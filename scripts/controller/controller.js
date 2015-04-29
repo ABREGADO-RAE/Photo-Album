@@ -205,7 +205,6 @@ app.controller = (function () {
         attachEventSelectPictureToUpload.call(this, selector);
         attachEventClearSelectedPicture.call(this, selector);
         attachEventAddPictureComment.call(this, selector);
-        attachEventPictureOnFocus.call(this, selector);
         attachEventHandlerSearch.call(this);
 
     };
@@ -226,25 +225,6 @@ app.controller = (function () {
             }
         });
     };
-
-    var attachEventPictureOnFocus = function attachEventPictureOnFocus(selector) {
-        var _this = this;
-
-        //$(selector).on('click', '.thumbnail', function(ev) {
-        //    function foo(){
-        //        $('.lightbox').each(function(){
-        //            if($(this).is(':visible')){
-        //                $('.lb-nav').on('click', function (ev) {
-        //                   console.log('clicked ');
-        //                });
-        //                clearInterval(interval);
-        //            }
-        //        });
-        //    }
-        //    var interval = window.setInterval(foo, 100);
-        //})
-    };
-
 
     var attachEventAddPictureComment = function attachEventAddPictureComment(selector) {
         var _this = this;

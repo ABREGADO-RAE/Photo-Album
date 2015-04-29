@@ -61,7 +61,7 @@ body:after {
   position: relative;
   background-color: #000;
   *zoom: 1;
-  width: 75% !important;
+  width: 100% !important;
   max-height: 550px !important;
   min-height: 500px !important;
   /*margin: 0 auto;*/
