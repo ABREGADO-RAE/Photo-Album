@@ -1,12 +1,12 @@
 <div id="categories">
 {{#results}}
     <div class="albums-list" data-id="{{objectId}}">
-        <h3 data-id="{{objectId}}">{{name}}</h3>
+        <h3 data-id="{{objectId}}" class="category-name">{{name}}</h3>
     </div>
 {{/results}}
     <div>
         <label for="categoryName">Add category: </label>
         <input type="text" id="categoryName"/>
-        <a href="#/AddCategory">Add</a>
+        <a href="#/AddCategory" id="add-category-btn">Add</a>
     </div>
 </div>

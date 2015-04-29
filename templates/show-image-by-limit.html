@@ -1,7 +1,7 @@
 <section class="image-container">
     {{#results}}
     <div class="thumbnail-container">
-        <a href="{{picture.url}}" data-lightbox="image-1" data-title='{{title}}' ><img class="thumbnail" src="{{picture.url}}" alt=""/></a>
+        <a href="{{picture.url}}" data-lightbox="image-1" data-title='{{title}}' data-id='{{objectId}}' ><img class="thumbnail" data-id='{{objectId}}' src="{{picture.url}}" alt=""/></a>
     </div>
     {{/results}}
 </section>

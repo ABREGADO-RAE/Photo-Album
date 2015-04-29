@@ -187,7 +187,8 @@
       function addToAlbum($link) {
         self.album.push({
           link: $link.attr('href'),
-          title: $link.attr('data-title') || $link.attr('title')
+          title: $link.attr('data-title') || $link.attr('title'),
+          dataId: $link.attr('data-id')
         });
       }
 
@@ -257,6 +258,9 @@
       preloader.onload = function() {
         var $preloader, imageHeight, imageWidth, maxImageHeight, maxImageWidth, windowHeight, windowWidth;
         $image.attr('src', self.album[imageNumber].link);
+        $('.on-focus-picture').removeClass('on-focus-picture');
+        $image.addClass('on-focus-picture');
+        $image.attr('data-id', self.album[imageNumber].dataId);
         $downloadLink.attr('href', self.album[imageNumber].link);
 
         $preloader = $(preloader);
@@ -313,11 +317,10 @@
       var newWidth  = imageWidth + this.containerLeftPadding + this.containerRightPadding;
       var newHeight = imageHeight + this.containerTopPadding + this.containerBottomPadding;
 
-      var a = $('.lb-outerContainer').width();
-      console.log(a);
+      var outerContainerWidth = $('.lb-outerContainer').width();
 
       function postResize() {
-        self.$lightbox.find('.lb-dataContainer').width(a);
+        self.$lightbox.find('.lb-dataContainer').width(outerContainerWidth);
         self.$lightbox.find('.lb-prevLink').height(newHeight);
         self.$lightbox.find('.lb-nextLink').height(newHeight);
         self.showImage();

@@ -661,7 +661,7 @@ body div#signBox > a {
 }
 
 #file-select {
-
+    display: none;
 }
 
 #upload-image-preview-section {
@@ -699,4 +699,63 @@ body div#signBox > a {
 #upload-img-buttons {
     margin: 2% auto;
     margin-bottom: 0;
+}
+
+#img-size {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #dcdcdc;
+    margin-top: 0;
+    font-size: 23px;
+}
+
+#file-select-btn {
+    width: 11%;
+    margin-top: 0 !important;
+    padding: .7% 1.5% !important;
+    border: 1px solid #000000;
+    border-radius: 6px;
+    color: #fff;
+    background-color: #bababa;
+}
+
+#file-select-btn:hover {
+    background-color: #a0a0a0;
+    cursor: pointer;
+}
+
+#search {
+    width: 16%;
+    margin-left: 2%;
+    padding: 1.5% 2%;
+}
+
+#clear-img-button, #upload-button {
+    display: inline-block !important;
+    margin: 0 !important;
+}
+
+#clear-img-button {
+    margin-right: 1.5% !important;
+}
+
+.top-rated-albums-preview {
+    max-width: 70%;
+    display: block;
+    margin: 0 auto;
+}
+
+.albums-preview {
+    max-width: 60% !important;
+}
+
+.voteBox {
+    margin: 2% 0;
+}
+
+#add-category-btn {
+    width: 10% !important;
+}
+
+.category-name {
+    margin: 2.7%;
 }

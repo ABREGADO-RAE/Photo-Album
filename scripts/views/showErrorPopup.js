@@ -1,7 +1,7 @@
 var app = app || {};
 
 app.showErrorPopup = (function () {
-    var DEFAULT_ERROR_TIMEOUT = 2000;
+    var DEFAULT_ERROR_TIMEOUT = 3000;
 
     function showErrorDuringRegister() {
         return noty({
@@ -33,6 +33,15 @@ app.showErrorPopup = (function () {
     function showErrorDuringPictureUpload() {
         return noty({
             text: 'Picture upload failed!',
+            type: 'error',
+            layout: 'topCenter',
+            timeout:DEFAULT_ERROR_TIMEOUT
+        });
+    }
+
+    function showErrorInvalidPictureFormat(){
+        return noty({
+            text: 'Invalid file format. Selected file must be in format gif, jpg, jpeg, tiff or png)',
             type: 'error',
             layout: 'topCenter',
             timeout:DEFAULT_ERROR_TIMEOUT
@@ -73,6 +82,7 @@ app.showErrorPopup = (function () {
         showErrorMaximumPictureSizeExceeded: showErrorMaximumPictureSizeExceeded,
         showErrorNoPictureWasSelected: showErrorNoPictureWasSelected,
         showErrorAddCategoryFailed:showErrorAddCategoryFailed,
-        showErrorUnableToRetrieveAlbums:showErrorUnableToRetrieveAlbums
+        showErrorUnableToRetrieveAlbums:showErrorUnableToRetrieveAlbums,
+        showErrorInvalidPictureFormat: showErrorInvalidPictureFormat
     }
 }());

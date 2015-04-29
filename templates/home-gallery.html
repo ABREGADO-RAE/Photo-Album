@@ -1,9 +1,10 @@
 <div id="galleryContainer">
     <h2>Most highly ranked albums</h2>
-    {{#results}}
+    {{#albums}}
     <div class="top-albums">
         <h3>{{title}}</h3>
+        <img src="{{pictureUrl}}" class="top-rated-albums-preview" alt="image"/>
         <span>Rating: {{rating}}</span>
     </div>
-    {{/results}}
+    {{/albums}}
 </div>

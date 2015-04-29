@@ -18,11 +18,31 @@ app.controller = (function () {
     };
 
     Controller.prototype.getHomePage = function (selector) {
+        var _this = this;
         this._model.albums.getMostHighlyRankedAlbums()
-            .then(function(data){
-                //console.log(data);
-                app.homeView.load(selector, data);
-            }, function(error){
+            .then(function (data) {
+                var albums = [];
+                data.results.forEach(function (result) {
+                    var album = {
+                        title: result.title,
+                        id: result.objectId,
+                        pictureUrl: undefined,
+                        rating: result.rating
+                    };
+                    albums.push(album);
+                });
+                getLatestPicture(_this, albums, selector)
+                    .then(function (data) {
+                        //console.log(data);
+                        var output = {
+                            albums: albums
+                        };
+                        app.homeView.load(selector, output);
+                        //app.albumsView.load(selector, output);
+                    }, function (error) {
+                        console.log(error.responseText);
+                    }).done();
+            }, function (error) {
                 console.log(error);
             })
     };
@@ -30,9 +50,9 @@ app.controller = (function () {
     Controller.prototype.getAlbumPage = function (selector) {
         var _this = this;
         this._model.albums.getAlbums()
-            .then(function(data) {
+            .then(function (data) {
                 var albums = [];
-                data.results.forEach(function(result) {
+                data.results.forEach(function (result) {
                     var album = {
                         title: result.title,
                         id: result.objectId,
@@ -43,16 +63,16 @@ app.controller = (function () {
                     albums.push(album);
                 });
                 getLatestPicture(_this, albums, selector)
-                    .then(function(data) {
+                    .then(function (data) {
                         //console.log(data);
                         var output = {
                             albums: albums
                         };
                         app.albumsView.load(selector, output);
-                    }, function(error) {
+                    }, function (error) {
                         console.log(error.responseText);
                     }).done();
-            }, function(error) {
+            }, function (error) {
                 console.log(error);
                 app.showErrorPopup.showErrorUnableToRetrieveAlbums();
             })
@@ -62,26 +82,26 @@ app.controller = (function () {
         var defer = Q.defer();
         var promises = [];
 
-        albums.forEach(function(album) {
+        albums.forEach(function (album) {
             var id = album.id;
 
             promises.push(controller._model.pictures.getAlbumLatestPicture(id));
         });
 
         Q.allSettled(promises)
-                .then(function (results) {
-                    results.forEach(function(data) {
-                        if(data.value.results.length
-                        ) {
-                            albums.filter(function(album) {
-                                return album.id === data.value.results[0].album.objectId;
-                            })[0].pictureUrl = data.value.results[0].picture.url;
-                        }
-                    });
-                    defer.resolve('All pictures loaded successfully!');
-                }, function (error) {
-                    defer.reject(error.responseText);
+            .then(function (results) {
+                results.forEach(function (data) {
+                    if (data.value.results.length
+                    ) {
+                        albums.filter(function (album) {
+                            return album.id === data.value.results[0].album.objectId;
+                        })[0].pictureUrl = data.value.results[0].picture.url;
+                    }
                 });
+                defer.resolve('All pictures loaded successfully!');
+            }, function (error) {
+                defer.reject(error.responseText);
+            });
 
         return defer.promise;
     }
@@ -96,7 +116,7 @@ app.controller = (function () {
     };
 
     Controller.prototype.getUploadPage = function (selector) {
-        if(isLoggedIn()) {
+        if (isLoggedIn()) {
             this._model.albums.getAlbums()
                 .then(function (data) {
                     app.uploadImageView.load(selector, data);
@@ -117,28 +137,28 @@ app.controller = (function () {
         app.loggedOutHomeView.load(selector);
     };
 
-    Controller.prototype.getLoggedInHomeView = function(selector, data){
+    Controller.prototype.getLoggedInHomeView = function (selector, data) {
         app.loggedInHomeView.load('header', data, this);
     };
 
-    Controller.prototype.getCategories = function(selector) {
+    Controller.prototype.getCategories = function (selector) {
         this._model.categories.getCategory()
-            .then(function(data) {
+            .then(function (data) {
                 app.categoriesView.load(selector, data);
-            }, function(error) {
+            }, function (error) {
                 console.log(error);
             })
     };
 
-    Controller.prototype.addCategory = function() {
-        if(isLoggedIn()) {
+    Controller.prototype.addCategory = function () {
+        if (isLoggedIn()) {
             var categoryName = $('#categoryName').val();
             var data = {'name': categoryName};
             this._model.categories.addCategory(data)
-                .then(function() {
+                .then(function () {
                     location.href = '#/Categories';
                     app.showSuccessPopup.showAddCategorySuccess();
-                }, function(error) {
+                }, function (error) {
                     console.log(error);
                     app.showErrorPopup.showErrorAddCategoryFailed();
                 })
@@ -160,7 +180,27 @@ app.controller = (function () {
         attachEventSelectPictureToUpload.call(this, selector);
         attachEventClearSelectedPicture.call(this, selector);
         attachEventAddPictureComment.call(this, selector);
+        attachEventPictureOnFocus.call(this, selector);
     };
+
+    var attachEventPictureOnFocus = function attachEventPictureOnFocus(selector) {
+        var _this = this;
+
+        //$(selector).on('click', '.thumbnail', function(ev) {
+        //    function foo(){
+        //        $('.lightbox').each(function(){
+        //            if($(this).is(':visible')){
+        //                $('.lb-nav').on('click', function (ev) {
+        //                   console.log('clicked ');
+        //                });
+        //                clearInterval(interval);
+        //            }
+        //        });
+        //    }
+        //    var interval = window.setInterval(foo, 100);
+        //})
+    };
+
 
     var attachEventAddPictureComment = function attachEventAddPictureComment(selector) {
         var _this = this;
@@ -169,27 +209,30 @@ app.controller = (function () {
 
     var attachEventAddAlbumComment = function attachEventAddAlbumComment(selector) {
         var _this = this;
-        $(selector).on('click', '#btn-add-album-comment', function(ev) {
+        $(selector).on('click', '#btn-add-album-comment', function (ev) {
             var commentArea = $('#commend-area').val();
             var currentAlbumId = sessionStorage['AlbumId'];
-            var comment = {"album": {"__type": "Pointer","className": "Album","objectId": currentAlbumId}, "content":commentArea};
+            var comment = {
+                "album": {"__type": "Pointer", "className": "Album", "objectId": currentAlbumId},
+                "content": commentArea
+            };
             _this._model.comments.addComment(comment)
-                .then(function(data) {
-                   // console.log(data);
-                }, function(error) {
+                .then(function (data) {
+                    // console.log(data);
+                }, function (error) {
                     console.log(error);
                 })
-                .then(function(data){
+                .then(function (data) {
                     var condition = '?where={"album": {"__type":"Pointer", "className" : "Album", "objectId" : "' + currentAlbumId + '"}}';
-                   return _this._model.comments.getAllComments(condition)
-                }, function(error) {
+                    return _this._model.comments.getAllComments(condition)
+                }, function (error) {
                     console.log(error);
                 })
-                .then(function(album) {
+                .then(function (album) {
                     var selector = '.comments';
                     app.showCommentsView.load(selector, album);
                     app.showSuccessPopup.showPostCommentSuccess();
-                }, function(err) {
+                }, function (err) {
                     console.log(err);
                 });
             commentArea.val('');
@@ -198,17 +241,17 @@ app.controller = (function () {
 
     var attachEventLikeAlbum = function attachEventLikeAlbum(selector) {
         var _this = this;
-        $(selector).on('click', '#btn-like-album', function(ev) {
-            if ( $(this).is("span")) {
+        $(selector).on('click', '#btn-like-album', function (ev) {
+            if ($(this).is("span")) {
                 var albumId = $(this).parent().parent().data('id');
                 var likes = $(ev.target);
-                var data = {"likes":{"__op":"Increment","amount":1}, "rating":{"__op":"Increment","amount":1}};
+                var data = {"likes": {"__op": "Increment", "amount": 1}, "rating": {"__op": "Increment", "amount": 1}};
                 _this._model.albums.editAlbum(data, albumId)
-                    .then(function(data){
+                    .then(function (data) {
                         //console.log(data);
                         var currentLikes = likes.text();
-                        likes.text(Number(currentLikes)+1);
-                    }, function(error){
+                        likes.text(Number(currentLikes) + 1);
+                    }, function (error) {
                         console.log(error.responseText);
                     })
             }
@@ -217,17 +260,20 @@ app.controller = (function () {
 
     var attachEventDislikeAlbum = function attachEventDislikeAlbum(selector) {
         var _this = this;
-        $(selector).on('click', '#btn-dislike-album', function(ev) {
-            if ( $(this).is("span")) {
+        $(selector).on('click', '#btn-dislike-album', function (ev) {
+            if ($(this).is("span")) {
                 var albumId = $(this).parent().parent().data('id');
                 var dislikes = $(ev.target);
-                var data = {"dislikes":{"__op":"Increment","amount":-1}, "rating":{"__op":"Increment","amount":-1}};
+                var data = {
+                    "dislikes": {"__op": "Increment", "amount": -1},
+                    "rating": {"__op": "Increment", "amount": -1}
+                };
                 _this._model.albums.editAlbum(data, albumId)
-                    .then(function(data){
+                    .then(function (data) {
                         //console.log(data);
                         var currentDislikes = dislikes.text();
-                        dislikes.text(Number(currentDislikes)-1);
-                    }, function(error){
+                        dislikes.text(Number(currentDislikes) - 1);
+                    }, function (error) {
                         console.log(error);
                     })
             }
@@ -236,9 +282,9 @@ app.controller = (function () {
 
     var attachEventHandlerLoadMorePictures = function attachEventHandlerLoadMorePictures() {
         var _this = this;
-        $(document).scroll(function(){
+        $(document).scroll(function () {
             if (($(window).scrollTop() + 400 + $(window).height() >= $(document).height()) &&
-                 $('#mainContent .image-container').length) {
+                $('#mainContent .image-container').length) {
                 _this._model.pictures.loadMorePictures()
                     .then(function (data) {
                         app.loadMorePicturesView.load(MAIN_CONTAINER_SELECTOR, data);
@@ -251,7 +297,7 @@ app.controller = (function () {
 
     var attachEventHandlerShowPicture = function attachEventHandlerShowPicture(selector) {
         var _this = this;
-        $(selector).on('click', '.albums-list > h3', function(ev) {
+        $(selector).on('click', '.albums-list > h3', function (ev) {
             var albumId = $(ev.target).data('id');
             sessionStorage.setItem('AlbumId', albumId);
             getPicturesByAlbum(_this, albumId);
@@ -260,18 +306,23 @@ app.controller = (function () {
 
     var attachEventHandlerLogoutUser = function attachEventHandlerLogoutUser(selector) {
         var _this = this;
-        $(selector).on('click', '#btn-logout', function(ev) {
+        $(selector).on('click', '#btn-logout', function (ev) {
             _this._model.users.logout()
-                .then(function() {
+                .then(function () {
                     location.href = '#/';
                     _this.getLoggedOutHomeView(selector);
-                }, function(error) {
+                }, function (error) {
                     console.log(error);
                 });
         });
     };
 
     var attachEventSelectPictureToUpload = function attachEventSelectPictureToUpload(selector) {
+        $(selector).on('click', '#file-select-btn', function () {
+            $('#file-select').click();
+        });
+
+
         $(selector).on('change', '#file-select', function (input) {
             var $selectedFileInput = $('#file-select');
             var hasSelectedFile = $.trim(($selectedFileInput).val());
@@ -314,31 +365,36 @@ app.controller = (function () {
                 var $imageTags = $('#img-tags').val().split(/','/g);
 
                 if ($imageSize < MAX_IMAGE_SIZE) {
-                    _this._model.pictures.uploadPictureData($fileName, $selectedFile)
-                        .then(function (data) {
-                            var dataToUpload = {
-                                'title': $imageTitle,
-                                "picture": {
-                                    "name": data.name,
-                                    "__type": "File"
-                                },
-                                "likes": 0,
-                                "dislikes": 0,
-                                "tags": $imageTags,
-                                "album": {"__type": "Pointer", "className": "Album", "objectId": selectedAlbumId}
-                            };
+                    if ($selectedFile.type.match(/\.(gif|jpg|jpeg|tiff|png)$/i)) {
+                        _this._model.pictures.uploadPictureData($fileName, $selectedFile)
+                            .then(function (data) {
+                                var dataToUpload = {
+                                    'title': $imageTitle,
+                                    "picture": {
+                                        "name": data.name,
+                                        "__type": "File"
+                                    },
+                                    "likes": 0,
+                                    "dislikes": 0,
+                                    "tags": $imageTags,
+                                    "album": {"__type": "Pointer", "className": "Album", "objectId": selectedAlbumId}
+                                };
 
-                            _this._model.pictures.addPicture(JSON.stringify(dataToUpload));
-                            $selectedFileInput.val('');
-                            $('.upload-image-preview-selected').toggleClass('upload-image-preview-selected upload-image-preview');
-                            $('.upload-image-preview').attr('src', 'http://iconizer.net/files/Sabre/orig/folder_black_web_upload.png');
-                            $('#img-title').val('');
-                            $('#img-tags').val('');
-                            app.showSuccessPopup.showPictureUploadSuccess();
-                        }, function (error) {
-                            console.log(error.responseText);
-                            app.showErrorPopup.showErrorDuringPictureUpload();
-                        })
+                                _this._model.pictures.addPicture(JSON.stringify(dataToUpload));
+                                $selectedFileInput.val('');
+                                $('.upload-image-preview-selected').toggleClass('upload-image-preview-selected upload-image-preview');
+                                $('.upload-image-preview').attr('src', 'http://iconizer.net/files/Sabre/orig/folder_black_web_upload.png');
+                                $('#img-title').val('');
+                                $('#img-tags').val('');
+                                app.showSuccessPopup.showPictureUploadSuccess();
+                            }, function (error) {
+                                console.log(error.responseText);
+                                app.showErrorPopup.showErrorDuringPictureUpload();
+                            })
+                    } else {
+                        app.showErrorPopup.showErrorInvalidPictureFormat();
+                    }
+
                 } else {
                     app.showErrorPopup.showErrorMaximumPictureSizeExceeded();
                 }
@@ -385,7 +441,7 @@ app.controller = (function () {
                     sessionStorage.setItem('currentUserName', data.username);
                     //console.log('Login successful');
                 }, function (error) {
-                   // console.log('Login failed');
+                    // console.log('Login failed');
                 });
             username.val('');
             password.val('');
@@ -399,7 +455,7 @@ app.controller = (function () {
             if (isLoggedIn()) {
                 _this._model.categories.getCategory()
                     .then(function (data) {
-                       // console.log(data);
+                        // console.log(data);
                         app.showAddAlbumView.loadShowView(MAIN_CONTAINER_SELECTOR, data);
                     }, function (error) {
                         console.log(error);
@@ -416,7 +472,7 @@ app.controller = (function () {
             var albumData = {
                 "title": albumTitle.val(),
                 "likes": 0,
-                "dislikes":0,
+                "dislikes": 0,
                 "rating": 0,
                 "category": {"__type": "Pointer", "className": "Category", "objectId": selectedCategoryId}
             };
@@ -436,16 +492,16 @@ app.controller = (function () {
         });
     };
 
-    function getPicturesByAlbum (controller, albumId) {
+    function getPicturesByAlbum(controller, albumId) {
         var condition = '?where={"album": {"__type":"Pointer", "className" : "Album", "objectId" : "' + albumId + '"}}';
 
         controller._model.pictures.getAllPicturesByAlbumId(albumId)
-            .then(function(data) {
+            .then(function (data) {
                 location.href = '#/Albums/Pictures-by-album';
                 //console.log(data);
                 console.log('Successfully showed pictures');
                 app.pictureByAlbumView.loadPictureByAlbum(MAIN_CONTAINER_SELECTOR, data);
-            }, function(error){
+            }, function (error) {
                 console.log(error);
             })
             .then(function () {
